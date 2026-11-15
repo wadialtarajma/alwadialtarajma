@@ -10,6 +10,7 @@ var TITLES={home:"الرئيسية",matches:"المباريات والنتائج
 var SEED={
   settings:{name:"وادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",
     about:"نادي وادي التراجمة ريفي رفاعة ممثل منطقة التراجمة في منافسات اتحاد رفاعة المحلي لكرة القدم ضمن دوري الدرجة الثانية.",
+    defaultXI:[1,2,3,4,5,6,7,8,9,10,11],
     f1:{name:"ميدان الوادي",map:"https://maps.app.goo.gl/5omSxgEUMPaeguno7"},
     f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"}},
   players:[
@@ -26,15 +27,15 @@ var SEED={
     {id:11,name:"أنس يحيى",num:11,age:22,pos:"مهاجم",apps:5,photo:""},
     {id:12,name:"عوض الكريم",num:18,age:24,pos:"مهاجم",apps:4,photo:""}],
   matches:[
-    {id:1,opponent:"الهلال رفاعة",date:"2026-11-21T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,lineup:[1,2,3,4,5,6,7,8,9,10,11],oppLineup:[]},
-    {id:2,opponent:"المريخ رفاعة",date:"2026-11-28T15:00",venue:"ميدان الهاشماب",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,lineup:[],oppLineup:[]},
-    {id:3,opponent:"الأمل رفاعة",date:"2026-11-07T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"finished",my:2,op:1,lineup:[],oppLineup:[]},
-    {id:4,opponent:"النيل رفاعة",date:"2026-10-31T15:00",venue:"استاد رفاعة",comp:"دوري الدرجة الثانية",home:false,status:"finished",my:1,op:1,lineup:[],oppLineup:[]},
-    {id:5,opponent:"الشباب رفاعة",date:"2026-10-24T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"finished",my:3,op:0,lineup:[],oppLineup:[]}],
+    {id:1,opponent:"الهلال رفاعة",date:"2026-11-21T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,lineup:[1,2,3,4,5,6,7,8,9,10,11],oppLineup:[],goals:[]},
+    {id:2,opponent:"المريخ رفاعة",date:"2026-11-28T15:00",venue:"ميدان الهاشماب",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,lineup:[],oppLineup:[],goals:[]},
+    {id:3,opponent:"الأمل رفاعة",date:"2026-11-07T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"finished",my:2,op:1,lineup:[],oppLineup:[],goals:[{team:"my",pid:10,min:23},{team:"my",pid:6,min:55},{team:"op",name:"لاعب الأمل رفاعة",min:70}]},
+    {id:4,opponent:"النيل رفاعة",date:"2026-10-31T15:00",venue:"استاد رفاعة",comp:"دوري الدرجة الثانية",home:false,status:"finished",my:1,op:1,lineup:[],oppLineup:[],goals:[{team:"my",pid:9,min:33},{team:"op",name:"لاعب النيل رفاعة",min:80}]},
+    {id:5,opponent:"الشباب رفاعة",date:"2026-10-24T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"finished",my:3,op:0,lineup:[],oppLineup:[],goals:[{team:"my",pid:10,min:12},{team:"my",pid:9,min:40},{team:"my",pid:10,min:67}]}],
   news:[
-    {id:1,title:"الفريق يكتسح الشباب رفاعة بثلاثية ويعتلي وصافة الترتيب",date:"2026-10-24",ex:"قدّم نسور التراجمة واحدة من أفضل مبارياتهم الموسم الحالي، فحسموا اللقاء بثلاثة أهداف نظيفة على ميدان الوادي وسط حضور جماهيري كبير."},
-    {id:2,title:"تحضيرات متواصلة على ميدان الهاشماب قبل مواجهة الهلال",date:"2026-11-12",ex:"يواصل الجهاز الفني رفع النسق البدني والفني استعدادًا لقمة الجولة القادمة، مع تركيز خاص على الكرات الثابتة والتحولات."},
-    {id:3,title:"الإدارة تدعو الجماهير لمؤازرة الفريق في القمة",date:"2026-11-10",ex:"وجّهت إدارة النادي دعوة لجماهير التراجمة للحضور المبكر ومساندة الفريق في مباراته المقبلة على ميدان الوادي."}],
+    {id:1,title:"الفريق يكتسح الشباب رفاعة بثلاثية ويعتلي وصافة الترتيب",date:"2026-10-24",imgs:[],ex:"قدّم نسور التراجمة واحدة من أفضل مبارياتهم الموسم الحالي، فحسموا اللقاء بثلاثة أهداف نظيفة على ميدان الوادي وسط حضور جماهيري كبير."},
+    {id:2,title:"تحضيرات متواصلة على ميدان الهاشماب قبل مواجهة الهلال",date:"2026-11-12",imgs:[],ex:"يواصل الجهاز الفني رفع النسق البدني والفني استعدادًا لقمة الجولة القادمة، مع تركيز خاص على الكرات الثابتة والتحولات."},
+    {id:3,title:"الإدارة تدعو الجماهير لمؤازرة الفريق في القمة",date:"2026-11-10",imgs:[],ex:"وجّهت إدارة النادي دعوة لجماهير التراجمة للحضور المبكر ومساندة الفريق في مباراته المقبلة على ميدان الوادي."}],
   board:[
     {id:1,name:"عبد الرحمن أحمد",role:"رئيس النادي",phone:""},
     {id:2,name:"الشفيع محمد",role:"نائب الرئيس",phone:""},
@@ -55,6 +56,8 @@ function load(){
   try{var r=localStorage.getItem(KEY);C=r?merge(clone(SEED),JSON.parse(r)):clone(SEED)}catch(e){C=clone(SEED)}
   ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
   C.settings=merge(clone(SEED.settings),C.settings||{});
+  C.matches.forEach(function(m){if(!Array.isArray(m.lineup))m.lineup=[];if(!Array.isArray(m.oppLineup))m.oppLineup=[];if(!Array.isArray(m.goals))m.goals=[]});
+  C.news.forEach(function(n){if(!Array.isArray(n.imgs))n.imgs=n.img?[n.img]:[]});
 }
 function toast(m){var t=$("#toast");if(!t)return;t.textContent=m;t.classList.add("on");clearTimeout(t._x);t._x=setTimeout(function(){t.classList.remove("on")},3000)}
 
@@ -66,15 +69,31 @@ var fT=function(d){return new Date(d).toLocaleTimeString("ar",{hour:"2-digit",mi
 var dN=function(d){return new Date(d).getDate()};
 var dM=function(d){return new Date(d).toLocaleDateString("ar",{month:"short"})};
 var nextM=function(){return C.matches.filter(function(m){return m.status==="upcoming"&&new Date(m.date)>new Date()}).sort(function(a,b){return new Date(a.date)-new Date(b.date)})[0]};
-
 function setTheme(t){document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem(TK,t)}catch(e){}
   var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="dark"?"#060d0a":"#ffffff")}
+function playerName(id){var p=C.players.filter(function(x){return x.id===id})[0];return p?p.name:"لاعب"}
 
-/* ===== التشكيلات ===== */
+/* ===== الملعب المنظوري ===== */
+function jersey(num){
+  return '<svg viewBox="0 0 44 38" class="jsy" aria-hidden="true"><path d="M15 3 7 7 2 14l7 4 2-3v16h22V15l2 3 7-4-5-7-8-4c0 4-3 6-6 6s-6-2-6-6z" fill="#f2b84b" stroke="#123024" stroke-width="1.6"/><text x="22" y="28" text-anchor="middle" font-size="12" font-family="Changa" font-weight="800" fill="#123024">'+esc(num)+'</text></svg>';
+}
+function pitch3d(list){
+  if(!list||!list.length)return '<div class="lu-empty">لم تُحدَّد التشكيلة بعد — تُضبط من لوحة التحكم</div>';
+  var rows=[["مهاجم","r1"],["وسط","r2"],["مدافع","r3"],["حارس مرمى","r4"]].map(function(r){
+    return {cls:r[1],ps:list.filter(function(p){return p.pos===r[0]})};
+  }).filter(function(r){return r.ps.length});
+  return '<div class="p3"><div class="p3in">'+rows.map(function(r){
+    return '<div class="p3row '+r.cls+'">'+r.ps.map(function(p){
+      return '<div class="p3p">'+jersey(p.num)+'<span>'+esc(p.name)+'</span></div>'}).join("")+'</div>';
+  }).join("")+'</div></div>';
+}
 function playersOf(ids){return (ids||[]).map(function(id){return C.players.filter(function(p){return p.id===id})[0]}).filter(Boolean)}
+function defaultXI(){
+  var xi=playersOf(C.settings.defaultXI);
+  return xi.length>=7?xi:autoXI();
+}
 function autoXI(){
-  var byApps=function(a,b){return (b.apps||0)-(a.apps||0)};
-  var xi=[];
+  var byApps=function(a,b){return (b.apps||0)-(a.apps||0)},xi=[];
   var g=C.players.filter(function(p){return p.pos==="حارس مرمى"}).sort(byApps)[0];
   if(g)xi.push(g);
   xi=xi.concat(C.players.filter(function(p){return p.pos==="مدافع"}).sort(byApps).slice(0,4));
@@ -82,46 +101,63 @@ function autoXI(){
   xi=xi.concat(C.players.filter(function(p){return p.pos==="مهاجم"}).sort(byApps).slice(0,2));
   return xi;
 }
-function pitchHTML(list){
-  if(!list||!list.length)return '<div class="lu-empty">لم تُعلن التشكيلة بعد — تُضاف من لوحة التحكم</div>';
-  var rows=POS.map(function(pos){return list.filter(function(p){return p.pos===pos})}).filter(function(r){return r.length});
-  return '<div class="pitch">'+rows.map(function(r){return '<div class="prow">'+r.map(function(p){
-    return '<div class="pdot"><span class="num">'+esc(p.num)+'</span><span class="pn">'+esc(p.name)+'</span></div>'}).join("")+'</div>'}).join("")+'</div>';
-}
 function oppListHTML(names){
   if(!names||!names.length)return '<div class="lu-empty">لم تُعلن تشكيلة الخصم بعد</div>';
   return '<ol class="oplist">'+names.map(function(n,i){return '<li><b>'+(i+1)+'</b>'+esc(n)+'</li>'}).join("")+'</ol>';
 }
-function lineupsHTML(m){
-  return '<div class="lu-grid"><div class="lu-col"><h4>تشكيلتنا — '+esc(C.settings.name)+'</h4>'+pitchHTML(playersOf(m.lineup))+'</div>'+
-    '<div class="lu-col"><h4>تشكيلة '+esc(m.opponent)+'</h4>'+oppListHTML(m.oppLineup)+'</div></div>';
+
+/* ===== المشاركة ===== */
+function shareHTML(title){
+  var u=location.origin+location.pathname+"#/news";
+  var t=encodeURIComponent(title+" | "+C.settings.name);
+  var ue=encodeURIComponent(u);
+  return '<div class="share" onclick="event.stopPropagation()">'+
+    '<a class="sh wa" target="_blank" rel="noopener" href="https://wa.me/?text='+t+'%20'+ue+'" aria-label="واتساب"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.1-3.4-8.3zM12 21.8a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2c0-5.5 4.4-9.9 9.9-9.9s9.9 4.4 9.9 9.9-4.4 9.9-9.9 9.9zm5.4-7.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1a8.1 8.1 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg></a>'+
+    '<a class="sh fb" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u='+ue+'" aria-label="فيسبوك"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>'+
+    '<a class="sh x" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text='+t+'&url='+ue+'" aria-label="X"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L6 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2z"/></svg></a>'+
+    '<button class="sh cp" data-copy="'+esc(u)+'" aria-label="نسخ الرابط">🔗</button></div>';
 }
 
 /* ===== بطاقات ===== */
+function goalsHTML(m){
+  if(!m.goals||!m.goals.length)return '<p class="dim">لا تفاصيل أهداف مسجلة.</p>';
+  return '<ul class="goals">'+m.goals.slice().sort(function(a,b){return (a.min||0)-(b.min||0)}).map(function(g){
+    var nm=g.team==="my"?playerName(g.pid):(g.name||"الخصم");
+    return '<li><span class="g-min">'+esc(g.min||0)+'′</span> ⚽ <b>'+esc(nm)+'</b>'+(g.team==="op"?' <span class="dim">(الخصم)</span>':"")+'</li>';
+  }).join("")+'</ul>';
+}
 function matchCard(m){
   var fin=m.status==="finished",w=m.my>m.op,d=m.my===m.op;
-  var hasLu=(m.lineup&&m.lineup.length)||(m.oppLineup&&m.oppLineup.length);
+  var det=(m.goals&&m.goals.length)||(m.lineup&&m.lineup.length)||(m.oppLineup&&m.oppLineup.length);
   return '<article class="match card"><div class="mdate"><b>'+dN(m.date)+'</b><small>'+dM(m.date)+'</small></div>'+
     '<div class="minfo"><b>'+(m.home?(fin?"أمام":"يستضيف"):(fin?"ضد":"يحل ضيفًا على"))+' '+esc(m.opponent)+'</b><em>'+esc(m.comp||"")+'</em><small>📍 '+esc(m.venue)+(fin?"":" • ⏰ "+fT(m.date))+'</small></div>'+
     '<div class="mfoot">'+(fin?'<span class="score">'+(m.home?m.my+" – "+m.op:m.op+" – "+m.my)+'</span><span class="tag '+(w?"w":d?"d":"l")+'">'+(w?"فوز":d?"تعادل":"خسارة")+'</span>':'<span class="tag u">قادمة</span><span class="tag">'+fD(m.date)+'</span>')+
-    (hasLu?'<button class="btn sm ghost" data-lu="'+m.id+'">🧾 التشكيلة</button>':"")+'</div></article>';
+    (det?'<button class="btn sm ghost" data-md="'+m.id+'">📋 التفاصيل</button>':"")+'</div></article>';
 }
-function newsCard(n){return '<article class="ncard card"><time>'+fDs(n.date)+'</time><h3>'+esc(n.title)+'</h3><p>'+esc(n.ex)+'</p></article>'}
+function newsCard(n){
+  var cover=n.imgs&&n.imgs.length?'<img src="'+esc(n.imgs[0])+'" alt="" loading="lazy">':'<span class="n2-ic">📰</span>';
+  return '<article class="ncard2 card"><div class="n2-cover">'+cover+'<time>'+fDs(n.date)+'</time>'+((n.imgs&&n.imgs.length>1)?'<span class="n2-count">📷 '+n.imgs.length+'</span>':"")+'</div>'+
+    '<div class="n2-bd"><h3>'+esc(n.title)+'</h3><p>'+esc(n.ex)+'</p>'+
+    '<div class="n2-ft"><button class="btn sm ghost" data-news="'+n.id+'">قراءة الخبر</button>'+shareHTML(n.title)+'</div></div></article>';
+}
 function playerCard(x){return '<article class="player card"><div class="pph">'+(x.photo?'<img src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" loading="lazy">':'<span>'+esc(x.num)+'</span>')+'</div><div class="pbd"><b>'+esc(x.name)+'</b><div><span class="pos">'+esc(x.pos)+'</span>'+(x.age?'<span>'+esc(x.age)+' سنة</span>':"")+'<span>#'+esc(x.num)+'</span></div></div></article>'}
 function memberCard(b){var ini=(b.name||"؟").trim().charAt(0);
   return '<article class="bcard card"><div class="bph">'+(b.photo?'<img src="'+esc(b.photo)+'" alt="">':esc(ini))+'</div><b>'+esc(b.name)+'</b><span class="role">'+esc(b.role)+'</span>'+(b.phone?'<a class="tel" href="tel:'+esc(b.phone)+'">📞 '+esc(b.phone)+'</a>':"")+'</article>'}
 function phero(t,s){return '<section class="phero"><div class="wrap"><h1>'+t+'</h1><p>'+s+'</p><div class="rule"></div></div></section>'}
 function emptyState(i,t,d){return '<div class="empty"><i>'+i+'</i><h3>'+t+'</h3><p>'+d+'</p></div>'}
 function searchbar(id,ph){return '<div class="searchbar"><span>🔍</span><input id="sq_'+id+'" placeholder="'+ph+'" autocomplete="off"><span class="s-count" id="sn_'+id+'"></span></div>'}
-function bindSearch(id,set,rr){var inp=$("#sq_"+id);inp.oninput=function(){set(inp.value);rr()}}
+function bindSearch(id,set,rr){var inp=$("#sq_"+id);if(inp)inp.oninput=function(){set(inp.value);rr()}}
 
 function boardHTML(){
   var m=nextM();
-  if(!m)return '<div class="nm-head"><b><i></i> '+esc(C.settings.name)+'</b><span>اتحاد رفاعة</span></div><div style="text-align:center;padding:8px 0">'+crest(70)+'<p style="color:rgba(244,241,232,.7);font-size:.85rem;margin-top:8px">لم تُجدول مباراة قادمة بعد.</p></div>';
+  if(!m)return '<div class="nm-head"><b><i></i> '+esc(C.settings.name)+'</b><span>اتحاد رفاعة</span></div><div style="text-align:center;padding:8px 0">'+crest(70)+'<p style="color:rgba(244,241,232,.75);font-size:.85rem;margin-top:8px">لم تُجدول مباراة قادمة بعد.</p></div>';
   return '<div class="nm-head"><b><i></i> المباراة القادمة</b><span>'+esc(m.comp||"")+'</span></div>'+
     '<div class="vs"><div>'+crest(46)+'<span class="nm-t">'+esc(C.settings.name)+'</span><small>'+(m.home?"مستضيف":"")+'</small></div><strong>VS</strong><div><div class="opc">'+esc((m.opponent||"؟").charAt(0))+'</div><span class="nm-t">'+esc(m.opponent)+'</span><small>'+(m.home?"ضيف":"مستضيف")+'</small></div></div>'+
     '<div class="nm-meta"><span>📅 '+fD(m.date)+'</span><span>⏰ '+fT(m.date)+'</span><span>📍 '+esc(m.venue)+'</span></div>'+
-    '<div class="cd"><div><b id="cD">--</b><span>يوم</span></div><div><b id="cH">--</b><span>ساعة</span></div><div><b id="cM">--</b><span>دقيقة</span></div><div><b id="cS">--</b><span>ثانية</span></div></div>';
+    '<div class="cd"><div><b id="cD">--</b><span>يوم</span></div><div><b id="cH">--</b><span>ساعة</span></div><div><b id="cM">--</b><span>دقيقة</span></div><div><b id="cS">--</b><span>ثانية</span></div></div>'+
+    '<div class="lu-btns"><button class="btn sm" data-lu="my">👥 تشكيلتنا</button><button class="btn sm" data-lu="op">👥 تشكيلة '+esc(m.opponent)+'</button></div>'+
+    '<div class="lu-panel" id="luMy" hidden><div class="lu-col"><h4 style="color:#ffd98a">تشكيلتنا</h4>'+pitch3d(playersOf(m.lineup))+'</div></div>'+
+    '<div class="lu-panel" id="luOp" hidden><div class="lu-col"><h4 style="color:#ffd98a">تشكيلة '+esc(m.opponent)+'</h4>'+oppListHTML(m.oppLineup)+'</div></div>';
 }
 function startCD(){clearInterval(cdT);var tick=function(){var n=nextM(),el=$("#cD");if(!n||!el)return;
   var s=Math.max(0,Math.floor((new Date(n.date)-Date.now())/1000));
@@ -133,37 +169,34 @@ function startCD(){clearInterval(cdT);var tick=function(){var n=nextM(),el=$("#c
 var VIEWS={
   home:function(){
     var m=nextM();
-    var nw=C.news.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)}).slice(0,3);
+    var nw=C.news.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)}).slice(0,2);
+    var pl=C.players.slice(0,6);
     var h='<section class="hero"><div class="wrap hero-in"><div class="hero-t">'+
       '<span class="badge"><i></i> اتحاد رفاعة المحلي • الدرجة الثانية</span>'+
       '<h1>نادي وادي <em>التراجمة</em><span>'+esc(C.settings.region)+'</span></h1>'+
       '<p class="lead">«'+esc(C.settings.motto)+'»</p>'+
-      '<div class="hero-cta"><a class="btn" href="#/matches" data-nav="matches">⚽ المباريات</a><a class="btn on-dark" href="#/squad" data-nav="squad">👥 الفريق</a></div>'+
+      '<div class="hero-cta"><a class="btn" href="#/matches" data-nav="matches">⚽ المباريات</a><a class="btn on-dark" href="#/news" data-nav="news">📰 الأخبار</a></div>'+
       '</div></div></section>';
-    h+='<section class="sec"><div class="wrap"><div class="nm-card">'+boardHTML()+'</div>';
-    if(m)h+='<div style="margin-top:18px">'+lineupsHTML(m)+'</div>';
-    h+='</div></section>';
-    h+='<section class="sec alt"><div class="wrap"><div class="sec-head"><div><span class="kick">المركز الإعلامي</span><h2>آخر الأخبار</h2></div><a class="btn sm ghost" href="#/news" data-nav="news">الكل ⬅</a></div>'+
+    h+='<section class="sec"><div class="wrap"><div class="nm-card">'+boardHTML()+'</div></div></section>';
+    h+='<section class="sec alt"><div class="wrap"><div class="sec-head"><div><span class="kick">الخطة الأساسية</span><h2>تشكيلة الفريق</h2></div><a class="btn sm ghost" href="#/squad" data-nav="squad">الفريق كاملًا ⬅</a></div>'+
+      '<div class="lu-col">'+pitch3d(defaultXI())+'</div></div></section>';
+    h+='<section class="sec"><div class="wrap"><div class="sec-head"><div><span class="kick">المركز الإعلامي</span><h2>آخر الأخبار</h2></div><a class="btn sm ghost" href="#/news" data-nav="news">المزيد ⬅</a></div>'+
       '<div class="news-g">'+(nw.length?nw.map(newsCard).join(""):emptyState("📰","لا أخبار بعد","أضف الأخبار من لوحة التحكم."))+'</div></div></section>';
-    h+='<section class="sec"><div class="wrap"><div class="sec-head"><div><span class="kick">النادي</span><h2>أقسام سريعة</h2></div></div>'+
-      '<div class="news-g">'+
-      '<a class="card" href="#/matches" data-nav="matches" style="display:block"><h3>⚽ المباريات</h3><p style="color:var(--muted);font-size:.85rem">'+C.matches.length+' مباراة محفوظة</p></a>'+
-      '<a class="card" href="#/squad" data-nav="squad" style="display:block"><h3>👥 الفريق</h3><p style="color:var(--muted);font-size:.85rem">'+C.players.length+' لاعبًا</p></a>'+
-      '<a class="card" href="#/board" data-nav="board" style="display:block"><h3>🧑‍💼 الإدارة</h3><p style="color:var(--muted);font-size:.85rem">'+C.board.length+' عضوًا</p></a>'+
-      '</div></div></section>';
+    h+='<section class="sec alt"><div class="wrap"><div class="sec-head"><div><span class="kick">نسور التراجمة</span><h2>نجوم الفريق</h2></div><a class="btn sm ghost" href="#/squad" data-nav="squad">المزيد ⬅</a></div>'+
+      '<div class="hscroll2">'+(pl.length?pl.map(playerCard).join(""):emptyState("👥","لا لاعبين بعد",""))+'</div></div></section>';
     return h;
   },
-  matches:function(){return phero("المباريات <em>والنتائج</em>","كل مباريات الفريق: القادمة والنتائج النهائية.")+
+  matches:function(){return phero("المباريات <em>والنتائج</em>","كل مباريات الفريق بتفاصيلها: النتائج، الهدافون، والتشكيلات.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("m","ابحث: خصم، ملعب، بطولة…")+
     '<div class="tabs"><button class="on" data-mt="u">القادمة</button><button data-mt="r">النتائج</button></div><div class="mlist" id="mlist"></div></div></section>'},
-  squad:function(){return phero("قائمة <em>الفريق</em>","اللاعبون والخانات والتشكيلة الأساسية للفريق.")+
+  squad:function(){return phero("قائمة <em>الفريق</em>","اللاعبون والخانات، والتشكيلة الأساسية الثابتة.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("p","ابحث: اسم لاعب، خانة، رقم…")+
     '<div class="chips" id="pchips"></div><div class="players" id="plist"></div>'+
     '<div class="sec-head" style="margin-top:30px"><div><span class="kick">الخطة</span><h2>التشكيلة الأساسية</h2></div></div>'+
-    '<div class="lu-grid"><div class="lu-col"><h4>'+esc(C.settings.name)+'</h4>'+pitchHTML(autoXI())+'</div>'+
-    '<div class="lu-col"><h4>ملاحظة</h4><div class="card" style="color:var(--muted);font-size:.86rem">تُعرض التشكيلة الأساسية تلقائيًا حسب الأكثر مشاركة في كل خانة. تشكيلة كل مباراة تُحدَّد من لوحة التحكم ← المباريات.</div></div></div>'+
+    '<div class="lu-col">'+pitch3d(defaultXI())+'</div>'+
+    '<p class="dim" style="text-align:center;margin-top:10px">تُضبط التشكيلة الأساسية من لوحة التحكم ← الإعدادات.</p>'+
     '</div></section>'},
-  news:function(){return phero("أخبار <em>النادي</em>","أرشيف كامل لكل مستجدات الفريق والإدارة.")+
+  news:function(){return phero("أخبار <em>النادي</em>","أرشيف كامل لكل مستجدات الفريق والإدارة — شاركها بضغطة.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("n","ابحث في الأخبار…")+'<div class="news-g" id="nlist"></div></div></section>'},
   board:function(){return phero("إدارة <em>النادي</em>","الهيئة الإدارية والجهاز الفني المشرف على النادي.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+
@@ -171,7 +204,19 @@ var VIEWS={
 };
 
 var BIND={
-  home:function(){startCD()},
+  home:function(){
+    startCD();
+    $$(".lu-btns [data-lu]").forEach(function(b){
+      b.onclick=function(){
+        var my=b.dataset.lu==="my";
+        var panel=my?$("#luMy"):$("#luOp");
+        if(!panel)return;
+        var show=panel.hidden;
+        panel.hidden=!show;
+        b.classList.toggle("on",show);
+      };
+    });
+  },
   matches:function(){
     var render=function(){
       var list=C.matches.filter(function(m){return mtab==="u"?m.status==="upcoming":m.status==="finished"});
@@ -205,20 +250,26 @@ var BIND={
   }
 };
 
-/* ===== مودال التشكيلة ===== */
-function openLu(id){
-  var m=C.matches.filter(function(x){return x.id===id})[0];
-  if(!m)return;
-  $("#modalBody").innerHTML='<h3 style="margin-bottom:4px">تشكيلة المباراة — '+esc(m.opponent)+'</h3>'+
-    '<p style="color:var(--muted);font-size:.82rem;margin-bottom:14px">'+fDs(m.date)+' • '+esc(m.venue)+(m.status==="finished"?" • النتيجة: "+m.my+" – "+m.op:"")+'</p>'+lineupsHTML(m);
-  $("#modal").classList.add("on");document.body.classList.add("lock");
-}
+/* ===== المودالات ===== */
+function openModal(html){$("#modalBody").innerHTML=html;$("#modal").classList.add("on");document.body.classList.add("lock")}
 function closeModal(){$("#modal").classList.remove("on");document.body.classList.remove("lock")}
+function newsModal(n){
+  var imgs=(n.imgs&&n.imgs.length)?'<div class="n2-imgs">'+n.imgs.map(function(s){return '<img src="'+esc(s)+'" alt="" loading="lazy">'}).join("")+'</div>':"";
+  openModal('<h3>'+esc(n.title)+'</h3><div class="m-meta">📅 '+fDs(n.date)+'</div>'+imgs+
+    '<p style="font-size:.92rem">'+esc(n.ex)+'</p><div style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span class="dim">مشاركة الخبر:</span>'+shareHTML(n.title)+'</div>');
+}
+function matchModal(m){
+  var hasLu=(m.lineup&&m.lineup.length)||(m.oppLineup&&m.oppLineup.length);
+  openModal('<h3>'+(m.status==="finished"?"نتيجة مباراة":"مباراة")+' '+esc(m.opponent)+'</h3>'+
+    '<div class="m-meta">'+fDs(m.date)+' • '+esc(m.venue)+' • '+esc(m.comp||"")+(m.status==="finished"?' • النتيجة: <b>'+m.my+" – "+m.op+"</b>":"")+'</div>'+
+    '<div class="lu-col"><h4>⚽ الأهداف</h4>'+goalsHTML(m)+'</div>'+
+    (hasLu?'<div class="lu-grid"><div class="lu-col"><h4>تشكيلتنا</h4>'+pitch3d(playersOf(m.lineup))+'</div><div class="lu-col"><h4>تشكيلة '+esc(m.opponent)+'</h4>'+oppListHTML(m.oppLineup)+'</div></div>':""));
+}
 
 /* ===== SEO ===== */
 function updateMeta(v){
   var d={home:"الموقع الرسمي لنادي وادي التراجمة — المباراة القادمة والنتائج والأخبار",
-    matches:"جدول مباريات ونتائج نادي وادي التراجمة في دوري الدرجة الثانية",
+    matches:"جدول مباريات ونتائج نادي وادي التراجمة مع الهدافين والتشكيلات",
     squad:"قائمة لاعبي نادي وادي التراجمة والتشكيلة الأساسية",
     news:"آخر أخبار نادي وادي التراجمة ريفي رفاعة",
     board:"الهيئة الإدارية لنادي وادي التراجمة"}[v]||"";
@@ -227,7 +278,7 @@ function updateMeta(v){
 }
 
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("on");io.unobserve(en.target)}})},{threshold:.08});
-function reveal(){$$(".card,.sec-head,.nm-card,.phero .wrap,.hero-in").forEach(function(el){el.classList.add("rv");io.observe(el)})}
+function reveal(){$$(".card,.sec-head,.nm-card,.phero .wrap,.hero-in,.p3").forEach(function(el){el.classList.add("rv");io.observe(el)})}
 function setActive(v){$$("[data-nav]").forEach(function(a){a.classList.toggle("on",a.dataset.nav===v)})}
 function closeDrawer(){$("#drawer").classList.remove("on");$("#scrim").classList.remove("on");$("#burger").classList.remove("on");document.body.classList.remove("lock")}
 
@@ -260,8 +311,14 @@ function buildChrome(){
   if(!bound){bound=true;
     document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeDrawer();closeModal()}});
     document.addEventListener("click",function(e){
-      var lu=e.target.closest?e.target.closest("[data-lu]"):null;
-      if(lu){openLu(+lu.dataset.lu);return}
+      var cp=e.target.closest?e.target.closest("[data-copy]"):null;
+      if(cp){e.preventDefault();var u=cp.dataset.copy;
+        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){toast("🔗 تم نسخ الرابط")})}else{toast(u)}
+        return}
+      var nd=e.target.closest?e.target.closest("[data-news]"):null;
+      if(nd){var n=C.news.filter(function(x){return x.id===+nd.dataset.news})[0];if(n)newsModal(n);return}
+      var md=e.target.closest?e.target.closest("[data-md]"):null;
+      if(md){var mm=C.matches.filter(function(x){return x.id===+md.dataset.md})[0];if(mm)matchModal(mm);return}
       var a=e.target.closest?e.target.closest("[data-nav]"):null;
       if(a){e.preventDefault();go(a.dataset.nav)}
     });
