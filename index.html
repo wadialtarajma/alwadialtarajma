@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>وادي التراجمة ريفي رفاعة | الرئيسية</title>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("wadi_theme")||"light")}catch(e){}</script>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Changa:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap");
+:root{
+  --bg:#FFFFFF;--bg-soft:#F4F7F4;--srf:#FFFFFF;--srf-2:#F1F4F1;--srf-3:#E4EBE5;
+  --txt:#101815;--muted:#57665E;--dim:#8A978F;
+  --line:rgba(16,24,21,.14);--line2:rgba(16,24,21,.07);
+  --gold:#F2B84B;--gold2:#FFD98A;--gold-ink:#9A6E00;--goldD:#B57E1F;
+  --blue:#2E5BFF;--blue-ink:#1D4ED8;--blue2:#7C9BFF;
+  --green:#1F8A4C;--red:#C2410C;--amber:#B45309;--ink-fixed:#0B0F0D;
+  --topbar:rgba(255,255,255,.88);--dockbg:rgba(255,255,255,.92);--drawer:#FFFFFF;
+  --shadow:0 16px 44px rgba(16,24,21,.10);--shadow2:0 24px 60px rgba(16,24,21,.16);
+  --df:"Changa",sans-serif;--bf:"IBM Plex Sans Arabic",sans-serif;
+  --nav:70px;--dockh:70px;--r:20px;
+  --kit:linear-gradient(90deg,var(--gold) 0 33%,var(--blue) 33% 66%,var(--gold) 66% 100%);
+  color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#050D0A;--bg-soft:#071510;--srf:#0A1A14;--srf-2:#0F241B;--srf-3:#123024;
+  --txt:#F4F1E8;--muted:#93A69B;--dim:#6B8078;
+  --line:rgba(242,184,75,.16);--line2:rgba(244,241,232,.08);
+  --gold-ink:#FFD98A;--blue-ink:#7C9BFF;--green:#35E08D;--red:#FF5C5C;--amber:#FFB020;
+  --topbar:rgba(5,13,10,.85);--dockbg:rgba(5,13,10,.94);--drawer:#0A1A14;
+  --shadow:0 24px 60px rgba(0,0,0,.45);--shadow2:0 30px 80px rgba(0,0,0,.55);
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{width:100%;overflow-x:hidden;overflow-x:clip;scroll-behavior:smooth}
+body{width:100%;max-width:100vw;overflow-x:hidden;overflow-x:clip;background:var(--bg);color:var(--txt);font-family:var(--bf);line-height:1.8;min-height:100vh}
+body.pub{padding-top:var(--nav);padding-bottom:calc(var(--dockh) + env(safe-area-inset-bottom))}
+body.lock{overflow:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none}
+h1,h2,h3,h4,.df{font-family:var(--df)}
+::selection{background:var(--gold);color:var(--ink-fixed)}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:var(--bg-soft)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--goldD));border:3px solid var(--bg-soft);border-radius:20px}
+*{scrollbar-color:var(--gold) var(--bg-soft);scrollbar-width:thin}
+.wrap{width:100%;max-width:1220px;margin-inline:auto;padding-inline:clamp(16px,4vw,28px)}
+main{min-height:calc(100svh - var(--nav))}
+body,.topbar,.card,.sec.alt,.drawer,.dock,.phero,.searchbar,.fab-theme{transition:background-color .3s,color .3s,border-color .3s}
+.view{animation:viewIn .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes viewIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.bg{position:fixed;inset:0;z-index:-2;background:
+ radial-gradient(760px 520px at 90% -8%,rgba(242,184,75,.14),transparent 62%),
+ radial-gradient(680px 480px at 5% 18%,rgba(46,91,255,.10),transparent 60%),
+ radial-gradient(600px 440px at 80% 96%,rgba(31,138,76,.08),transparent 62%),var(--bg);animation:bgShift 18s ease-in-out infinite alternate}
+html[data-theme="dark"] .bg{background:
+ radial-gradient(760px 520px at 90% -8%,rgba(242,184,75,.16),transparent 62%),
+ radial-gradient(680px 480px at 5% 18%,rgba(46,91,255,.15),transparent 60%),
+ radial-gradient(600px 440px at 80% 96%,rgba(53,224,141,.08),transparent 62%),var(--bg)}
+@keyframes bgShift{to{filter:hue-rotate(9deg) brightness(1.04)}}
+.grain{position:fixed;inset:0;z-index:95;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* هيدر ثابت */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:80;background:var(--topbar);backdrop-filter:blur(18px) saturate(1.3);border-bottom:1px solid var(--line2)}
+.topbar::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--kit);opacity:.9}
+.topbar-in{width:100%;max-width:1300px;margin:auto;min-height:var(--nav);display:flex;align-items:center;gap:12px;padding-inline:clamp(12px,3vw,24px)}
+.burger{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--srf);display:grid;place-items:center;gap:5px;padding:11px;flex-shrink:0}
+.burger:hover{border-color:var(--gold)}
+.burger i{display:block;width:20px;height:2px;background:var(--txt);border-radius:2px;transition:.3s}
+.burger.on i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.on i:nth-child(2){opacity:0}
+.burger.on i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.lock{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.lock svg{flex-shrink:0}
+.lock-t b{display:block;font-family:var(--df);font-weight:800;font-size:clamp(.98rem,3.5vw,1.18rem);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lock-t small{display:flex;align-items:center;gap:6px;color:var(--gold-ink);font-size:.68rem;font-weight:700}
+.lock-t small::before{content:"";width:14px;height:2px;background:var(--blue-ink);border-radius:2px}
+.qnav{display:none;align-items:center;gap:2px}
+.qnav a{position:relative;padding:9px 11px;border-radius:10px;font-size:.85rem;font-weight:600;color:var(--muted);transition:.22s}
+.qnav a:hover{color:var(--txt);background:var(--line2)}
+.qnav a.on{color:var(--gold-ink)}
+.qnav a.on::after{content:"";position:absolute;bottom:4px;left:11px;right:11px;height:2px;background:var(--kit);border-radius:2px}
+.qnav a.go{background:linear-gradient(135deg,var(--gold),var(--goldD));color:var(--ink-fixed);font-weight:700;padding-inline:15px;margin-inline-start:6px}
+/* زر الوضع الليلي العائم */
+.fab-theme{position:fixed;left:16px;bottom:24px;z-index:130;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--gold),var(--goldD));color:#08130d;box-shadow:0 12px 30px rgba(242,184,75,.42),0 0 0 4px rgba(242,184,75,.16);transition:.3s;border:none}
+.fab-theme:hover{transform:translateY(-3px) scale(1.06)}
+.fab-theme:active{transform:scale(.94)}
+.fab-theme .moon{display:none}
+html[data-theme="dark"] .fab-theme{background:linear-gradient(145deg,#1d3a5f,#0f241b);color:var(--gold2);box-shadow:0 12px 30px rgba(0,0,0,.55),0 0 0 4px rgba(124,155,255,.18)}
+html[data-theme="dark"] .fab-theme .sun{display:none}
+html[data-theme="dark"] .fab-theme .moon{display:block}
+@media(max-width:1023px){body.pub .fab-theme{bottom:calc(var(--dockh) + 14px + env(safe-area-inset-bottom))}}
+/* القائمة الجانبية */
+.scrim{position:fixed;inset:0;z-index:110;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;bottom:0;right:0;z-index:120;width:min(87vw,360px);background:var(--drawer);border-left:1px solid var(--line);box-shadow:var(--shadow2);transform:translateX(105%);transition:transform .4s cubic-bezier(.2,.85,.25,1);display:flex;flex-direction:column;overflow-y:auto}
+.drawer.on{transform:none}
+.drawer::before{content:"";height:3px;background:var(--kit)}
+.dhead{display:flex;align-items:center;gap:12px;padding:22px 20px;border-bottom:1px solid var(--line2)}
+.dhead>div{flex:1;min-width:0}
+.dhead b{display:block;font-family:var(--df);font-size:1.1rem}
+.dhead small{display:block;color:var(--gold-ink);font-size:.7rem;font-weight:600}
+.dclose{width:38px;height:38px;border-radius:11px;border:1px solid var(--line);background:var(--srf-2);color:var(--muted);flex-shrink:0}
+.dnav{display:flex;flex-direction:column;gap:3px;padding:15px 13px;flex:1}
+.dnav a{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:13px;color:var(--muted);font-weight:600;font-size:.94rem;border:1px solid transparent;transition:.2s}
+.dnav a:hover{background:var(--srf-2);color:var(--txt)}
+.dnav a i{font-style:normal;width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:rgba(46,91,255,.12);font-size:.9rem}
+.dnav a.on{background:linear-gradient(120deg,rgba(242,184,75,.18),rgba(46,91,255,.12));color:var(--gold-ink);border-color:var(--line)}
+.dfoot{padding:16px 20px;border-top:1px solid var(--line2);font-size:.78rem;display:grid;grid-template-columns:auto 1fr;gap:5px 12px}
+.dfoot b{color:var(--gold-ink);font-family:var(--df)}
+.dfoot span{color:var(--dim)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:linear-gradient(135deg,var(--gold),var(--goldD));color:var(--ink-fixed);border-radius:13px;padding:13px 24px;font-family:var(--df);font-weight:700;font-size:.95rem;min-height:48px;transition:.25s;box-shadow:0 10px 26px rgba(242,184,75,.28);border:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(242,184,75,.36);filter:brightness(1.05)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt);box-shadow:none}
+.btn.ghost:hover{background:rgba(242,184,75,.12);border-color:var(--gold)}
+.btn.on-dark{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;box-shadow:none}
+.btn.on-dark:hover{background:rgba(255,255,255,.12)}
+.btn.full{width:100%}
+.btn.sm{padding:9px 16px;font-size:.85rem;min-height:40px;border-radius:10px}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+/* هيرو مضغوط بدون فراغ */
+.hero{position:relative;overflow:hidden;color:#fff;padding:30px 0 64px;background:
+ radial-gradient(900px 520px at 88% -12%,rgba(242,184,75,.26),transparent 60%),
+ radial-gradient(720px 480px at 8% 112%,rgba(46,91,255,.24),transparent 62%),
+ repeating-linear-gradient(-45deg,rgba(255,255,255,.035) 0 2px,transparent 2px 26px),
+ linear-gradient(160deg,#123024,#050d0a 72%)}
+.hero::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:6px;background:var(--kit)}
+.hero-mark{position:absolute;font-family:var(--df);font-weight:800;font-size:clamp(5rem,24vw,15rem);line-height:.8;bottom:-.14em;left:-.03em;color:transparent;-webkit-text-stroke:1px rgba(242,184,75,.12);pointer-events:none}
+.hero-grid{position:relative;z-index:2;display:grid;gap:30px;align-items:center;width:100%}
+.badge{display:inline-flex;align-items:center;gap:9px;background:rgba(53,224,141,.14);border:1px solid rgba(53,224,141,.3);color:#35E08D;padding:7px 15px;border-radius:100px;font-size:.78rem;font-weight:700}
+.badge i{width:7px;height:7px;border-radius:50%;background:#35E08D;animation:blip 1.6s infinite}
+@keyframes blip{0%,100%{box-shadow:0 0 0 0 rgba(53,224,141,.5)}55%{box-shadow:0 0 0 8px rgba(53,224,141,0)}}
+.hero h1{font-size:clamp(2.3rem,9.5vw,4.4rem);font-weight:800;line-height:1.12;margin:14px 0 6px}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 span{display:block;font-size:.38em;color:#8FB0FF;font-weight:700;margin-top:6px}
+.lead{font-size:clamp(.98rem,3.5vw,1.16rem);color:rgba(255,255,255,.85);max-width:42ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-cta .btn{flex:1;min-width:140px}
+.board{position:relative;overflow:hidden;background:linear-gradient(150deg,rgba(18,48,36,.94),rgba(5,13,10,.96));border:1px solid rgba(242,184,75,.3);border-radius:24px;padding:clamp(18px,4vw,26px);box-shadow:var(--shadow2);backdrop-filter:blur(10px);color:#F4F1E8}
+.board::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--kit)}
+.bhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:12px;margin-bottom:16px;border-bottom:1px dashed rgba(242,184,75,.3);font-size:.78rem;color:rgba(244,241,232,.6)}
+.bhead b{color:var(--gold2);font-family:var(--df);display:flex;align-items:center;gap:8px;font-size:.86rem}
+.bhead b i{width:7px;height:7px;border-radius:50%;background:#ff5c5c;animation:blip 1.5s infinite}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;text-align:center}
+.vs svg{margin:0 auto 8px}
+.vs .nm{display:block;font-family:var(--df);font-weight:700;font-size:clamp(.85rem,3vw,1rem);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vs small{color:rgba(244,241,232,.5);font-size:.66rem}
+.vs strong{font-family:var(--df);font-weight:800;color:var(--gold);font-size:1.2rem;padding:6px 10px;border-radius:10px;background:rgba(242,184,75,.1);border:1px solid rgba(242,184,75,.3)}
+.opc{width:50px;height:58px;margin:0 auto 8px;display:grid;place-items:center;border:1.5px dashed rgba(124,155,255,.4);border-radius:13px 13px 24px 24px;font-family:var(--df);font-size:1.3rem;color:var(--blue2);background:rgba(46,91,255,.08)}
+.bmeta{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:.76rem;color:rgba(244,241,232,.8);margin:15px 0}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;direction:ltr}
+.cd>div{background:rgba(0,0,0,.32);border:1px solid rgba(242,184,75,.28);border-radius:12px;padding:10px 2px;text-align:center}
+.cd b{display:block;font-family:var(--df);font-weight:800;font-size:clamp(1.15rem,5vw,1.8rem);color:var(--gold2);line-height:1;font-variant-numeric:tabular-nums}
+.cd span{font-size:.62rem;color:rgba(244,241,232,.6)}
+.board .btn{margin-top:15px}
+/* رأس الصفحات */
+.phero{position:relative;padding:44px 0 38px;overflow:hidden;background:linear-gradient(160deg,var(--srf-2),var(--bg) 72%)}
+.phero::before{content:attr(data-wm);position:absolute;font-family:var(--df);font-weight:800;font-size:20vw;line-height:.8;bottom:-.14em;left:-.03em;color:transparent;-webkit-text-stroke:1px var(--line);pointer-events:none;opacity:.55}
+.phero .wrap{position:relative}
+.phero h1{font-size:clamp(1.9rem,7.6vw,3.2rem);font-weight:800}
+.phero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold-ink),var(--goldD));-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme="dark"] .phero h1 em{background:linear-gradient(100deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text}
+.phero p{color:var(--muted);max-width:60ch;margin-top:10px}
+.phero .rule{width:64px;height:4px;background:var(--kit);border-radius:2px;margin-top:14px}
+/* بحث */
+.searchbar{display:flex;align-items:center;gap:10px;background:var(--srf);border:1.5px solid var(--line);border-radius:100px;padding:6px 8px 6px 18px;box-shadow:var(--shadow);margin:0 0 22px;transition:.25s}
+.searchbar:focus-within{border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,184,75,.16)}
+.searchbar .s-ico{font-size:1rem;opacity:.75}
+.searchbar input{flex:1;border:none;background:transparent;outline:none;font-size:.95rem;padding:10px 0;color:var(--txt);min-width:0}
+.searchbar .s-clear{width:34px;height:34px;border-radius:50%;background:var(--srf-2);color:var(--muted);display:none;place-items:center;flex-shrink:0}
+.searchbar.has .s-clear{display:grid}
+.searchbar .s-count{font-size:.7rem;font-weight:800;color:var(--gold-ink);background:rgba(242,184,75,.16);padding:5px 11px;border-radius:100px;white-space:nowrap}
+/* بطاقات الوصول */
+.qcards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.qcard{position:relative;display:flex;align-items:center;gap:12px;padding:16px;border-radius:18px;background:var(--srf);border:1px solid var(--line2);box-shadow:var(--shadow);overflow:hidden;transition:.3s}
+.qcard::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:4px;background:var(--kit)}
+.qcard:hover{transform:translateY(-5px);box-shadow:var(--shadow2);border-color:var(--gold)}
+.q-ico{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:1.4rem;background:linear-gradient(135deg,rgba(242,184,75,.18),rgba(46,91,255,.14));flex-shrink:0}
+.qcard b{display:block;font-family:var(--df);font-size:1rem}
+.qcard small{color:var(--muted);font-size:.74rem}
+.q-num{margin-inline-start:auto;font-family:var(--df);font-weight:800;font-size:1.15rem;color:var(--gold-ink);background:var(--srf-2);border:1px solid var(--line);border-radius:11px;padding:5px 11px}
+/* أقسام */
+.sec{width:100%;padding:clamp(48px,8vw,80px) 0}
+.sec.alt{background:var(--bg-soft)}
+.sec-head{margin-bottom:24px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.kick{display:inline-flex;align-items:center;gap:10px;color:var(--gold-ink);font-family:var(--df);font-weight:700;font-size:.88rem}
+.kick::before{content:"";width:28px;height:3px;border-radius:3px;background:var(--kit)}
+.sec-head h2{font-size:clamp(1.5rem,6vw,2.3rem);font-weight:800;margin-top:5px}
+.sec-head p{color:var(--muted);max-width:60ch;margin-top:8px;font-size:.93rem}
+.card{background:var(--srf);border:1px solid var(--line2);border-radius:var(--r);box-shadow:var(--shadow)}
+.empty{border:1.5px dashed var(--line);border-radius:var(--r);padding:38px 22px;text-align:center;color:var(--muted);background:var(--bg-soft)}
+.empty i{font-style:normal;font-size:2.2rem;display:block;margin-bottom:10px}
+.empty h3{color:var(--gold-ink);font-size:1.15rem;margin-bottom:6px}
+.hscroll{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+.hscroll>*{scroll-snap-align:start;flex:0 0 min(340px,84vw)}
+.tabs{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px}
+.tabs button{background:var(--srf);border:1.5px solid var(--line);color:var(--muted);padding:9px 24px;border-radius:100px;font-family:var(--df);font-weight:700;white-space:nowrap;font-size:.9rem}
+.tabs button.on{background:linear-gradient(135deg,var(--gold),var(--goldD));color:var(--ink-fixed);border-color:transparent}
+/* مباريات */
+.match{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:16px;margin-bottom:12px;align-items:center;transition:.25s}
+.match:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:var(--shadow2)}
+.mdate{width:64px;text-align:center;background:linear-gradient(150deg,rgba(242,184,75,.18),rgba(46,91,255,.1));border:1px solid var(--line);border-radius:14px;padding:8px 4px}
+.mdate b{display:block;font-family:var(--df);font-size:1.45rem;font-weight:800;color:var(--gold-ink);line-height:1}
+.mdate small{font-size:.68rem;color:var(--muted)}
+.minfo{min-width:0}
+.minfo b{display:block;font-family:var(--df);font-weight:700;font-size:.98rem;line-height:1.45}
+.minfo em{font-style:normal;display:block;color:var(--blue-ink);font-size:.72rem;font-weight:600}
+.minfo small{display:block;color:var(--dim);font-size:.74rem;margin-top:3px}
+.mphoto{grid-column:1/-1;border-radius:12px;overflow:hidden;height:160px;cursor:zoom-in;position:relative}
+.mphoto img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.mphoto:hover img{transform:scale(1.05)}
+.mphoto::after{content:"📸 اللحظة";position:absolute;bottom:8px;inset-inline-start:8px;background:rgba(5,13,10,.8);color:var(--gold2);font-family:var(--df);font-size:.62rem;font-weight:700;padding:3px 10px;border-radius:100px}
+.mtags{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.7rem;font-weight:700;padding:4px 11px;border-radius:100px;border:1px solid var(--line2);color:var(--muted);white-space:nowrap}
+.tag.g{background:rgba(242,184,75,.14);color:var(--gold-ink);border-color:rgba(242,184,75,.4)}
+.tag.w{background:rgba(31,138,76,.12);color:var(--green);border-color:rgba(31,138,76,.3)}
+.tag.d{background:rgba(180,83,9,.12);color:var(--amber);border-color:rgba(180,83,9,.3)}
+.tag.l{background:rgba(194,65,12,.12);color:var(--red);border-color:rgba(194,65,12,.3)}
+.tag.u{background:rgba(46,91,255,.12);color:var(--blue-ink);border-color:rgba(46,91,255,.3)}
+.score{grid-column:1/-1;text-align:center;font-family:var(--df);font-weight:800;font-size:1.4rem;color:var(--gold-ink);direction:ltr;background:var(--srf-2);border:1px solid var(--line2);border-radius:12px;padding:5px}
+/* لاعبون */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chips button{padding:8px 18px;border-radius:100px;border:1.5px solid var(--line);background:var(--srf);color:var(--muted);font-family:var(--df);font-weight:700;font-size:.82rem;transition:.2s}
+.chips button.on{background:var(--ink-fixed);color:var(--gold2);border-color:var(--ink-fixed)}
+.players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.player{overflow:hidden;transition:.3s;min-width:0}
+.player:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow2)}
+.pph{aspect-ratio:4/4.5;display:grid;place-items:center;overflow:hidden;background:linear-gradient(160deg,var(--srf-3),var(--bg-soft));position:relative;cursor:zoom-in}
+.pph::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 118%,rgba(242,184,75,.22),transparent 62%)}
+.pph::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--kit);opacity:.8}
+.pph img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}
+.pph span{position:relative;z-index:1;font-family:var(--df);font-weight:800;font-size:3.2rem;background:linear-gradient(160deg,var(--gold-ink),var(--goldD));-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme="dark"] .pph span{background:linear-gradient(160deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text}
+.pbd{padding:12px;border-top:1px solid var(--line)}
+.pbd>b{display:block;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbd>div{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.pbd span{font-size:.64rem;font-weight:700;background:var(--srf-2);border:1px solid var(--line2);padding:2px 8px;border-radius:5px;color:var(--muted)}
+.pbd .pos{background:rgba(46,91,255,.14);border-color:rgba(46,91,255,.3);color:var(--blue-ink)}
+/* أخبار */
+.news-g{display:grid;gap:16px}
+.ncard{overflow:hidden;display:flex;flex-direction:column;transition:.3s;min-width:0}
+.ncard:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow2)}
+.nph{height:180px;overflow:hidden;background:var(--srf-2);cursor:zoom-in}
+.nph img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.ncard:hover .nph img{transform:scale(1.07)}
+.nbd{padding:18px;flex:1}
+.nbd time{font-size:.72rem;color:var(--gold-ink);font-weight:700}
+.nbd h3{font-size:1.02rem;margin:8px 0;line-height:1.6}
+.nbd p{font-size:.87rem;color:var(--muted)}
+/* سجل الشرف */
+.hgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.hcard{padding:16px;position:relative;overflow:hidden;transition:.25s}
+.hcard:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:var(--shadow2)}
+.hcard .hi{font-size:1.7rem}
+.hcard b{display:block;font-family:var(--df);font-size:1rem;margin:8px 0 2px}
+.hcard .hh{color:var(--blue-ink);font-weight:700;font-size:.84rem}
+.hcard .hs{position:absolute;top:12px;inset-inline-end:12px;font-size:.66rem;font-weight:800;color:var(--gold-ink);background:rgba(242,184,75,.16);padding:3px 10px;border-radius:100px}
+.hcard p{color:var(--muted);font-size:.8rem;margin-top:6px}
+/* الإدارة */
+.bgrid{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.bcard{padding:18px 14px;text-align:center;transition:.25s}
+.bcard:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:var(--shadow2)}
+.bph{width:74px;height:74px;border-radius:50%;margin:0 auto 10px;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,rgba(242,184,75,.2),rgba(46,91,255,.16));border:2px solid var(--gold);font-family:var(--df);font-weight:800;font-size:1.5rem;color:var(--gold-ink)}
+.bph img{width:100%;height:100%;object-fit:cover}
+.bcard b{display:block;font-family:var(--df);font-size:.98rem}
+.bcard .role{display:inline-block;margin-top:6px;font-size:.7rem;font-weight:800;color:var(--blue-ink);background:rgba(46,91,255,.12);padding:3px 10px;border-radius:100px}
+.bcard a.tel{display:block;margin-top:8px;font-size:.76rem;color:var(--muted);direction:ltr}
+/* عن + تواصل */
+.about-g{display:grid;gap:28px}
+.about-c h2{font-size:clamp(1.5rem,6vw,2.1rem);margin:6px 0 14px;line-height:1.35}
+.about-c p{color:var(--muted);font-size:.98rem;margin-bottom:18px;line-height:2}
+.tline{position:relative;padding-inline-start:26px;display:grid;gap:13px}
+.tline::before{content:"";position:absolute;inset-inline-start:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--gold),var(--blue),transparent)}
+.titem{position:relative;padding:16px 18px}
+.titem::before{content:"";position:absolute;inset-inline-start:-26px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--gold)}
+.titem b{font-family:var(--df);color:var(--gold-ink);font-size:1.02rem}
+.titem h3{font-size:.98rem;margin:2px 0 4px}
+.titem p{font-size:.85rem;color:var(--muted)}
+.facts{padding:22px}
+.facts h3{font-family:var(--df);font-weight:800;font-size:1.1rem;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.facts h3::before{content:"";width:22px;height:4px;background:var(--kit)}
+.facts .frow{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:.92rem}
+.facts .frow:last-child{border:none}
+.facts .frow b{font-family:var(--df);font-weight:700;color:var(--blue-ink);min-width:86px;flex-shrink:0}
+.facts .frow span{color:var(--muted)}
+.contact-g{display:grid;gap:18px}
+.form,.info{padding:clamp(18px,4vw,26px)}
+.form label{display:block;font-weight:600;font-size:.85rem;color:var(--gold-ink);margin-bottom:14px}
+.form input,.form select,.form textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--srf-2);color:var(--txt);font-size:.92rem;margin-top:6px}
+.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(242,184,75,.15)}
+.form textarea{resize:vertical;min-height:110px}
+.info{background:var(--ink-fixed);color:#fff;border:none}
+.info h3{color:var(--gold2);font-size:1.25rem;margin-bottom:14px}
+.info ul{list-style:none}
+.info li{display:flex;gap:12px;margin-bottom:12px;font-size:.89rem}
+.info li b{color:var(--gold);font-family:var(--df);min-width:70px;flex-shrink:0}
+.info li span{color:rgba(255,255,255,.8);word-break:break-word}
+/* سوشال بأيقونات حقيقية */
+.soc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.soc-a{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border-radius:100px;border:1px solid rgba(255,255,255,.28);color:#fff;font-size:.8rem;font-weight:700;transition:.2s;background:rgba(255,255,255,.04)}
+.soc-a:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+.soc-a svg{flex-shrink:0}
+.cta-band{position:relative;overflow:hidden;margin-top:30px;padding:36px 22px;border-radius:var(--r);text-align:center;background:linear-gradient(130deg,rgba(46,91,255,.16),rgba(242,184,75,.16),rgba(31,138,76,.12));border:1px solid var(--line)}
+.cta-band h3{font-size:1.4rem;color:var(--gold-ink);margin-bottom:6px}
+.cta-band p{color:var(--muted);margin-bottom:18px;font-size:.9rem}
+.fields-mini{padding:8px 0;text-align:center}
+.mini-lbl{display:block;color:var(--dim);font-size:.76rem;margin-bottom:12px;font-weight:600}
+.fbtns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.fbtn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:100px;border:1px solid var(--line);background:var(--srf);font-family:var(--df);font-weight:700;font-size:.85rem;min-height:44px;box-shadow:var(--shadow);transition:.22s}
+.fbtn:hover{border-color:var(--gold);color:var(--gold-ink);transform:translateY(-2px)}
+.fbtn em{font-style:normal;color:var(--gold-ink);font-size:.76rem}
+/* فوتر */
+.footer{background:var(--ink-fixed);color:rgba(255,255,255,.75);padding:44px 0 24px;position:relative}
+.footer::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--kit)}
+.foot-g{display:grid;gap:26px;margin-bottom:24px}
+.foot-g h3{color:#fff;font-size:1.35rem;margin:10px 0 8px;line-height:1.3}
+.foot-g p{font-size:.85rem;max-width:38ch}
+.foot-g h4{color:var(--gold);font-family:var(--df);margin-bottom:10px;font-size:.95rem}
+.foot-g a{display:block;font-size:.85rem;padding:3px 0;transition:.2s}
+.foot-g a:hover{color:var(--gold2);transform:translateX(-3px)}
+.foot-soc{display:flex;flex-wrap:wrap;gap:8px}
+.foot-b{border-top:1px solid rgba(255,255,255,.12);padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:.75rem}
+/* دوك */
+.dock{position:fixed;bottom:0;left:0;right:0;z-index:70;display:grid;grid-template-columns:repeat(4,1fr);background:var(--dockbg);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:7px 8px calc(7px + env(safe-area-inset-bottom));gap:4px}
+.dock::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--kit);opacity:.8}
+.dock a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:12px;color:var(--dim);font-size:.64rem;font-weight:600;transition:.2s}
+.dock a i{font-style:normal;font-size:1.12rem}
+.dock a.on{color:var(--gold-ink);background:rgba(242,184,75,.16)}
+/* عارض صورة */
+.lb{position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.96);backdrop-filter:blur(12px)}
+.lb.on{display:flex}
+.lb-in{max-width:94vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lb-in img{max-width:100%;max-height:78vh;object-fit:contain;border-radius:12px}
+.lb-meta{text-align:center;color:rgba(255,255,255,.85);font-size:.88rem}
+.lb-meta b{display:block;color:var(--gold2);font-family:var(--df);font-size:1.05rem}
+.lb-x{position:absolute;top:16px;left:16px;width:46px;height:46px;display:grid;place-items:center;background:rgba(242,184,75,.14);border:1px solid var(--gold);color:var(--gold2);border-radius:50%}
+.lb-x:hover{background:var(--gold);color:var(--ink-fixed)}
+.toast{position:fixed;bottom:calc(var(--dockh) + 16px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,16px);background:var(--ink-fixed);color:#fff;border:1px solid var(--gold);padding:12px 22px;border-radius:100px;font-weight:600;font-size:.86rem;z-index:200;max-width:calc(100vw - 90px);box-shadow:var(--shadow2);opacity:0;visibility:hidden;pointer-events:none;transition:.3s}
+.toast.on{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s cubic-bezier(.2,.75,.25,1)}
+.rv.on{opacity:1;transform:none}
+@media(min-width:720px){
+ .players{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .bgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .news-g{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .contact-g{grid-template-columns:1.1fr .9fr}
+ .about-g{grid-template-columns:1fr 1.2fr;align-items:start}
+ .foot-g{grid-template-columns:1.4fr 1fr 1fr}
+}
+@media(min-width:1024px){
+ :root{--nav:74px}
+ .qnav{display:flex}
+ .dock{display:none}
+ body.pub{padding-bottom:0}
+ .toast{bottom:26px}
+ .hero-grid{grid-template-columns:1.06fr .94fr;gap:52px}
+ .players{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .bgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .news-g{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+ .view{animation:none}
+ .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="pub">
+<div class="bg"></div><div class="grain"></div>
+
+<header class="topbar"><div class="topbar-in">
+  <button class="burger" id="burger" aria-label="القائمة"><i></i><i></i><i></i></button>
+  <a class="lock" href="#/home" data-nav="home"><span data-crest="44"></span><span class="lock-t"><b class="js-name">وادي التراجمة</b><small class="js-region">ريفي رفاعة</small></span></a>
+  <nav class="qnav">
+    <a href="#/matches" data-nav="matches">المباريات</a>
+    <a href="#/squad" data-nav="squad">الفريق</a>
+    <a href="#/news" data-nav="news">الأخبار</a>
+    <a href="#/honors" data-nav="honors">سجل الشرف</a>
+    <a href="#/board" data-nav="board">الإدارة</a>
+    <a class="go" href="#/contact" data-nav="contact">تواصل</a>
+  </nav>
+</div></header>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="dhead"><span data-crest="50"></span><div><b class="js-name">وادي التراجمة</b><small class="js-region">ريفي رفاعة</small></div><button class="dclose" id="dclose">✕</button></div>
+  <nav class="dnav" id="dnav"></nav>
+  <div class="dfoot"><b>الميدان الأول</b><span id="df1">ميدان الوادي</span><b>الميدان الثاني</b><span id="df2">ميدان الهاشماب</span></div>
+</aside>
+
+<main id="main"></main>
+<nav class="dock" id="dock"></nav>
+
+<button class="fab-theme" id="themeBtn" aria-label="تبديل الوضع الليلي">
+  <svg class="sun" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+  <svg class="moon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+</button>
+
+<footer class="footer">
+  <div class="wrap foot-g">
+    <div><span data-crest="50"></span><h3 class="js-name">وادي التراجمة</h3><p>نادي كرة قدم يمثل منطقة التراجمة — ينافس في دوري الدرجة الثانية باتحاد رفاعة المحلي. هنا نحفظ مباريات الفريق ولحظاته ونتائجه وأخباره للذكريات.</p></div>
+    <div><h4>الصفحات</h4><a href="#/matches" data-nav="matches">المباريات</a><a href="#/squad" data-nav="squad">الفريق</a><a href="#/news" data-nav="news">الأخبار</a></div>
+    <div><h4>النادي</h4><a href="#/honors" data-nav="honors">سجل الشرف</a><a href="#/board" data-nav="board">الإدارة</a><a href="#/about" data-nav="about">عن النادي</a><a href="#/contact" data-nav="contact">التواصل</a></div>
+    <div id="footSoc" style="grid-column:1/-1"></div>
+  </div>
+  <div class="wrap foot-b"><span>© <span id="yr"></span> نادي وادي التراجمة ريفي رفاعة</span><span>صُنع بحب في ريفي رفاعة 💛💙</span></div>
+</footer>
+
+<div class="lb" id="lb"><button class="lb-x" id="lbX">✕</button><div class="lb-in"><img id="lbImg" alt=""><div class="lb-meta" id="lbMeta"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
+var KEY="wadi_v8",TK="wadi_theme";
+var clone=function(o){return JSON.parse(JSON.stringify(o))};
+var POS=["حارس مرمى","مدافع","وسط","مهاجم"];
+var ICO={"حارس مرمى":"🧤","مدافع":"🛡","وسط":"⚙","مهاجم":"🎯"};
+var NAV=[["home","🏠","الرئيسية"],["matches","⚽","المباريات"],["squad","👥","الفريق"],["news","📰","الأخبار"],["honors","🏅","سجل الشرف"],["board","🧑‍💼","الإدارة"],["about","📜","عن النادي"],["contact","✉️","التواصل"]];
+var TITLES={home:"الرئيسية",matches:"المباريات والنتائج",squad:"قائمة الفريق",news:"أخبار النادي",honors:"سجل الشرف",board:"إدارة النادي",about:"عن النادي",contact:"التواصل"};
+/* أيقونات التطبيقات الحقيقية */
+var TT='M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-1.59-2.39V9.86a5.74 5.74 0 1 0 4.68 5.64V9.35a7.35 7.35 0 0 0 4.3 1.38V7.64a4.28 4.28 0 0 1-3.24-1.82z';
+var SOC={
+ fb:{n:"فيسبوك",icon:'<svg viewBox="0 0 24 24" width="18" height="18" fill="#1877F2"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8V11H8v3h2.5v7z"/></svg>'},
+ wa:{n:"واتساب",icon:'<svg viewBox="0 0 24 24" width="18" height="18" fill="#25D366"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.2.2-3.4-.6-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4-.1.6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.7.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4.1.1.1.8-.2 1.5z"/></svg>'},
+ yt:{n:"يوتيوب",icon:'<svg viewBox="0 0 24 24" width="18" height="18" fill="#FF0000"><path d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8zM10 15.2V8.8L15.5 12z"/></svg>'},
+ ig:{n:"إنستغرام",icon:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#E1306C" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.3" fill="#E1306C" stroke="none"/></svg>'},
+ tt:{n:"تيك توك",icon:'<svg viewBox="0 0 24 24" width="18" height="18"><path fill="#25F4EE" transform="translate(-1,-1)" d="'+TT+'"/><path fill="#FE2C55" transform="translate(1,1)" d="'+TT+'"/><path fill="#FFFFFF" d="'+TT+'"/></svg>'}};
+var SEED={
+ settings:{name:"وادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",address:"منطقة التراجمة — ريفي رفاعة، السودان",phone:"+249 912 000 000",email:"info@wadi-tarajma.sd",about:"نادي وادي التراجمة ريفي رفاعة ممثل منطقة التراجمة في منافسات اتحاد رفاعة المحلي لكرة القدم ضمن دوري الدرجة الثانية. يخوض الفريق مبارياته الرسمية على ميدان الوادي، ويحتضن ميدان الهاشماب تدريباته اليومية وإعدادَه البدني والفني.",f1:{name:"ميدان الوادي",map:"https://maps.app.goo.gl/5omSxgEUMPaeguno7"},f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"},social:{fb:"",wa:"",yt:"",ig:"",tt:""}},
+ players:[{id:1,name:"أحمد الطيب",num:1,age:26,pos:"حارس مرمى",photo:""},{id:2,name:"محمد عثمان",num:2,age:23,pos:"مدافع",photo:""},{id:3,name:"عمر عبد الله",num:3,age:25,pos:"مدافع",photo:""},{id:4,name:"خالد إبراهيم",num:6,age:27,pos:"مدافع",photo:""},{id:5,name:"يوسف حسن",num:15,age:22,pos:"مدافع",photo:""},{id:6,name:"معاذ آدم",num:17,age:24,pos:"وسط",photo:""},{id:7,name:"النور محمد",num:12,age:21,pos:"وسط",photo:""},{id:8,name:"طارق سليمان",num:7,age:23,pos:"وسط",photo:""},{id:9,name:"صهيب علي",num:10,age:25,pos:"وسط",photo:""},{id:10,name:"مصعب أحمد",num:9,age:26,pos:"مهاجم",photo:""},{id:11,name:"أنس يحيى",num:11,age:22,pos:"مهاجم",photo:""},{id:12,name:"عوض الكريم",num:18,age:24,pos:"مهاجم",photo:""}],
+ matches:[{id:1,opponent:"الهلال رفاعة",date:"2026-11-21T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,img:""},{id:2,opponent:"المريخ رفاعة",date:"2026-11-28T15:00",venue:"ميدان الهاشماب",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,img:""},{id:3,opponent:"الأمل رفاعة",date:"2026-11-07T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"finished",my:2,op:1,img:"img/team-2.jpg"},{id:4,opponent:"النيل رفاعة",date:"2026-10-31T15:00",venue:"استاد رفاعة",comp:"دوري الدرجة الثانية",home:false,status:"finished",my:1,op:1,img:""},{id:5,opponent:"الشباب رفاعة",date:"2026-10-24T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"finished",my:3,op:0,img:"img/team-4.jpg"}],
+ news:[{id:1,title:"الفريق يكتسح الشباب رفاعة بثلاثية ويعتلي وصافة الترتيب",date:"2026-10-24",img:"img/team-2.jpg",ex:"قدّم نسور التراجمة واحدة من أفضل مبارياتهم الموسم الحالي، فحسموا اللقاء بثلاثة أهداف نظيفة على ميدان الوادي وسط حضور جماهيري كبير."},{id:2,title:"تحضيرات متواصلة على ميدان الهاشماب قبل مواجهة الهلال",date:"2026-11-12",img:"img/team-3.jpg",ex:"يواصل الجهاز الفني رفع النسق البدني والفني استعدادًا لقمة الجولة القادمة، مع تركيز خاص على الكرات الثابتة والتحولات."},{id:3,title:"الإدارة تدعو الجماهير لمؤازرة الفريق في القمة",date:"2026-11-10",img:"img/team-4.jpg",ex:"وجّهت إدارة النادي دعوة لجماهير التراجمة للحضور المبكر ومساندة الفريق في مباراته المقبلة على ميدان الوادي."}],
+ honors:[],board:[],
+ timeline:[{yr:"2019",t:"التأسيس",d:"انطلق النادي من منطقة التراجمة بمبادرة من شباب المنطقة ليجمعهم تحت راية واحدة."},{yr:"2022",t:"الانضمام لاتحاد رفاعة",d:"سُجّل النادي رسميًا ضمن أندية الاتحاد المحلي وبدأ مشواره في الدرجات التمهيدية."},{yr:"2025",t:"الصعود للدرجة الثانية",d:"توّج الفريق مشواره التمهيدي بالصعود إلى دوري الدرجة الثانية عن جدارة."},{yr:"2026",t:"موسم المنافسة",d:"ينافس الفريق هذا الموسم على بطاقات الصعود بين ميدان الوادي وميدان الهاشماب."}],
+ messages:[]};
+var C=clone(SEED),cdT=null,cur="home",chromeBound=false,mtab="u",posF="all",Q={m:"",p:"",n:""};
+function merge(a,b){if(b==null)return a;if(Array.isArray(a)||Array.isArray(b))return b;if(typeof a==="object"&&typeof b==="object"){var o={};for(var k in a)o[k]=a[k];for(var k2 in b)o[k2]=(k2 in a)?merge(a[k2],b[k2]):b[k2];return o}return b}
+function load(){try{var r=localStorage.getItem(KEY);C=r?merge(clone(SEED),JSON.parse(r)):clone(SEED)}catch(e){C=clone(SEED)}
+ ["players","matches","news","honors","board","timeline","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+ C.settings=merge(clone(SEED.settings),C.settings||{});if(!C.settings.social)C.settings.social={fb:"",wa:"",yt:"",ig:"",tt:""}}
+function toast(m){var t=$("#toast");if(!t)return;t.textContent=m;t.classList.add("on");clearTimeout(t._x);t._x=setTimeout(function(){t.classList.remove("on")},3000)}
+function crest(w){return '<svg viewBox="0 0 64 74" width="'+w+'" aria-hidden="true"><defs><linearGradient id="g'+w+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123024"/><stop offset="1" stop-color="#050d0a"/></linearGradient></defs><path d="M32 2 60 12v27c0 16-12 27-28 33C16 66 4 55 4 39V12Z" fill="url(#g'+w+')" stroke="#f2b84b" stroke-width="2.6"/><path d="M4 24h56" stroke="#2e5bff" stroke-width="2.2" opacity=".85"/><circle cx="32" cy="17" r="6.4" fill="#f2b84b"/><path d="M9 40c6-5 12 5 23 0s17 5 23 0" stroke="#f4f1e8" stroke-width="2.6" fill="none"/><path d="M9 49c6-5 12 5 23 0s17 5 23 0" stroke="#7c9bff" stroke-width="1.9" fill="none" opacity=".85"/><text x="32" y="63" text-anchor="middle" font-size="7" font-family="Changa" font-weight="700" fill="#f2b84b">التراجمة</text></svg>'}
+var fD=function(d){return new Date(d).toLocaleDateString("ar",{weekday:"long",day:"numeric",month:"long"})};
+var fDs=function(d){return new Date(d).toLocaleDateString("ar",{day:"numeric",month:"long",year:"numeric"})};
+var fT=function(d){return new Date(d).toLocaleTimeString("ar",{hour:"2-digit",minute:"2-digit"})};
+var dN=function(d){return new Date(d).getDate()};
+var dM=function(d){return new Date(d).toLocaleDateString("ar",{month:"short"})};
+var nextM=function(){return C.matches.filter(function(m){return m.status==="upcoming"&&new Date(m.date)>new Date()}).sort(function(a,b){return new Date(a.date)-new Date(b.date)})[0]};
+function setTheme(t){document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem(TK,t)}catch(e){}
+ var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="dark"?"#050d0a":"#ffffff")}
+function socialHTML(){var s=C.settings.social||{},out=[];
+ ["fb","wa","yt","ig","tt"].forEach(function(k){if(s[k])out.push('<a class="soc-a" href="'+esc(s[k])+'" target="_blank" rel="noopener" aria-label="'+SOC[k].n+'">'+SOC[k].icon+'<span>'+SOC[k].n+'</span></a>')});
+ return out.length?'<div class="soc">'+out.join("")+'</div>':""}
+function phero(wm,t,s){return '<section class="phero" data-wm="'+wm+'"><div class="wrap"><span class="kick">'+wm+'</span><h1>'+t+'</h1><p>'+s+'</p><div class="rule"></div></div></section>'}
+function emptyState(i,t,d){return '<div class="empty"><i>'+i+'</i><h3>'+t+'</h3><p>'+d+'</p></div>'}
+function searchbar(id,ph){return '<div class="searchbar" id="sb_'+id+'"><span class="s-ico">🔍</span><input id="sq_'+id+'" placeholder="'+ph+'" autocomplete="off"><button class="s-clear" id="sc_'+id+'" type="button" aria-label="مسح">✕</button><span class="s-count" id="sn_'+id+'"></span></div>'}
+function bindSearch(id,set,rerender){var inp=$("#sq_"+id),clr=$("#sc_"+id),bar=$("#sb_"+id);
+ inp.oninput=function(){set(inp.value);bar.classList.toggle("has",!!inp.value);rerender()};
+ clr.onclick=function(){inp.value="";set("");bar.classList.remove("has");rerender();inp.focus()}}
+function boardHTML(){var m=nextM();if(!m)return '<div class="bhead"><b><i></i> '+esc(C.settings.name)+'</b><span>اتحاد رفاعة</span></div><div style="text-align:center;padding:10px 0">'+crest(80)+'<p style="color:rgba(244,241,232,.7);font-size:.88rem;margin-top:8px">لم تُجدول مباراة قادمة بعد.</p></div>';
+ return '<div class="bhead"><b><i></i> المباراة القادمة</b><span>'+esc(m.comp||"")+'</span></div>'+
+ '<div class="vs"><div>'+crest(50)+'<span class="nm">'+esc(C.settings.name)+'</span><small>'+(m.home?"مستضيف":"")+'</small></div><strong>VS</strong><div><div class="opc">'+esc((m.opponent||"؟").charAt(0))+'</div><span class="nm">'+esc(m.opponent)+'</span><small>'+(m.home?"ضيف":"مستضيف")+'</small></div></div>'+
+ '<div class="bmeta"><span>📅 '+fD(m.date)+'</span><span>⏰ '+fT(m.date)+'</span><span>📍 '+esc(m.venue)+'</span></div>'+
+ '<div class="cd"><div><b id="cD">--</b><span>يوم</span></div><div><b id="cH">--</b><span>ساعة</span></div><div><b id="cM">--</b><span>دقيقة</span></div><div><b id="cS">--</b><span>ثانية</span></div></div>'+
+ '<a class="btn full" href="#/matches" data-nav="matches">جميع المباريات</a>'}
+function startCD(){clearInterval(cdT);var tick=function(){var n=nextM();var el=$("#cD");if(!n||!el)return;var s=Math.max(0,Math.floor((new Date(n.date)-Date.now())/1000));el.textContent=Math.floor(s/86400);$("#cH").textContent=("0"+Math.floor(s%86400/3600)).slice(-2);$("#cM").textContent=("0"+Math.floor(s%3600/60)).slice(-2);$("#cS").textContent=("0"+(s%60)).slice(-2)};tick();cdT=setInterval(tick,1000)}
+function matchCard(m){var fin=m.status==="finished",w=m.my>m.op,d=m.my===m.op;
+ return '<article class="match card"><div class="mdate"><b>'+dN(m.date)+'</b><small>'+dM(m.date)+'</small></div>'+
+ '<div class="minfo"><b>'+(m.home?(fin?"أمام":"يستضيف"):(fin?"ضد":"يحل ضيفًا على"))+' '+esc(m.opponent)+'</b><em>'+esc(m.comp||"")+'</em><small>📍 '+esc(m.venue)+(fin?"":" • ⏰ "+fT(m.date))+'</small></div>'+
+ (m.img?'<div class="mphoto" data-img="'+esc(m.img)+'" data-t="'+esc(m.opponent)+'"><img src="'+esc(m.img)+'" loading="lazy" alt=""></div>':"")+
+ (fin?'<div class="score">'+(m.home?m.my+" – "+m.op:m.op+" – "+m.my)+'</div><div class="mtags">'+(w?'<span class="tag w">فوز</span>':d?'<span class="tag d">تعادل</span>':'<span class="tag l">خسارة</span>')+'</div>'
+     :'<div class="mtags"><span class="tag g">'+fD(m.date)+'</span><span class="tag u">قادمة</span></div>')+'</article>'}
+function newsCard(n){return '<article class="ncard card">'+(n.img?'<div class="nph" data-img="'+esc(n.img)+'" data-t="'+esc(n.title)+'"><img src="'+esc(n.img)+'" loading="lazy" alt=""></div>':"")+'<div class="nbd"><time>'+fDs(n.date)+'</time><h3>'+esc(n.title)+'</h3><p>'+esc(n.ex)+'</p></div></article>'}
+function playerCard(x){return '<article class="player card"><div class="pph"'+(x.photo?' data-img="'+esc(x.photo)+'" data-t="'+esc(x.name)+'"':"")+'>'+(x.photo?'<img src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" loading="lazy">':'<span>'+esc(x.num)+'</span>')+'</div><div class="pbd"><b>'+esc(x.name)+'</b><div><span class="pos">'+esc(x.pos)+'</span>'+(x.age?'<span>'+esc(x.age)+' سنة</span>':"")+'<span>#'+esc(x.num)+'</span></div></div></article>'}
+function honorCard(h){return '<article class="hcard card"><span class="hi">'+(h.kind==="club"?"🏆":"🏅")+'</span>'+(h.season?'<span class="hs">'+esc(h.season)+'</span>':"")+'<b>'+esc(h.title)+'</b>'+
+ (h.holder?'<span class="hh">'+esc(h.holder)+(h.role?" — "+esc(h.role):"")+'</span>':"")+(h.note?'<p>'+esc(h.note)+'</p>':"")+'</article>'}
+function memberCard(b){var ini=(b.name||"؟").trim().charAt(0);
+ return '<article class="bcard card"><div class="bph">'+(b.photo?'<img src="'+esc(b.photo)+'" alt="'+esc(b.name)+'" loading="lazy">':esc(ini))+'</div><b>'+esc(b.name)+'</b><span class="role">'+esc(b.role)+'</span>'+
+ (b.phone?'<a class="tel" href="tel:'+esc(b.phone)+'">📞 '+esc(b.phone)+'</a>':"")+'</article>'}
+function fieldsHTML(){return '<div class="fields-mini"><span class="mini-lbl">📍 مواقع الميدانين على الخريطة</span><div class="fbtns"><a class="fbtn" href="'+esc(C.settings.f1.map)+'" target="_blank" rel="noopener">🏟️ '+esc(C.settings.f1.name)+' <em>↗</em></a><a class="fbtn" href="'+esc(C.settings.f2.map)+'" target="_blank" rel="noopener">🥅 '+esc(C.settings.f2.name)+' <em>↗</em></a></div></div>'}
+var VIEWS={
+ home:function(){
+  var up=C.matches.filter(function(m){return m.status==="upcoming"}).sort(function(a,b){return new Date(a.date)-new Date(b.date)});
+  var nw=C.news.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)}).slice(0,3);
+  return '<section class="hero"><div class="hero-mark">التراجمة</div>'+
+  '<div class="wrap hero-grid"><div><span class="badge"><i></i> اتحاد رفاعة المحلي • دوري الدرجة الثانية</span>'+
+  '<h1>نادي وادي <em>التراجمة</em><span>'+esc(C.settings.region)+'</span></h1>'+
+  '<p class="lead">«'+esc(C.settings.motto)+'» — هنا نحفظ مباريات الفريق ولحظاته ونتائجه وأخباره للذكريات.</p>'+
+  '<div class="hero-cta"><a class="btn" href="#/matches" data-nav="matches">⚽ المباريات</a><a class="btn on-dark" href="#/news" data-nav="news">📰 الأخبار</a></div>'+
+  '</div><div class="board">'+boardHTML()+'</div></div></section>'+
+  '<section class="sec"><div class="wrap"><div class="qcards">'+
+   '<a class="qcard" href="#/matches" data-nav="matches"><span class="q-ico">⚽</span><div><b>المباريات</b><small>القادمة والنتائج واللحظات</small></div><span class="q-num">'+C.matches.length+'</span></a>'+
+   '<a class="qcard" href="#/squad" data-nav="squad"><span class="q-ico">👥</span><div><b>الفريق</b><small>اللاعبون والخانات</small></div><span class="q-num">'+C.players.length+'</span></a>'+
+   '<a class="qcard" href="#/news" data-nav="news"><span class="q-ico">📰</span><div><b>الأخبار</b><small>أرشيف المستجدات</small></div><span class="q-num">'+C.news.length+'</span></a>'+
+   '<a class="qcard" href="#/honors" data-nav="honors"><span class="q-ico">🏅</span><div><b>سجل الشرف</b><small>ألقاب وجوائز</small></div><span class="q-num">'+C.honors.length+'</span></a>'+
+   '<a class="qcard" href="#/board" data-nav="board"><span class="q-ico">🧑‍💼</span><div><b>الإدارة</b><small>أعضاء النادي</small></div><span class="q-num">'+C.board.length+'</span></a>'+
+  '</div></div></section>'+
+  '<section class="sec alt"><div class="wrap"><div class="sec-head"><div><span class="kick">روزنامة</span><h2>المباريات القادمة</h2></div><a class="btn sm ghost" href="#/matches" data-nav="matches">الكل ⬅</a></div>'+
+  '<div class="hscroll">'+(up.length?up.slice(0,4).map(matchCard).join(""):'<div class="empty" style="flex:1"><i>📅</i><h3>لا مباريات قادمة</h3></div>')+'</div></div></section>'+
+  '<section class="sec"><div class="wrap"><div class="sec-head"><div><span class="kick">الذكريات</span><h2>آخر الأخبار</h2></div><a class="btn sm ghost" href="#/news" data-nav="news">الأرشيف ⬅</a></div>'+
+  '<div class="news-g">'+(nw.length?nw.map(newsCard).join(""):'<div class="empty"><i>📰</i><h3>لا أخبار بعد</h3></div>')+'</div></div></section>'+
+  '<section class="sec alt"><div class="wrap about-g"><div class="about-c"><span class="kick">الحكاية</span><h2>من قلب الوادي..<br>نلعب باسم التراجمة</h2><p>'+esc(C.settings.about)+'</p><a class="btn" href="#/about" data-nav="about">القصة كاملة</a></div>'+
+  '<div class="tline">'+C.timeline.slice(0,3).map(function(t){return '<div class="titem card"><b>'+esc(t.yr)+'</b><h3>'+esc(t.t)+'</h3><p>'+esc(t.d)+'</p></div>'}).join("")+'</div></div></section>'+
+  '<section class="sec"><div class="wrap">'+fieldsHTML()+
+  '<div class="cta-band"><h3>كن جزءًا من القصة</h3><p>سجّل لاعبًا، ادعم النادي، أو تواصل مع الإدارة.</p><a class="btn" href="#/contact" data-nav="contact">تواصل معنا</a></div></div></section>'},
+ matches:function(){return phero("روزنامة الموسم","المباريات <em>والنتائج</em>","كل مباريات الفريق: القادمة، النتائج، ولحظات موثّقة بالصور.")+
+  '<section class="sec" style="padding-top:26px"><div class="wrap">'+searchbar("m","ابحث: خصم، ملعب، بطولة…")+
+  '<div class="tabs"><button class="on" data-mt="u">القادمة</button><button data-mt="r">النتائج</button></div><div id="mlist"></div></div></section>'},
+ squad:function(){return phero("نسور التراجمة","قائمة <em>الفريق</em>","الاسم • العمر • الخانة • رقم القميص • الصورة.")+
+  '<section class="sec" style="padding-top:26px"><div class="wrap">'+searchbar("p","ابحث: اسم لاعب، خانة، رقم…")+
+  '<div class="chips" id="pchips"></div><div class="players" id="plist"></div></div></section>'},
+ news:function(){return phero("المركز الإعلامي","أخبار <em>النادي</em>","أرشيف كامل لكل مستجدات الفريق والإدارة — للذكريات.")+
+  '<section class="sec" style="padding-top:26px"><div class="wrap">'+searchbar("n","ابحث في الأخبار…")+'<div class="news-g" id="nlist"></div></div></section>'},
+ honors:function(){var club=C.honors.filter(function(h){return h.kind==="club"});var ind=C.honors.filter(function(h){return h.kind!=="club"});
+  return phero("سجل الشرف","الألقاب <em>والجوائز</em>","بطولات النادي وجوائز لاعبيه وأطقمه حسب الخانة والمنصب.")+
+  '<section class="sec" style="padding-top:26px"><div class="wrap">'+
+  '<div class="sec-head"><div><span class="kick">🏆 بطولات النادي</span><h2 style="font-size:1.35rem">الألقاب الجماعية</h2></div></div>'+
+  (club.length?'<div class="hgrid">'+club.map(honorCard).join("")+'</div>':emptyState("🏆","لا ألقاب جماعية بعد","أضف بطولات وكؤوس النادي من لوحة التحكم ← سجل الشرف."))+
+  '<div class="sec-head" style="margin-top:36px"><div><span class="kick">🏅 الجوائز الفردية</span><h2 style="font-size:1.35rem">حسب الخانة والمنصب</h2></div></div>'+
+  (ind.length?'<div class="hgrid">'+ind.map(honorCard).join("")+'</div>':emptyState("🏅","لا جوائز فردية بعد","أضف جوائز أفضل حارس / مدافع / وسط / مهاجم / مدرب من لوحة التحكم."))+
+  '</div></section>'},
+ board:function(){return phero("القيادة","إدارة النادي <em>وأعضاؤه</em>","الهيئة الإدارية والجهاز الفني والمشرفون على النادي.")+
+  '<section class="sec" style="padding-top:26px"><div class="wrap">'+
+  (C.board.length?'<div class="bgrid">'+C.board.map(memberCard).join("")+'</div>':emptyState("🧑‍💼","لم تُضف الإدارة بعد","أضف رئيس النادي والأعضاء والمناصب من لوحة التحكم ← الإدارة."))+
+  '</div></section>'},
+ about:function(){return phero("الحكاية","عن <em>النادي</em>","من مبادرة شبابية إلى منافس في الدرجة الثانية.")+
+  '<section class="sec"><div class="wrap about-g"><div class="about-c"><h2>من قلب الوادي..<br>نلعب باسم التراجمة</h2><p>'+esc(C.settings.about)+'</p>'+
+  '<div class="facts card"><h3>بطاقة النادي</h3><div class="frow"><b>الاسم</b><span>نادي '+esc(C.settings.name)+' '+esc(C.settings.region)+'</span></div><div class="frow"><b>الاتحاد</b><span>اتحاد رفاعة المحلي</span></div><div class="frow"><b>الدرجة</b><span>الدرجة الثانية</span></div><div class="frow"><b>الميدانان</b><span>'+esc(C.settings.f1.name)+' • '+esc(C.settings.f2.name)+'</span></div><div class="frow"><b>المقر</b><span>'+esc(C.settings.address)+'</span></div></div>'+socialHTML()+'</div>'+
+  '<div class="tline">'+C.timeline.map(function(t){return '<div class="titem card"><b>'+esc(t.yr)+'</b><h3>'+esc(t.t)+'</h3><p>'+esc(t.d)+'</p></div>'}).join("")+'</div></div></section>'},
+ contact:function(){return phero("تواصل","راسل <em>الإدارة</em>","رسالتك تصل مباشرة إلى لوحة التحكم.")+
+  '<section class="sec"><div class="wrap contact-g">'+
+  '<form class="card form" id="cform"><label>الاسم الكامل<input id="cName" required></label><label>الهاتف / واتساب<input id="cPhone"></label>'+
+  '<label>الموضوع<select id="cTopic"><option>تسجيل لاعب</option><option>شأن إداري</option><option>إعلام وتغطية</option><option>دعم ورعاية</option><option>أخرى</option></select></label>'+
+  '<label>الرسالة<textarea id="cBody" rows="4" required></textarea></label><button class="btn full" id="cSend">إرسال الرسالة</button></form>'+
+  '<div class="card info"><h3>بيانات النادي</h3><ul><li><b>المقر</b><span>'+esc(C.settings.address)+'</span></li><li><b>الهاتف</b><span>'+esc(C.settings.phone||"—")+'</span></li><li><b>البريد</b><span>'+esc(C.settings.email||"—")+'</span></li><li><b>الميدانان</b><span>'+esc(C.settings.f1.name)+' — '+esc(C.settings.f2.name)+'</span></li></ul>'+socialHTML()+'</div></div></section>'}
+};
+var BIND={
+ home:function(){startCD()},
+ matches:function(){
+  var render=function(){var list=C.matches.filter(function(m){return mtab==="u"?m.status==="upcoming":m.status==="finished"});
+   if(Q.m){var q=Q.m.toLowerCase();list=list.filter(function(m){return ((m.opponent||"")+" "+(m.venue||"")+" "+(m.comp||"")).toLowerCase().indexOf(q)>-1})}
+   list.sort(function(a,b){return mtab==="u"?new Date(a.date)-new Date(b.date):new Date(b.date)-new Date(a.date)});
+   $("#sn_m").textContent=list.length+" نتيجة";
+   $("#mlist").innerHTML=list.length?list.map(matchCard).join(""):'<div class="empty"><i>🔍</i><h3>لا نتائج مطابقة</h3><p>جرّب كلمة بحث أخرى أو بدّل التبويب.</p></div>'};
+  $$("[data-mt]").forEach(function(b){b.onclick=function(){$$("[data-mt]").forEach(function(x){x.classList.remove("on")});b.classList.add("on");mtab=b.dataset.mt;render()}});
+  bindSearch("m",function(v){Q.m=v},render);render()},
+ squad:function(){
+  var chips=function(){$("#pchips").innerHTML=['all'].concat(POS).map(function(p){return '<button class="'+(posF===p?"on":"")+'" data-pos="'+p+'">'+(p==="all"?"الكل":p)+'</button>'}).join("");
+   $$("#pchips button").forEach(function(b){b.onclick=function(){posF=b.dataset.pos;chips();render()}})};
+  var render=function(){var list=C.players.filter(function(x){return posF==="all"||x.pos===posF});
+   if(Q.p){var q=Q.p.toLowerCase();list=list.filter(function(x){return (x.name+" "+x.pos+" "+x.num).toLowerCase().indexOf(q)>-1})}
+   $("#sn_p").textContent=list.length+" لاعب";
+   $("#plist").innerHTML=list.length?list.map(playerCard).join(""):'<div class="empty" style="grid-column:1/-1"><i>🔍</i><h3>لا لاعبين مطابقين</h3></div>'};
+  chips();bindSearch("p",function(v){Q.p=v},render);render()},
+ news:function(){
+  var render=function(){var list=C.news.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});
+   if(Q.n){var q=Q.n.toLowerCase();list=list.filter(function(n){return (n.title+" "+n.ex).toLowerCase().indexOf(q)>-1})}
+   $("#sn_n").textContent=list.length+" خبر";
+   $("#nlist").innerHTML=list.length?list.map(newsCard).join(""):'<div class="empty"><i>🔍</i><h3>لا أخبار مطابقة</h3></div>'};
+  bindSearch("n",function(v){Q.n=v},render);render()},
+ contact:function(){var f=$("#cform");if(!f)return;f.onsubmit=function(e){e.preventDefault();var b=$("#cSend");b.disabled=true;b.textContent="جارٍ الإرسال…";
+  var msg={id:Date.now(),name:$("#cName").value.trim(),phone:$("#cPhone").value.trim(),topic:$("#cTopic").value,body:$("#cBody").value.trim(),created_at:new Date().toISOString(),read:false};
+  try{fetch("/api/messages",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(msg)}).catch(function(){})}catch(err){}
+  load();C.messages.unshift(msg);try{localStorage.setItem(KEY,JSON.stringify(C))}catch(err){}
+  f.reset();toast("✓ وصلت رسالتك للإدارة");b.disabled=false;b.textContent="إرسال الرسالة"}}
+};
+function openImg(src,t){$("#lbImg").src=src;$("#lbMeta").innerHTML='<b>'+esc(t||"")+'</b>';$("#lb").classList.add("on");document.body.classList.add("lock")}
+function closeLB(){$("#lb").classList.remove("on");document.body.classList.remove("lock")}
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("on");io.unobserve(en.target)}})},{threshold:.08});
+function reveal(){$$(".card,.sec-head,.cta-band,.empty,.phero .wrap,.hero-grid,.qcard,.searchbar").forEach(function(el){el.classList.add("rv");io.observe(el)})}
+function setActive(v){$$("[data-nav]").forEach(function(a){a.classList.toggle("on",a.dataset.nav===v)})}
+function closeDrawer(){$("#drawer").classList.remove("on");$("#scrim").classList.remove("on");$("#burger").classList.remove("on");document.body.classList.remove("lock")}
+function route(){clearInterval(cdT);
+ var h=(location.hash||"#/home").replace(/^#\/?/,"");
+ cur=VIEWS[h]?h:"home";
+ closeDrawer();
+ document.title=TITLES[cur]+" | وادي التراجمة ريفي رفاعة";
+ var wrap=document.createElement("div");wrap.className="view";wrap.innerHTML=VIEWS[cur]();
+ var main=$("#main");main.innerHTML="";main.appendChild(wrap);
+ setActive(cur);
+ if(BIND[cur])BIND[cur]();
+ reveal();
+ window.scrollTo(0,0)}
+function go(v){if(location.hash==="#/"+v)route();else location.hash="#/"+v}
+function buildChrome(){
+ $("#dnav").innerHTML=NAV.map(function(n){return '<a href="#/'+n[0]+'" data-nav="'+n[0]+'"><i>'+n[1]+'</i>'+n[2]+'</a>'}).join("");
+ $("#dock").innerHTML=[["home","🏠","الرئيسية"],["matches","⚽","المباريات"],["squad","👥","الفريق"],["news","📰","الأخبار"]].map(function(n){return '<a href="#/'+n[0]+'" data-nav="'+n[0]+'"><i>'+n[1]+'</i><span>'+n[2]+'</span></a>'}).join("");
+ $$(".js-name").forEach(function(e){e.textContent=C.settings.name});
+ $$(".js-region").forEach(function(e){e.textContent=C.settings.region});
+ $("#df1").textContent=C.settings.f1.name;$("#df2").textContent=C.settings.f2.name;
+ $("#yr").textContent=new Date().getFullYear();
+ var soc=socialHTML();
+ $("#footSoc").innerHTML=soc?('<div class="foot-soc">'+soc.replace('<div class="soc">',"").replace("</div>","")+'</div>'):"";
+ $$("[data-crest]").forEach(function(e){e.innerHTML=crest(+e.dataset.crest||44)});
+ $("#burger").onclick=function(){var d=$("#drawer");if(d.classList.contains("on"))closeDrawer();else{d.classList.add("on");$("#scrim").classList.add("on");$("#burger").classList.add("on");document.body.classList.add("lock")}};
+ $("#dclose").onclick=closeDrawer;$("#scrim").onclick=closeDrawer;
+ $("#themeBtn").onclick=function(){setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark")};
+ setTheme((function(){try{return localStorage.getItem(TK)}catch(e){return null}})()||"light");
+ $("#lbX").onclick=closeLB;$("#lb").onclick=function(e){if(e.target.id==="lb")closeLB()};
+ if(!chromeBound){chromeBound=true;
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeDrawer();closeLB()}});
+  document.addEventListener("click",function(e){
+   var img=e.target.closest?e.target.closest("[data-img]"):null;
+   if(img){openImg(img.dataset.img,img.dataset.t||"");return}
+   var a=(e.target.closest)?e.target.closest("[data-nav]"):null;if(a){e.preventDefault();go(a.dataset.nav)}});
+  window.addEventListener("hashchange",route);
+  window.addEventListener("storage",function(e){if(e.key===KEY){load();route()}});
+ }}
+load();
+buildChrome();
+route();
+try{
+ fetch("/api/data",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(d){
+   if(d){C=merge(clone(SEED),d);try{localStorage.setItem(KEY,JSON.stringify(C))}catch(e){}load();buildChrome();route()}
+ }).catch(function(){});
+}catch(e){}
+})();
+</script>
+</body>
+</html>
