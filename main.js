@@ -73,6 +73,31 @@ function setTheme(t){document.documentElement.setAttribute("data-theme",t);try{l
   var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="dark"?"#060d0a":"#ffffff")}
 function playerName(id){var p=C.players.filter(function(x){return x.id===id})[0];return p?p.name:"لاعب"}
 
+/* ===== حساب الأهداف تلقائياً من المباريات ===== */
+function calcPlayerGoals(){
+  var goals={};
+  C.players.forEach(function(p){goals[p.id]=0});
+  C.matches.forEach(function(m){
+    if(m.status==="finished"&&m.goals&&m.goals.length){
+      m.goals.forEach(function(g){
+        if(g.team==="my"&&g.pid&&goals[g.pid]!==undefined){
+          goals[g.pid]++;
+        }
+      });
+    }
+  });
+  return goals;
+}
+
+/* ===== حساب الميداليات/الأوسمة ===== */
+function calcPlayerMedals(){
+  var medals={};
+  C.players.forEach(function(p){medals[p.id]=[]});
+  // مثال: أفضل لاعب في المباراة، هداف الشهر، إلخ
+  // يمكن إضافة منطق هنا لحساب الميداليات بناءً على بيانات المباريات
+  return medals;
+}
+
 /* ===== الملعب المنظوري ===== */
 function jersey(num){
   return '<svg viewBox="0 0 44 38" class="jsy" aria-hidden="true"><path d="M15 3 7 7 2 14l7 4 2-3v16h22V15l2 3 7-4-5-7-8-4c0 4-3 6-6 6s-6-2-6-6z" fill="#f2b84b" stroke="#123024" stroke-width="1.6"/><text x="22" y="28" text-anchor="middle" font-size="12" font-family="Changa" font-weight="800" fill="#123024">'+esc(num)+'</text></svg>';
@@ -140,7 +165,33 @@ function newsCard(n){
     '<div class="n2-bd"><h3>'+esc(n.title)+'</h3><p>'+esc(n.ex)+'</p>'+
     '<div class="n2-ft"><button class="btn sm ghost" data-news="'+n.id+'">قراءة الخبر</button>'+shareHTML(n.title)+'</div></div></article>';
 }
-function playerCard(x){return '<article class="player card"><div class="pph">'+(x.photo?'<img src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" loading="lazy">':'<span>'+esc(x.num)+'</span>')+'</div><div class="pbd"><b>'+esc(x.name)+'</b><div><span class="pos">'+esc(x.pos)+'</span>'+(x.age?'<span>'+esc(x.age)+' سنة</span>':"")+'<span>#'+esc(x.num)+'</span></div></div></article>'}
+
+/* ===== بطاقة اللاعب العصرية ===== */
+function playerCard(x){
+  var goals=calcPlayerGoals();
+  var medals=calcPlayerMedals();
+  var posClass=x.pos==="حارس مرمى"?"gk":x.pos==="مدافع"?"df":x.pos==="وسط"?"mf":"fw";
+  var playerGoals=goals[x.id]||0;
+  var playerMedals=medals[x.id]||[];
+  var medalsHTML=playerMedals.length?playerMedals.map(function(m){
+    return '<span class="pc-medal '+m.type+'">'+m.icon+' '+esc(m.label)+'</span>';
+  }).join(""):'<span class="dim" style="font-size:.72rem">لا أوسمة بعد</span>';
+  
+  return '<article class="player-card">'+
+    '<div class="pc-header">'+(x.photo?'<img src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" loading="lazy">':'')+
+    '<div class="pc-num">'+esc(x.num)+'</div>'+
+    '<div class="pc-pos-badge '+posClass+'">'+esc(x.pos)+'</div></div>'+
+    '<div class="pc-body">'+
+    '<div class="pc-name">'+esc(x.name)+'</div>'+
+    '<div class="pc-info">'+(x.age?'<span>🎂 '+esc(x.age)+' سنة</span>':"")+'<span>👕 #'+esc(x.num)+'</span></div>'+
+    '<div class="pc-medals">'+medalsHTML+'</div>'+
+    '<div class="pc-stats">'+
+    '<div class="pc-stat"><b>'+playerGoals+'</b><small>أهداف</small></div>'+
+    '<div class="pc-stat"><b>'+(x.apps||0)+'</b><small>مباريات</small></div>'+
+    '<div class="pc-stat"><b>0</b><small>صناعة</small></div>'+
+    '</div></div></article>';
+}
+
 function memberCard(b){var ini=(b.name||"؟").trim().charAt(0);
   return '<article class="bcard card"><div class="bph">'+(b.photo?'<img src="'+esc(b.photo)+'" alt="">':esc(ini))+'</div><b>'+esc(b.name)+'</b><span class="role">'+esc(b.role)+'</span>'+(b.phone?'<a class="tel" href="tel:'+esc(b.phone)+'">📞 '+esc(b.phone)+'</a>':"")+'</article>'}
 function phero(t,s){return '<section class="phero"><div class="wrap"><h1>'+t+'</h1><p>'+s+'</p><div class="rule"></div></div></section>'}
