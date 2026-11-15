@@ -4,101 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
-
-<title>وادي التراجمة ريفي رفاعة | الموقع الرسمي للنادي</title>
-<meta name="description" content="الموقع الرسمي لنادي وادي التراجمة ريفي رفاعة - أخبار الفريق، المباريات، اللاعبين ونتائج دوري الدرجة الثانية لاتحاد رفاعة المحلي لكرة القدم">
-<meta name="keywords" content="وادي التراجمة, التراجمة, ريفي رفاعة, نادي كرة قدم, السودان, دوري الدرجة الثانية, اتحاد رفاعة">
-<meta name="author" content="نادي وادي التراجمة">
+<title>وادي التراجمة ريفي رفاعة | الموقع الرسمي</title>
+<meta name="description" content="الموقع الرسمي لنادي وادي التراجمة ريفي رفاعة — المباراة القادمة، النتائج، الأخبار، الفريق والإدارة">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://wadialtarajma.github.io/wadialtarajma/">
-
+<link rel="canonical" href="https://wadialtarajma.pages.dev/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="نادي وادي التراجمة">
 <meta property="og:title" content="وادي التراجمة | من قلب الوادي نلعب باسم الديار">
-<meta property="og:description" content="الموقع الرسمي لنادي وادي التراجمة ريفي رفاعة - أخبار ومباريات ونتائج الفريق">
+<meta property="og:description" content="المباراة القادمة والنتائج والأخبار والفريق — نادي وادي التراجمة ريفي رفاعة">
 <meta property="og:locale" content="ar_AR">
-<meta property="og:url" content="https://wadialtarajma.github.io/wadialtarajma/">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="وادي التراجمة | من قلب الوادي نلعب باسم الديار">
-<meta name="twitter:description" content="الموقع الرسمي لنادي وادي التراجمة ريفي رفاعة">
-
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SportsTeam",
-  "name": "نادي وادي التراجمة",
-  "alternateName": "وادي التراجمة ريفي رفاعة",
-  "sport": "http://schema.org/Soccer",
-  "description": "نادي وادي التراجمة ممثل منطقة التراجمة في اتحاد رفاعة المحلي لكرة القدم - دوري الدرجة الثانية",
-  "foundingDate": "2019",
-  "location": {
-    "@type": "Place",
-    "name": "منطقة التراجمة — ريفي رفاعة، السودان",
-    "address": {
-      "@type": "PostalAddress",
-      "addressRegion": "ولاية الجزيرة",
-      "addressCountry": "SD"
-    }
-  },
-  "memberOf": {
-    "@type": "SportsOrganization",
-    "name": "اتحاد رفاعة المحلي لكرة القدم"
-  }
-}
+{"@context":"https://schema.org","@type":"SportsTeam","name":"نادي وادي التراجمة","sport":"http://schema.org/Soccer","foundingDate":"2019","memberOf":{"@type":"SportsOrganization","name":"اتحاد رفاعة المحلي لكرة القدم"}}
 </script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("wadi_theme")||"light")}catch(e){}</script>
-
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="pub">
 
-<div class="bg"></div>
-<div class="grain"></div>
-
 <header class="topbar">
   <div class="topbar-in">
-    <button class="burger" id="burger" aria-label="القائمة">
-      <i></i><i></i><i></i>
-    </button>
-    <div class="lock" data-nav="home">
-      <span data-crest="32"></span>
-      <div class="lock-t">
-        <b class="js-name">وادي التراجمة</b>
-        <small class="js-region">ريفي رفاعة</small>
-      </div>
-    </div>
-    <nav class="qnav">
-      <a href="#/home" data-nav="home">الرئيسية</a>
-      <a href="#/matches" data-nav="matches">المباريات</a>
-      <a href="#/squad" data-nav="squad">الفريق</a>
-      <a href="#/standings" data-nav="standings">الترتيب</a>
-      <a href="#/news" data-nav="news">الأخبار</a>
-      <a href="#/gallery" data-nav="gallery">الصور</a>
-    </nav>
+    <button class="burger" id="burger" aria-label="القائمة"><i></i><i></i><i></i></button>
+    <a class="brand" href="#/home" data-nav="home">
+      <span data-crest="34"></span>
+      <span class="brand-t"><b class="js-name">وادي التراجمة</b><small class="js-region">ريفي رفاعة</small></span>
+    </a>
+    <nav class="qnav" id="qnav"></nav>
+    <button class="theme-btn" id="themeBtn" aria-label="تبديل الوضع"><span class="sun">☀</span><span class="moon">🌙</span></button>
   </div>
 </header>
 
 <aside class="drawer" id="drawer">
   <div class="dhead">
-    <span data-crest="44"></span>
-    <div>
-      <b class="js-name">وادي التراجمة</b>
-      <small class="js-region">ريفي رفاعة</small>
-    </div>
+    <span data-crest="42"></span>
+    <div><b class="js-name">وادي التراجمة</b><small class="js-region">ريفي رفاعة</small></div>
     <button class="dclose" id="dclose" aria-label="إغلاق">✕</button>
   </div>
   <nav class="dnav" id="dnav"></nav>
-  <div class="dfoot">
-    <span>الميدانان</span>
-    <span id="df1">-</span>
-    <span>والآخر</span>
-    <span id="df2">-</span>
-  </div>
 </aside>
 <div class="scrim" id="scrim"></div>
 
@@ -106,65 +48,20 @@
 
 <nav class="dock" id="dock"></nav>
 
-<button class="fab-search" id="searchBtn" aria-label="بحث">🔍</button>
-<button class="fab-theme" id="themeBtn" aria-label="تبديل الوضع">
-  <span class="sun">☀</span>
-  <span class="moon">🌙</span>
-</button>
-
-<div class="gsearch-modal" id="gsearch">
-  <div class="gsearch-box">
-    <div class="gsearch-in">
-      <span>🔍</span>
-      <input id="gsInput" placeholder="ابحث في الموقع كاملاً..." autocomplete="off">
-      <button id="gsClose" aria-label="إغلاق">✕</button>
-    </div>
-    <div class="gsearch-results" id="gsResults"></div>
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="modal-x" id="modalX" aria-label="إغلاق">✕</button>
+    <div id="modalBody"></div>
   </div>
-</div>
-
-<div class="lightbox" id="lb">
-  <button class="lb-x" id="lbX" aria-label="إغلاق">✕</button>
-  <img id="lbImg" src="" alt="">
-  <div class="lb-meta" id="lbMeta"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <footer class="foot">
-  <div class="wrap">
-    <div class="foot-g">
-      <div>
-        <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
-          <span data-crest="44"></span>
-          <div>
-            <h4 class="js-name">وادي التراجمة</h4>
-            <small class="js-region">ريفي رفاعة</small>
-          </div>
-        </div>
-        <p style="font-size:.82rem">«من قلب الوادي.. نلعب باسم الديار» — الموقع الرسمي للنادي.</p>
-        <div id="footSoc"></div>
-      </div>
-      <div>
-        <h4>الأقسام</h4>
-        <a href="#/matches" data-nav="matches">المباريات</a>
-        <a href="#/squad" data-nav="squad">الفريق</a>
-        <a href="#/standings" data-nav="standings">جدول الترتيب</a>
-        <a href="#/news" data-nav="news">الأخبار</a>
-        <a href="#/gallery" data-nav="gallery">معرض الصور</a>
-        <a href="#/honors" data-nav="honors">سجل الشرف</a>
-      </div>
-      <div>
-        <h4>روابط</h4>
-        <a href="#/about" data-nav="about">عن النادي</a>
-        <a href="#/board" data-nav="board">الإدارة</a>
-        <a href="#/contact" data-nav="contact">تواصل معنا</a>
-      </div>
-    </div>
-    <div class="foot-btm">
-      <span>© <span id="yr"></span> <b class="js-name">وادي التراجمة</b> — جميع الحقوق محفوظة</span>
-      <span>اتحاد <b>رفاعة</b> المحلي</span>
-    </div>
+  <div class="wrap foot-in">
+    <div class="foot-brand"><span data-crest="36"></span><div><b class="js-name">وادي التراجمة</b><small>«من قلب الوادي.. نلعب باسم الديار»</small></div></div>
+    <nav class="foot-links" id="footLinks"></nav>
+    <div class="foot-copy">© <span id="yr"></span> — اتحاد رفاعة المحلي</div>
   </div>
 </footer>
 
