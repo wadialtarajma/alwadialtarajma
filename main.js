@@ -78,7 +78,7 @@ function jersey(num){
   return '<svg viewBox="0 0 44 38" class="jsy" aria-hidden="true"><path d="M15 3 7 7 2 14l7 4 2-3v16h22V15l2 3 7-4-5-7-8-4c0 4-3 6-6 6s-6-2-6-6z" fill="#f2b84b" stroke="#123024" stroke-width="1.6"/><text x="22" y="28" text-anchor="middle" font-size="12" font-family="Changa" font-weight="800" fill="#123024">'+esc(num)+'</text></svg>';
 }
 function pitch3d(list){
-  if(!list||!list.length)return '<div class="lu-empty">لم تُحدَّد التشكيلة بعد — تُضبط من لوحة التحكم</div>';
+  if(!list||!list.length)return '<div class="lu-empty">لم تُعلن التشكيلة بعد</div>';
   var rows=[["مهاجم","r1"],["وسط","r2"],["مدافع","r3"],["حارس مرمى","r4"]].map(function(r){
     return {cls:r[1],ps:list.filter(function(p){return p.pos===r[0]})};
   }).filter(function(r){return r.ps.length});
@@ -106,7 +106,7 @@ function oppListHTML(names){
   return '<ol class="oplist">'+names.map(function(n,i){return '<li><b>'+(i+1)+'</b>'+esc(n)+'</li>'}).join("")+'</ol>';
 }
 
-/* ===== المشاركة ===== */
+/* ===== المشاركة العامة ===== */
 function shareHTML(title){
   var u=location.origin+location.pathname+"#/news";
   var t=encodeURIComponent(title+" | "+C.settings.name);
@@ -115,12 +115,12 @@ function shareHTML(title){
     '<a class="sh wa" target="_blank" rel="noopener" href="https://wa.me/?text='+t+'%20'+ue+'" aria-label="واتساب"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.1-3.4-8.3zM12 21.8a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2c0-5.5 4.4-9.9 9.9-9.9s9.9 4.4 9.9 9.9-4.4 9.9-9.9 9.9zm5.4-7.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1a8.1 8.1 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/></svg></a>'+
     '<a class="sh fb" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u='+ue+'" aria-label="فيسبوك"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>'+
     '<a class="sh x" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text='+t+'&url='+ue+'" aria-label="X"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 2H22l-7 8 8.2 12h-6.4l-5-7.3L6 22H2.8l7.5-8.6L2.4 2h6.6l4.5 6.6L18.9 2z"/></svg></a>'+
-    '<button class="sh cp" data-copy="'+esc(u)+'" aria-label="نسخ الرابط">🔗</button></div>';
+    '<button class="sh cp" data-share="'+esc(title)+'" aria-label="مشاركة"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18 16.1a3 3 0 0 0-2.1.9l-7-4.1a3 3 0 0 0 0-1.8l7-4.1A3 3 0 1 0 15 4a3 3 0 0 0 .1.8l-7 4.1a3 3 0 1 0 0 6.2l7 4.1a3 3 0 1 0 2.9-3.1z"/></svg></button></div>';
 }
 
 /* ===== بطاقات ===== */
 function goalsHTML(m){
-  if(!m.goals||!m.goals.length)return '<p class="dim">لا تفاصيل أهداف مسجلة.</p>';
+  if(!m.goals||!m.goals.length)return '<p class="dim">لا تفاصيل أهداف لهذه المباراة.</p>';
   return '<ul class="goals">'+m.goals.slice().sort(function(a,b){return (a.min||0)-(b.min||0)}).map(function(g){
     var nm=g.team==="my"?playerName(g.pid):(g.name||"الخصم");
     return '<li><span class="g-min">'+esc(g.min||0)+'′</span> ⚽ <b>'+esc(nm)+'</b>'+(g.team==="op"?' <span class="dim">(الخصم)</span>':"")+'</li>';
@@ -181,7 +181,7 @@ var VIEWS={
     h+='<section class="sec alt"><div class="wrap"><div class="sec-head"><div><span class="kick">الخطة الأساسية</span><h2>تشكيلة الفريق</h2></div><a class="btn sm ghost" href="#/squad" data-nav="squad">الفريق كاملًا ⬅</a></div>'+
       '<div class="lu-col">'+pitch3d(defaultXI())+'</div></div></section>';
     h+='<section class="sec"><div class="wrap"><div class="sec-head"><div><span class="kick">المركز الإعلامي</span><h2>آخر الأخبار</h2></div><a class="btn sm ghost" href="#/news" data-nav="news">المزيد ⬅</a></div>'+
-      '<div class="news-g">'+(nw.length?nw.map(newsCard).join(""):emptyState("📰","لا أخبار بعد","أضف الأخبار من لوحة التحكم."))+'</div></div></section>';
+      '<div class="news-g">'+(nw.length?nw.map(newsCard).join(""):emptyState("📰","لا أخبار بعد","ترقبوا جديد النادي قريبًا."))+'</div></div></section>';
     h+='<section class="sec alt"><div class="wrap"><div class="sec-head"><div><span class="kick">نسور التراجمة</span><h2>نجوم الفريق</h2></div><a class="btn sm ghost" href="#/squad" data-nav="squad">المزيد ⬅</a></div>'+
       '<div class="hscroll2">'+(pl.length?pl.map(playerCard).join(""):emptyState("👥","لا لاعبين بعد",""))+'</div></div></section>';
     return h;
@@ -189,18 +189,17 @@ var VIEWS={
   matches:function(){return phero("المباريات <em>والنتائج</em>","كل مباريات الفريق بتفاصيلها: النتائج، الهدافون، والتشكيلات.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("m","ابحث: خصم، ملعب، بطولة…")+
     '<div class="tabs"><button class="on" data-mt="u">القادمة</button><button data-mt="r">النتائج</button></div><div class="mlist" id="mlist"></div></div></section>'},
-  squad:function(){return phero("قائمة <em>الفريق</em>","اللاعبون والخانات، والتشكيلة الأساسية الثابتة.")+
+  squad:function(){return phero("قائمة <em>الفريق</em>","اللاعبون والخانات، والتشكيلة الأساسية.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("p","ابحث: اسم لاعب، خانة، رقم…")+
     '<div class="chips" id="pchips"></div><div class="players" id="plist"></div>'+
     '<div class="sec-head" style="margin-top:30px"><div><span class="kick">الخطة</span><h2>التشكيلة الأساسية</h2></div></div>'+
     '<div class="lu-col">'+pitch3d(defaultXI())+'</div>'+
-    '<p class="dim" style="text-align:center;margin-top:10px">تُضبط التشكيلة الأساسية من لوحة التحكم ← الإعدادات.</p>'+
     '</div></section>'},
   news:function(){return phero("أخبار <em>النادي</em>","أرشيف كامل لكل مستجدات الفريق والإدارة — شاركها بضغطة.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("n","ابحث في الأخبار…")+'<div class="news-g" id="nlist"></div></div></section>'},
   board:function(){return phero("إدارة <em>النادي</em>","الهيئة الإدارية والجهاز الفني المشرف على النادي.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+
-    (C.board.length?'<div class="bgrid">'+C.board.map(memberCard).join("")+'</div>':emptyState("🧑‍","لم تُضف الإدارة بعد","أضف الأعضاء من لوحة التحكم ← الإدارة."))+'</div></section>'}
+    (C.board.length?'<div class="bgrid">'+C.board.map(memberCard).join("")+'</div>':emptyState("🧑‍","إدارة النادي","سيُعلن عن أعضاء الإدارة قريبًا."))+'</div></section>'}
 };
 
 var BIND={
@@ -303,6 +302,18 @@ function buildChrome(){
   $$(".js-region").forEach(function(e){e.textContent=C.settings.region});
   $("#yr").textContent=new Date().getFullYear();
   $$("[data-crest]").forEach(function(e){e.innerHTML=crest(+e.dataset.crest||40)});
+
+  var fw=document.querySelector(".foot .wrap");
+  if(fw&&!$("#footFields"))fw.insertAdjacentHTML("afterbegin",'<div class="foot-fields" id="footFields" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"></div>');
+  var ff=$("#footFields");
+  if(ff){
+    var btns=[];
+    if(C.settings.f1&&C.settings.f1.map)btns.push('<a class="btn ghost sm" href="'+esc(C.settings.f1.map)+'" target="_blank" rel="noopener">🏟️ '+esc(C.settings.f1.name)+' ↗</a>');
+    if(C.settings.f2&&C.settings.f2.map)btns.push('<a class="btn ghost sm" href="'+esc(C.settings.f2.map)+'" target="_blank" rel="noopener">🥅 '+esc(C.settings.f2.name)+' ↗</a>');
+    ff.innerHTML=btns.join("");
+    ff.style.display=btns.length?"flex":"none";
+  }
+
   $("#burger").onclick=function(){var d=$("#drawer");if(d.classList.contains("on"))closeDrawer();else{d.classList.add("on");$("#scrim").classList.add("on");$("#burger").classList.add("on");document.body.classList.add("lock")}};
   $("#dclose").onclick=closeDrawer;$("#scrim").onclick=closeDrawer;
   $("#themeBtn").onclick=function(){setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark")};
@@ -311,9 +322,13 @@ function buildChrome(){
   if(!bound){bound=true;
     document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeDrawer();closeModal()}});
     document.addEventListener("click",function(e){
-      var cp=e.target.closest?e.target.closest("[data-copy]"):null;
-      if(cp){e.preventDefault();var u=cp.dataset.copy;
-        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){toast("🔗 تم نسخ الرابط")})}else{toast(u)}
+      var sh=e.target.closest?e.target.closest("[data-share]"):null;
+      if(sh){e.preventDefault();
+        var ttl=sh.dataset.share||"";
+        var url=location.origin+location.pathname+"#/news";
+        if(navigator.share){navigator.share({title:ttl,text:ttl+" | "+C.settings.name,url:url}).catch(function(){})}
+        else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(function(){toast("🔗 تم نسخ الرابط للمشاركة")})}
+        else toast(url);
         return}
       var nd=e.target.closest?e.target.closest("[data-news]"):null;
       if(nd){var n=C.news.filter(function(x){return x.id===+nd.dataset.news})[0];if(n)newsModal(n);return}
