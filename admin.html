@@ -1,263 +1,800 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
-<title>لوحة التحكم — وادي التراجمة ريفي رفاعة</title>
-<meta name="robots" content="noindex,nofollow">
-<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("wadi_theme")||"light")}catch(e){}</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة التحكم | وادي التراجمة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Changa:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap");
-:root{--bg:#FFFFFF;--bg-soft:#F4F7F4;--srf:#FFFFFF;--srf-2:#F1F4F1;--txt:#101815;--muted:#57665E;--dim:#8A978F;--line:rgba(16,24,21,.14);--line2:rgba(16,24,21,.07);--gold:#F2B84B;--gold2:#FFD98A;--gold-ink:#9A6E00;--goldD:#B57E1F;--blue:#2E5BFF;--blue-ink:#1D4ED8;--green:#1F8A4C;--red:#C2410C;--ink-fixed:#0B0F0D;--df:"Changa",sans-serif;--bf:"IBM Plex Sans Arabic",sans-serif;--shadow:0 16px 44px rgba(16,24,21,.10);--kit:linear-gradient(90deg,var(--gold) 0 33%,var(--blue) 33% 66%,var(--gold) 66% 100%);color-scheme:light}
-html[data-theme="dark"]{--bg:#050D0A;--bg-soft:#071510;--srf:#0A1A14;--srf-2:#0F241B;--txt:#F4F1E8;--muted:#93A69B;--dim:#6B8078;--line:rgba(242,184,75,.16);--line2:rgba(244,241,232,.08);--gold-ink:#FFD98A;--blue-ink:#7C9BFF;--green:#35E08D;--red:#FF5C5C;--shadow:0 24px 60px rgba(0,0,0,.45);color-scheme:dark}
-*{box-sizing:border-box;margin:0;padding:0}[hidden]{display:none!important}
-html{overflow-x:hidden;overflow-x:clip}body{overflow-x:hidden;overflow-x:clip;background:var(--bg);color:var(--txt);font-family:var(--bf);line-height:1.7;min-height:100vh;padding-top:62px}
-img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;background:none;border:none}
-h1,h2,.df{font-family:var(--df)}::selection{background:var(--gold);color:var(--ink-fixed)}
-.at{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--bg);border-bottom:1px solid var(--line);min-height:62px;flex-wrap:wrap}
-.at::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--kit)}
-.at b{font-family:var(--df);font-weight:800;flex:1}
-.back{display:inline-flex;align-items:center;gap:6px;color:var(--gold-ink);font-weight:700;font-size:.82rem;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(242,184,75,.08)}
-.pill{font-size:.64rem;font-weight:800;padding:4px 11px;border-radius:99px;background:rgba(46,91,255,.12);color:var(--blue-ink);border:1px solid rgba(46,91,255,.3)}
-.pill.cl{background:rgba(31,138,76,.12);color:var(--green);border-color:rgba(31,138,76,.3)}
-.fab-theme{position:fixed;left:16px;bottom:24px;z-index:130;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--gold),var(--goldD));color:#08130d;box-shadow:0 12px 30px rgba(242,184,75,.42),0 0 0 4px rgba(242,184,75,.16);transition:.3s;border:none}
-.fab-theme:hover{transform:translateY(-3px) scale(1.06)}
-.fab-theme .moon{display:none}
-html[data-theme="dark"] .fab-theme{background:linear-gradient(145deg,#1d3a5f,#0f241b);color:var(--gold2);box-shadow:0 12px 30px rgba(0,0,0,.55),0 0 0 4px rgba(124,155,255,.18)}
-html[data-theme="dark"] .fab-theme .sun{display:none}
-html[data-theme="dark"] .fab-theme .moon{display:block}
-.login{min-height:calc(100svh - 62px);display:grid;place-items:center;padding:20px;background:radial-gradient(700px 400px at 80% 0%,rgba(242,184,75,.12),transparent 60%),var(--bg-soft)}
-.login .card{width:min(400px,100%);background:var(--srf);border:1px solid var(--line);border-radius:20px;padding:30px 24px;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.login .card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--kit)}
-.login h1{font-size:1.3rem;margin:10px 0 4px}
-.login p{font-size:.82rem;color:var(--muted);margin-bottom:18px}
-.login input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px;background:var(--srf-2);text-align:center;margin-bottom:10px}
-.login input:focus{outline:none;border-color:var(--gold)}
-.note{margin-top:14px;font-size:.74rem;color:var(--green);background:rgba(31,138,76,.08);border:1px dashed rgba(31,138,76,.4);border-radius:10px;padding:10px}
-.note code{color:var(--gold-ink);direction:ltr;display:inline-block}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--goldD));color:var(--ink-fixed);border-radius:10px;padding:11px 20px;font-family:var(--df);font-weight:700;font-size:.9rem;border:none;transition:.2s}
-.btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
+:root{
+  --bg:#f5f7f5;--srf:#fff;--srf2:#f0f3f0;--txt:#101815;--muted:#57665e;
+  --line:rgba(16,24,21,.12);--gold:#f2b84b;--goldD:#b57e1f;--gold-ink:#9a6e00;
+  --blue:#2e5bff;--green:#1f8a4c;--red:#c2410c;
+  --df:"Changa",sans-serif;--bf:"IBM Plex Sans Arabic",sans-serif;
+  --r:16px;--shadow:0 8px 30px rgba(16,24,21,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--bf);background:var(--bg);color:var(--txt);min-height:100vh}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:none;background:none}
+h1,h2,h3,h4{font-family:var(--df)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* شاشة الدخول */
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.login-card{background:var(--srf);padding:40px;border-radius:var(--r);box-shadow:var(--shadow);width:100%;max-width:400px;text-align:center}
+.login-card h1{font-size:1.5rem;margin-bottom:8px}
+.login-card p{color:var(--muted);font-size:.88rem;margin-bottom:24px}
+.login-card input{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:12px;margin-bottom:14px;font-size:.95rem}
+.login-card input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,184,75,.15)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--goldD));color:#fff;padding:13px 28px;border-radius:12px;font-family:var(--df);font-weight:700;font-size:.95rem;transition:.2s;box-shadow:0 6px 20px rgba(242,184,75,.3)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
 .btn.full{width:100%}
-.ab{display:grid;min-height:calc(100svh - 62px)}
-.as{display:flex;gap:6px;overflow-x:auto;background:var(--ink-fixed);padding:9px}
-.as button{flex:none;display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.72);padding:9px 14px;border-radius:10px;font-size:.82rem;font-weight:700}
-.as button.on{background:var(--gold);color:var(--ink-fixed)}
-.am{padding:16px;width:100%;overflow-x:hidden}
-.am h2{font-size:1.2rem;margin-bottom:4px;color:var(--gold-ink)}
-.hint{font-size:.78rem;color:var(--dim);margin-bottom:14px}
-.card{background:var(--srf);border:1px solid var(--line2);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
-.fg{display:grid;gap:10px}
-.lb2{display:block;font-size:.76rem;font-weight:700;color:var(--gold-ink);margin-bottom:10px}
-.lb2 span{display:block;margin-bottom:4px}
-.lb2.wide{grid-column:1/-1}
-.in{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--srf-2);font-size:.88rem;color:var(--txt)}
-.in:focus{outline:none;border-color:var(--gold)}
-textarea.in{resize:vertical;min-height:80px}
-.dtbtn{display:flex;align-items:center;gap:8px;text-align:right;cursor:pointer;width:100%}
-.dtbtn span{color:var(--txt);font-weight:600}
-.r{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line2);border-radius:12px;background:var(--srf);margin-bottom:8px;flex-wrap:wrap}
-.r .g{flex:1;min-width:140px}
-.r .g b{display:block;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.r .g small{color:var(--dim);font-size:.72rem}
-.th{width:48px;height:48px;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:var(--srf-2);display:grid;place-items:center;flex:none;overflow:hidden;font-size:1.2rem}
-.pbtn{background:var(--gold);color:var(--ink-fixed);padding:8px 14px;font-family:var(--df);font-weight:700;font-size:.82rem;border:none;border-radius:10px;transition:.2s}
-.pbtn.line{background:var(--srf);border:1.5px solid var(--line);color:var(--txt)}
-.pbtn.danger{background:rgba(194,65,12,.08);border:1.5px solid rgba(194,65,12,.4);color:var(--red)}
-.pbtn.sm{padding:6px 11px;font-size:.74rem}
-.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.tb{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
-.tb input,.tb select{border:1.5px solid var(--line);border-radius:9px;padding:9px 12px;background:var(--srf-2);font-size:.84rem;color:var(--txt)}
-.tb input{flex:1;min-width:130px}
-.st{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
-.st div{background:var(--srf);border:1px solid var(--line2);border-radius:12px;padding:14px;text-align:center}
-.st b{display:block;font-family:var(--df);font-size:1.5rem;color:var(--gold-ink)}
-.st span{font-size:.7rem;color:var(--muted)}
-.dtm{position:fixed;inset:0;z-index:160;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);padding:18px}
-.dtm-card{width:min(430px,100%);background:var(--srf);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.dtm-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--kit)}
-.dtm-card h3{font-size:1.1rem;margin-bottom:16px;color:var(--gold-ink)}
-.dtm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.dtm-grid label{font-size:.7rem;color:var(--muted);font-weight:700;display:grid;gap:5px}
-.dtm-grid select{border:1.5px solid var(--line);border-radius:10px;padding:11px 8px;background:var(--srf-2);color:var(--txt);font-size:.9rem;text-align:center}
-.dtm-actions{display:flex;gap:10px;margin-top:18px}
-.dtm-actions .pbtn{flex:1;min-height:48px;font-size:.95rem;border-radius:12px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,16px);background:var(--ink-fixed);color:#fff;border:1px solid var(--gold);padding:11px 20px;border-radius:99px;font-weight:700;font-size:.84rem;z-index:200;opacity:0;visibility:hidden;transition:.3s;max-width:calc(100vw - 90px);text-align:center}
-.toast.on{opacity:1;visibility:visible;transform:translate(-50%,0)}
-@media(min-width:1000px){.ab{grid-template-columns:220px 1fr}.as{flex-direction:column;overflow:visible}.as button{width:100%}.am{padding:26px;max-width:1040px}.fg{grid-template-columns:1fr 1fr}.st{grid-template-columns:repeat(4,1fr)}}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--txt);box-shadow:none}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold-ink)}
+.btn.sm{padding:8px 16px;font-size:.82rem}
+.btn.danger{background:linear-gradient(135deg,var(--red),#a03008)}
+.btn.green{background:linear-gradient(135deg,var(--green),#166a3a)}
+
+/* الهيدر */
+.header{background:var(--srf);border-bottom:1px solid var(--line);padding:14px 0;position:sticky;top:0;z-index:50}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.header h2{font-size:1.2rem}
+.header .user{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.85rem}
+
+/* التخطيط */
+.layout{display:grid;grid-template-columns:240px 1fr;gap:24px;padding:24px 0}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static;width:100%}}
+.sidebar{background:var(--srf);border-radius:var(--r);padding:16px;height:fit-content;position:sticky;top:80px}
+.sidebar a{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;color:var(--muted);font-weight:600;font-size:.9rem;margin-bottom:4px;transition:.2s;text-decoration:none}
+.sidebar a:hover{background:var(--srf2);color:var(--txt)}
+.sidebar a.on{background:linear-gradient(135deg,rgba(242,184,75,.15),rgba(46,91,255,.08));color:var(--gold-ink)}
+.sidebar a i{width:24px;height:24px;display:grid;place-items:center;font-style:normal}
+
+.content{background:var(--srf);border-radius:var(--r);padding:24px;box-shadow:var(--shadow)}
+.content h3{font-size:1.3rem;margin-bottom:16px}
+
+/* القوائم */
+.list{display:grid;gap:12px}
+.item{background:var(--srf2);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.item .info{flex:1;min-width:150px}
+.item .info b{display:block;font-family:var(--df);font-size:.95rem}
+.item .info small{color:var(--muted);font-size:.78rem}
+.item .actions{display:flex;gap:6px}
+.item .actions button{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;transition:.2s}
+.item .actions .edit{background:rgba(46,91,255,.12);color:var(--blue)}
+.item .actions .edit:hover{background:var(--blue);color:#fff}
+.item .actions .del{background:rgba(194,65,12,.12);color:var(--red)}
+.item .actions .del:hover{background:var(--red);color:#fff}
+
+/* النماذج */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);display:none;place-items:center;z-index:100;padding:20px}
+.modal.on{display:grid}
+.modal-box{background:var(--srf);border-radius:var(--r);width:100%;max-width:560px;max-height:85vh;overflow-y:auto;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-box h3{margin-bottom:16px;font-size:1.2rem}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.85rem;color:var(--muted);font-weight:600;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,184,75,.12)}
+.field textarea{min-height:100px;resize:vertical}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.field-row{grid-template-columns:1fr}}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+
+/* الإحصائيات */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px}
+.stat{background:var(--srf2);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+.stat b{display:block;font-family:var(--df);font-size:1.6rem;color:var(--gold-ink)}
+.stat small{color:var(--muted);font-size:.78rem}
+
+/* الجدول */
+.tbl{width:100%;border-collapse:collapse;font-size:.85rem}
+.tbl th,.tbl td{padding:10px;text-align:center;border-bottom:1px solid var(--line)}
+.tbl th{background:var(--srf2);font-weight:700;font-size:.8rem;color:var(--muted)}
+.tbl tr:hover{background:rgba(242,184,75,.05)}
+.tbl input{width:70px;padding:6px;border:1px solid var(--line);border-radius:6px;text-align:center}
+.tbl input:focus{outline:none;border-color:var(--gold)}
+
+/* الرسائل */
+.msg{background:var(--srf2);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
+.msg.read{opacity:.6}
+.msg .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.msg .head b{font-family:var(--df);font-size:.92rem}
+.msg .head time{font-size:.75rem;color:var(--muted)}
+.msg p{font-size:.88rem;color:var(--txt)}
+.msg .meta{font-size:.78rem;color:var(--muted);margin-top:6px}
+
+/* صور */
+.img-preview{width:100%;max-height:200px;object-fit:cover;border-radius:10px;margin-top:10px;background:var(--srf2)}
+.upload-area{border:2px dashed var(--line);border-radius:12px;padding:30px;text-align:center;cursor:pointer;transition:.2s;background:var(--bg)}
+.upload-area:hover{border-color:var(--gold);background:rgba(242,184,75,.05)}
+.upload-area input{display:none}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--txt);color:#fff;padding:12px 24px;border-radius:100px;font-size:.88rem;box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:200;opacity:0;transition:.3s;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(-5px)}
+
+.empty{text-align:center;padding:40px;color:var(--muted)}
+.empty i{font-size:2.5rem;display:block;margin-bottom:10px}
+
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.section-head h3{margin:0}
 </style>
 </head>
 <body>
-<header class="at">
-  <a class="back" href="index.html">⬅ الموقع</a>
-  <b>لوحة التحكم</b>
-  <span class="pill" id="mode">محلي</span>
-  <button class="pbtn danger sm" id="out" hidden>خروج</button>
-</header>
 
-<button class="fab-theme" id="themeBtn" aria-label="تبديل الوضع الليلي">
-  <svg class="sun" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
-  <svg class="moon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-</button>
-
-<div class="login" id="login">
-  <div class="card">
-    <span data-crest="56"></span>
-    <h1>دخول الإدارة</h1><p>وادي التراجمة ريفي رفاعة</p>
-    <input id="u" value="admin" placeholder="المستخدم">
-    <input id="p" type="password" placeholder="كلمة المرور">
-    <button class="btn full" id="go">دخول</button>
-    <div class="note">الافتراضي: <code>admin</code> / <code>wadi2026</code> — يعمل فورًا بدون إنترنت.</div>
+<!-- شاشة الدخول -->
+<div class="login" id="loginView">
+  <div class="login-card">
+    <h1>🏟️ وادي التراجمة</h1>
+    <p>لوحة تحكم النادي — تسجيل الدخول</p>
+    <input type="text" id="username" placeholder="اسم المستخدم" autocomplete="username">
+    <input type="password" id="password" placeholder="كلمة المرور" autocomplete="current-password">
+    <button class="btn full" onclick="login()">دخول</button>
   </div>
 </div>
 
-<div class="ab" id="shell" hidden>
-  <aside class="as" id="as">
-    <button data-t="dash" class="on">📊 العامة</button>
-    <button data-t="players">👥 اللاعبون</button>
-    <button data-t="matches">⚽ المباريات</button>
-    <button data-t="news">📰 الأخبار</button>
-    <button data-t="honors">🏅 سجل الشرف</button>
-    <button data-t="board">🧑‍ الإدارة</button>
-    <button data-t="set">⚙ الإعدادات</button>
-  </aside>
-  <main class="am" id="am"></main>
-</div>
-
-<div class="dtm" id="dtm" hidden>
-  <div class="dtm-card">
-    <h3>📅 تعيين التاريخ والوقت</h3>
-    <div class="dtm-grid">
-      <label>اليوم<select id="dD"></select></label>
-      <label>الشهر<select id="dMo"></select></label>
-      <label>السنة<select id="dY"></select></label>
-      <label>الساعة<select id="dH"></select></label>
-      <label>الدقيقة<select id="dMi"></select></label>
+<!-- لوحة التحكم -->
+<div id="appView" style="display:none">
+  <header class="header">
+    <div class="wrap">
+      <h2>⚽ لوحة التحكم</h2>
+      <div class="user">
+        <span id="userName">admin</span>
+        <button class="btn sm ghost" onclick="logout()">خروج</button>
+      </div>
     </div>
-    <div class="dtm-actions"><button class="pbtn" id="dtOk">✓ تم</button><button class="pbtn line" id="dtNo">✕ إلغاء</button></div>
+  </header>
+  
+  <div class="wrap">
+    <div class="layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <main class="content" id="content"></main>
+    </div>
   </div>
 </div>
+
+<!-- المودال -->
+<div class="modal" id="modal">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 (function(){
 "use strict";
-var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
-var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
-var KEY="wadi_v8",CK="wadi_c8",TK="wadi_theme",TKN="wadi_t8";
-var clone=function(o){return JSON.parse(JSON.stringify(o))},uid=function(){return Date.now()+Math.floor(Math.random()*9999)};
-var POS=["حارس مرمى","مدافع","وسط","مهاجم"];
-var MON=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
-var SEED={settings:{name:"وادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",address:"منطقة التراجمة — ريفي رفاعة، السودان",phone:"+249 912 000 000",email:"info@wadi-tarajma.sd",about:"نادي وادي التراجمة ريفي رفاعة ممثل منطقة التراجمة في منافسات اتحاد رفاعة المحلي لكرة القدم ضمن دوري الدرجة الثانية. يخوض الفريق مبارياته الرسمية على ميدان الوادي، ويحتضن ميدان الهاشماب تدريباته اليومية وإعدادَه البدني والفني.",f1:{name:"ميدان الوادي",map:"https://maps.app.goo.gl/5omSxgEUMPaeguno7"},f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"},social:{fb:"",wa:"",yt:"",ig:"",tt:""}},
- players:[{id:1,name:"أحمد الطيب",num:1,age:26,pos:"حارس مرمى",photo:""},{id:2,name:"محمد عثمان",num:2,age:23,pos:"مدافع",photo:""},{id:3,name:"عمر عبد الله",num:3,age:25,pos:"مدافع",photo:""},{id:4,name:"خالد إبراهيم",num:6,age:27,pos:"مدافع",photo:""},{id:5,name:"يوسف حسن",num:15,age:22,pos:"مدافع",photo:""},{id:6,name:"معاذ آدم",num:17,age:24,pos:"وسط",photo:""},{id:7,name:"النور محمد",num:12,age:21,pos:"وسط",photo:""},{id:8,name:"طارق سليمان",num:7,age:23,pos:"وسط",photo:""},{id:9,name:"صهيب علي",num:10,age:25,pos:"وسط",photo:""},{id:10,name:"مصعب أحمد",num:9,age:26,pos:"مهاجم",photo:""},{id:11,name:"أنس يحيى",num:11,age:22,pos:"مهاجم",photo:""},{id:12,name:"عوض الكريم",num:18,age:24,pos:"مهاجم",photo:""}],
- matches:[{id:1,opponent:"الهلال رفاعة",date:"2026-11-21T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,img:""},{id:2,opponent:"المريخ رفاعة",date:"2026-11-28T15:00",venue:"ميدان الهاشماب",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,img:""},{id:3,opponent:"الأمل رفاعة",date:"2026-11-07T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"finished",my:2,op:1,img:"img/team-2.jpg"},{id:4,opponent:"النيل رفاعة",date:"2026-10-31T15:00",venue:"استاد رفاعة",comp:"دوري الدرجة الثانية",home:false,status:"finished",my:1,op:1,img:""},{id:5,opponent:"الشباب رفاعة",date:"2026-10-24T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"finished",my:3,op:0,img:"img/team-4.jpg"}],
- news:[{id:1,title:"الفريق يكتسح الشباب رفاعة بثلاثية ويعتلي وصافة الترتيب",date:"2026-10-24",img:"img/team-2.jpg",ex:"قدّم نسور التراجمة واحدة من أفضل مبارياتهم الموسم الحالي، فحسموا اللقاء بثلاثة أهداف نظيفة على ميدان الوادي وسط حضور جماهيري كبير."},{id:2,title:"تحضيرات متواصلة على ميدان الهاشماب قبل مواجهة الهلال",date:"2026-11-12",img:"img/team-3.jpg",ex:"يواصل الجهاز الفني رفع النسق البدني والفني استعدادًا لقمة الجولة القادمة، مع تركيز خاص على الكرات الثابتة والتحولات."},{id:3,title:"الإدارة تدعو الجماهير لمؤازرة الفريق في القمة",date:"2026-11-10",img:"img/team-4.jpg",ex:"وجّهت إدارة النادي دعوة لجماهير التراجمة للحضور المبكر ومساندة الفريق في مباراته المقبلة على ميدان الوادي."}],
- honors:[],board:[],
- timeline:[{yr:"2019",t:"التأسيس",d:"انطلق النادي من منطقة التراجمة بمبادرة من شباب المنطقة."},{yr:"2022",t:"الانضمام لاتحاد رفاعة",d:"سُجّل النادي رسميًا ضمن أندية الاتحاد المحلي."},{yr:"2025",t:"الصعود للدرجة الثانية",d:"صعد الفريق إلى دوري الدرجة الثانية عن جدارة."},{yr:"2026",t:"موسم المنافسة",d:"ينافس الفريق على بطاقات الصعود هذا الموسم."}],
- messages:[]};
-var C=clone(SEED),tab="dash",edit=null,cloud=false,token="",q="",dtCb=null;
-try{token=sessionStorage.getItem(TKN)||""}catch(e){}
-function merge(a,b){if(b==null)return a;if(Array.isArray(a)||Array.isArray(b))return b;if(typeof a==="object"&&typeof b==="object"){var o={};for(var k in a)o[k]=a[k];for(var k2 in b)o[k2]=(k2 in a)?merge(a[k2],b[k2]):b[k2];return o}return b}
-function norm(){["players","matches","news","honors","board","timeline","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});C.settings=merge(clone(SEED.settings),C.settings||{});if(!C.settings.social)C.settings.social={fb:"",wa:"",yt:"",ig:"",tt:""}}
-function load(){try{var r=localStorage.getItem(KEY);C=r?merge(clone(SEED),JSON.parse(r)):clone(SEED)}catch(e){C=clone(SEED)}norm()}
-function saveL(){try{localStorage.setItem(KEY,JSON.stringify(C))}catch(e){}}
-function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._x);t._x=setTimeout(function(){t.classList.remove("on")},2800)}
-function crest(w){return '<svg viewBox="0 0 64 74" width="'+w+'"><defs><linearGradient id="a'+w+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123024"/><stop offset="1" stop-color="#050d0a"/></linearGradient></defs><path d="M32 2 60 12v27c0 16-12 27-28 33C16 66 4 55 4 39V12Z" fill="url(#a'+w+')" stroke="#f2b84b" stroke-width="2.6"/><path d="M4 24h56" stroke="#2e5bff" stroke-width="2.2" opacity=".85"/><circle cx="32" cy="17" r="6.4" fill="#f2b84b"/><path d="M9 40c6-5 12 5 23 0s17 5 23 0" stroke="#f4f1e8" stroke-width="2.6" fill="none"/><text x="32" y="63" text-anchor="middle" font-size="7" font-family="Changa" font-weight="700" fill="#f2b84b">التراجمة</text></svg>'}
-var fDs=function(d){return new Date(d).toLocaleDateString("ar",{day:"numeric",month:"long",year:"numeric"})};
-var fmtDT=function(v){var d=new Date(v);if(isNaN(d))return "غير محدد";return d.toLocaleDateString("ar",{weekday:"long",day:"numeric",month:"long",year:"numeric"})+" • "+d.toLocaleTimeString("ar",{hour:"2-digit",minute:"2-digit"})};
-function setTheme(t){document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem(TK,t)}catch(e){}}
-$("#themeBtn").onclick=function(){setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark")};
-function api(p,o){o=o||{};var h={};if(token)h["Authorization"]="Bearer "+token;var b=null;
- if(o.json!==undefined){h["Content-Type"]="application/json";b=JSON.stringify(o.json)}else if(o.form)b=o.form;
- return fetch("/api/"+p,{method:o.method||"GET",headers:h,body:b,cache:"no-store"})}
-function save(){saveL();if(cloud&&token){api("admin",{method:"POST",json:C}).catch(function(){})}toast("✓ تم الحفظ والنشر")}
-function setMode(c){cloud=c;var m=$("#mode");m.textContent=c?"☁ سحابي":"محلي";m.classList.toggle("cl",c)}
-function showL(){$("#login").hidden=false;$("#shell").hidden=true;$("#out").hidden=true}
-function showS(){$("#login").hidden=true;$("#shell").hidden=false;$("#out").hidden=false}
-function login(){var u=$("#u").value.trim(),p=$("#p").value;
- api("login",{method:"POST",json:{username:u,password:p}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){token=d.token;try{sessionStorage.setItem(TKN,token)}catch(e){}setMode(true);return api("admin")}).then(function(r){if(r&&r.ok)return r.json()}).then(function(d){if(d){C=merge(clone(SEED),d.content||{});norm();saveL()}showS();go(tab);toast("✓ سحابي")}).catch(function(){
-  var cr={u:"admin",p:"wadi2026"};try{cr=JSON.parse(localStorage.getItem(CK)||'{"u":"admin","p":"wadi2026"}')}catch(e){}
-  if(u===cr.u&&p===cr.p){try{sessionStorage.setItem("wadi_ok8","1")}catch(e){}setMode(false);load();showS();go(tab);toast("✓ اللوحة مفعّلة")}else toast("⚠ بيانات غير صحيحة")})}
-function logout(){try{sessionStorage.removeItem("wadi_ok8");sessionStorage.removeItem(TKN)}catch(e){}token="";if(cloud)api("logout",{method:"POST"}).catch(function(){});setMode(false);showL()}
-function boot(){load();if(token){api("admin").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){C=merge(clone(SEED),d.content||{});norm();setMode(true);showS();go(tab)}).catch(function(){fallback()})}else fallback()}
-function fallback(){var ok=false;try{ok=!!sessionStorage.getItem("wadi_ok8")}catch(e){}if(ok){setMode(false);showS();go(tab)}else showL()}
-function fill(sel,arr,val){sel.innerHTML=arr.map(function(v,i){return '<option value="'+(typeof v==="number"?v:i)+'">'+v+'</option>'}).join("");sel.value=val}
-function openDT(val,cb){dtCb=cb;var d=val?new Date(val):new Date();if(isNaN(d))d=new Date();
- var yy=new Date().getFullYear(),years=[];for(var y=yy-3;y<=yy+4;y++)years.push(y);
- var days=[];for(var i=1;i<=31;i++)days.push(i);
- var hrs=[];for(var h=0;h<24;h++)hrs.push(("0"+h).slice(-2));
- var mins=[];for(var m=0;m<60;m+=5)mins.push(("0"+m).slice(-2));
- fill($("#dD"),days,d.getDate());fill($("#dMo"),MON,d.getMonth());fill($("#dY"),years,d.getFullYear());fill($("#dH"),hrs,d.getHours());fill($("#dMi"),mins,Math.round(d.getMinutes()/5)*5);
- $("#dtm").hidden=false}
-$("#dtOk").onclick=function(){var p=function(n){return("0"+n).slice(-2)};
- var iso=$("#dY").value+"-"+p(+$("#dMo").value+1)+"-"+p($("#dD").value)+"T"+$("#dH").value+":"+$("#dMi").value;
- if(dtCb)dtCb(iso);$("#dtm").hidden=true};
-$("#dtNo").onclick=function(){$("#dtm").hidden=true};
-$("#dtm").onclick=function(e){if(e.target.id==="dtm")$("#dtm").hidden=true};
-var SCH={
- players:{t:"اللاعبون",ic:"👥",f:[["name","الاسم","text",1],["num","الرقم","number",1],["age","العمر","number"],["pos","الخانة","sel",0,POS],["photo","صورة اللاعب","img"]],row:function(p){return["#"+p.num+" — "+esc(p.name),p.pos+(p.age?" • "+p.age+" سنة":""),p.photo]},sorts:["num","name","age"]},
- matches:{t:"المباريات",ic:"⚽",f:[["opponent","الخصم","text",1],["date","التاريخ والوقت","dt",1],["venue","الملعب","text",1],["home","الأرض","sel",0,[["true","أرضنا"],["false","خارج"]]],["status","الحالة","sel",0,[["upcoming","قادمة"],["finished","منتهية"]]],["my","أهدافنا","number"],["op","أهداف الخصم","number"],["img","صورة اللحظة","img"]],row:function(m){return[(m.status==="finished"?"🏁 ":"⏳ ")+esc(m.opponent),fmtDT(m.date)+" • "+esc(m.venue)+(m.status==="finished"?" • "+m.my+"-"+m.op:""),m.img]},sorts:["date","opponent"]},
- news:{t:"الأخبار",ic:"📰",f:[["title","العنوان","text",1],["date","التاريخ","date",1],["img","صورة الخبر","img"],["ex","النص","ta",1]],row:function(n){return[esc(n.title),fDs(n.date),n.img]},sorts:["date","title"]},
- honors:{t:"سجل الشرف",ic:"🏅",f:[["kind","النوع","sel",0,[["club","لقب جماعي (بطولة/كأس)"],["ind","جائزة فردية"]]],["title","اللقب / الجائزة","text",1],["holder","الحاصل عليها","text"],["role","الخانة / المنصب","text"],["season","الموسم","text"],["note","ملاحظة","text"]],row:function(h){return[(h.kind==="club"?"🏆 ":"🏅 ")+esc(h.title),(h.holder?esc(h.holder)+(h.role?" — "+esc(h.role):""):"")+(h.season?" • "+esc(h.season):""),""]},sorts:["season","title"]},
- board:{t:"إدارة النادي",ic:"🧑‍💼",f:[["name","الاسم","text",1],["role","المنصب","text",1],["phone","هاتف","text"],["photo","صورة","img"]],row:function(b){return[esc(b.name),esc(b.role),b.photo]},sorts:["name","role"]}};
-function field(d,e){var k=d[0],l=d[1],t=d[2],req=d[3],opts=d[4]||[];var v=e?(e[k]!=null?e[k]:""):"";
- if(t==="sel"){return '<label class="lb2"><span>'+l+'</span><select class="in" name="'+k+'">'+opts.map(function(o){var a=Array.isArray(o)?o:[o,o];return '<option value="'+esc(a[0])+'" '+((String(v)===String(a[0]))?"selected":"")+'>'+esc(a[1])+'</option>'}).join("")+'</select></label>'}
- if(t==="ta"){return '<label class="lb2 wide"><span>'+l+'</span><textarea class="in" name="'+k+'" rows="3" '+(req?"required":"")+'>'+esc(v)+'</textarea></label>'}
- if(t==="dt"){return '<label class="lb2 wide"><span>'+l+'</span><input type="hidden" name="'+k+'" id="dtv_'+k+'" value="'+esc(v)+'"><button type="button" class="in dtbtn" data-dtopen="'+k+'">📅 <span id="dts_'+k+'">'+(v?esc(fmtDT(v)):"اختر التاريخ والوقت")+'</span></button></label>'}
- if(t==="img"){return '<label class="lb2 wide"><span>'+l+'</span><input class="in" name="'+k+'" dir="ltr" value="'+esc(v)+'" placeholder="مسار مثل img/team-1.jpg أو ارفع صورة">'+
-  '<span class="row"><input type="file" accept="image/*" data-up="'+k+'" style="flex:1"><span class="th" data-pv="'+k+'">'+(v?'<img src="'+esc(v)+'">':"🖼")+'</span></span></label>'}
- return '<label class="lb2"><span>'+l+'</span><input class="in" type="'+t+'" name="'+k+'" value="'+esc(v)+'" '+(req?"required":"")+'></label>'}
-function go(t){tab=t;edit=null;q="";$$("#as button").forEach(function(b){b.classList.toggle("on",b.dataset.t===t)});
- ({dash:dash,players:function(){list("players")},matches:function(){list("matches")},news:function(){list("news")},honors:function(){list("honors")},board:function(){list("board")},set:set}[t]||dash)()}
-function list(key){var s=SCH[key],e=edit;var items=C[key].slice();
- if(q)items=items.filter(function(x){return JSON.stringify(x).toLowerCase().indexOf(q.toLowerCase())>-1});
- $("#am").innerHTML='<h2>'+s.ic+' '+s.t+'</h2><p class="hint">أضف وعدّل واحذف وابحث — يظهر مباشرة في الموقع.</p>'+
- '<form class="card" id="ef"><div class="fg">'+s.f.map(function(d){return field(d,e)}).join("")+'</div><div class="row"><button class="pbtn">'+(e?"💾 حفظ":"＋ إضافة")+'</button>'+(e?'<button type="button" class="pbtn line" id="cx">إلغاء</button>':"")+'</div></form>'+
- '<div class="tb"><input id="q" placeholder="🔍 بحث…" value="'+esc(q)+'"><select id="srt"><option value="">ترتيب…</option>'+s.sorts.map(function(k){return "<option>"+k+"</option>"}).join("")+'</select></div>'+
- '<div id="rows">'+items.map(function(it){var r=s.row(it);return '<div class="r">'+(r[2]?'<img class="th" src="'+esc(r[2])+'" onerror="this.style.visibility=\'hidden\'">':'<span class="th">'+s.ic+'</span>')+'<div class="g"><b>'+r[0]+'</b><small>'+r[1]+'</small></div><button class="pbtn line sm" data-e="'+it.id+'">✏️</button><button class="pbtn danger sm" data-x="'+it.id+'">🗑</button></div>'}).join("")||'<p class="hint">لا عناصر — أضف أول عنصر.</p>'+'</div>';
- $("#ef").onsubmit=function(ev){ev.preventDefault();var fd=new FormData(ev.target);var o=e||{id:uid()};
-  s.f.forEach(function(d){var k=d[0],t=d[2];var v=fd.get(k);if(t==="number")v=(v===""?0:+v);if(k==="home")v=(v==="true");o[k]=v});
-  if(e){for(var kk in o)e[kk]=o[kk]}else C[key].push(o);edit=null;save();list(key)};
- if($("#cx"))$("#cx").onclick=function(){edit=null;list(key)};
- $("#q").oninput=function(ev){q=ev.target.value;var rows=$$("#rows .r");rows.forEach(function(r){r.hidden=r.textContent.toLowerCase().indexOf(q.toLowerCase())<0})};
- $("#srt").onchange=function(ev){var k=ev.target.value;if(!k)return;C[key].sort(function(a,b){return typeof a[k]==="number"?a[k]-b[k]:String(a[k]).localeCompare(String(b[k]),"ar")});saveL();list(key)};
- $$("[data-e]").forEach(function(b){b.onclick=function(){edit=C[key].filter(function(x){return x.id==b.dataset.e})[0];list(key)}});
- $$("[data-x]").forEach(function(b){b.onclick=function(){if(!confirm("حذف؟"))return;C[key]=C[key].filter(function(x){return x.id!=b.dataset.x});save();list(key)}});
- $$("[data-up]").forEach(function(inp){inp.onchange=function(){var f=inp.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var tgt=document.querySelector('#ef [name="'+inp.dataset.up+'"]');if(tgt)tgt.value=rd.result;var pv=document.querySelector('[data-pv="'+inp.dataset.up+'"]');if(pv)pv.innerHTML='<img src="'+rd.result+'">'};rd.readAsDataURL(f)}});
- $$("[data-dtopen]").forEach(function(b){b.onclick=function(){var k=b.dataset.dtopen;var hid=$("#dtv_"+k);openDT(hid.value,function(iso){hid.value=iso;$("#dts_"+k).textContent=fmtDT(iso)})}})}
-function dash(){$("#am").innerHTML='<h2>📊 نظرة عامة</h2><p class="hint">كل تعديل يظهر فورًا في الموقع.</p>'+
- '<div class="st"><div><b>'+C.players.length+'</b><span>لاعب</span></div><div><b>'+C.matches.filter(function(m){return m.status==="upcoming"}).length+'</b><span>مباراة قادمة</span></div><div><b>'+C.news.length+'</b><span>خبر</span></div><div><b>'+C.honors.length+'</b><span>سجل شرف</span></div></div>'+
- '<div class="card"><b class="df">ابدأ سريعًا</b><div class="row"><button class="pbtn" data-g="players">＋ لاعب</button><button class="pbtn" data-g="matches">＋ مباراة</button><button class="pbtn blue" data-g="news">＋ خبر</button><button class="pbtn" data-g="honors">＋ لقب/جائزة</button><button class="pbtn" data-g="board">＋ عضو إدارة</button><button class="pbtn line" data-g="set">⚙ الإعدادات</button></div></div>'+
- '<div class="card"><p class="hint" style="margin:0">'+(cloud?"☁ الحفظ سحابي عبر Cloudflare.":"💾 الحفظ محلي في هذا المتصفح؛ اربط Cloudflare لاحقًا.")+'</p></div>';
- $$("[data-g]").forEach(function(b){b.onclick=function(){go(b.dataset.g)}})}
-function set(){var s=C.settings,so=s.social||{};$("#am").innerHTML='<h2>⚙ الإعدادات</h2><p class="hint">بيانات النادي والميدانان وحسابات السوشال ميديا.</p><form class="card" id="sf"><div class="fg">'+
- '<label class="lb2"><span>اسم النادي</span><input class="in" name="name" value="'+esc(s.name)+'"></label>'+
- '<label class="lb2"><span>المنطقة</span><input class="in" name="region" value="'+esc(s.region)+'"></label>'+
- '<label class="lb2 wide"><span>العبارة</span><input class="in" name="motto" value="'+esc(s.motto)+'"></label>'+
- '<label class="lb2"><span>العنوان</span><input class="in" name="address" value="'+esc(s.address)+'"></label>'+
- '<label class="lb2"><span>الهاتف</span><input class="in" name="phone" dir="ltr" value="'+esc(s.phone)+'"></label>'+
- '<label class="lb2"><span>البريد</span><input class="in" name="email" dir="ltr" value="'+esc(s.email)+'"></label>'+
- '<label class="lb2 wide"><span>نبذة</span><textarea class="in" name="about">'+esc(s.about)+'</textarea></label>'+
- '<label class="lb2"><span>الميدان ١ اسم</span><input class="in" name="f1n" value="'+esc(s.f1.name)+'"></label>'+
- '<label class="lb2"><span>الميدان ١ رابط</span><input class="in" name="f1m" dir="ltr" value="'+esc(s.f1.map)+'"></label>'+
- '<label class="lb2"><span>الميدان ٢ اسم</span><input class="in" name="f2n" value="'+esc(s.f2.name)+'"></label>'+
- '<label class="lb2"><span>الميدان ٢ رابط</span><input class="in" name="f2m" dir="ltr" value="'+esc(s.f2.map)+'"></label>'+
- '<label class="lb2"><span>📘 فيسبوك</span><input class="in" name="fb" dir="ltr" value="'+esc(so.fb)+'"></label>'+
- '<label class="lb2"><span>💬 واتساب</span><input class="in" name="wa" dir="ltr" value="'+esc(so.wa)+'"></label>'+
- '<label class="lb2"><span>▶️ يوتيوب</span><input class="in" name="yt" dir="ltr" value="'+esc(so.yt)+'"></label>'+
- '<label class="lb2"><span>📷 إنستغرام</span><input class="in" name="ig" dir="ltr" value="'+esc(so.ig)+'"></label>'+
- '<label class="lb2"><span>🎵 تيك توك</span><input class="in" name="tt" dir="ltr" value="'+esc(so.tt)+'"></label>'+
- '</div><div class="row"><button class="pbtn">💾 حفظ</button></div></form>';
- $("#sf").onsubmit=function(ev){ev.preventDefault();var f=new FormData(ev.target);
-  ["name","region","motto","address","phone","email","about"].forEach(function(k){if(f.get(k)!=null)s[k]=f.get(k)});
-  s.f1.name=f.get("f1n");s.f1.map=f.get("f1m");s.f2.name=f.get("f2n");s.f2.map=f.get("f2m");
-  s.social={fb:f.get("fb")||"",wa:f.get("wa")||"",yt:f.get("yt")||"",ig:f.get("ig")||"",tt:f.get("tt")||""};
-  save();set()}}
-$("#as").onclick=function(e){var b=e.target.closest?e.target.closest("button[data-t]"):null;if(b)go(b.dataset.t)};
-$("#go").onclick=login;$("#p").onkeydown=function(e){if(e.key==="Enter")login()};$("#out").onclick=logout;
-window.addEventListener("storage",function(e){if(e.key===KEY&&!cloud){load();go(tab)}});
-$$("[data-crest]").forEach(function(e){e.innerHTML=crest(+e.dataset.crest||56)});
-boot();
+
+var API = "/api";
+var KEY = "wadi_data_v2";
+var TOKEN = localStorage.getItem("wadi_token")||"";
+var C = null;
+var cur = "dash";
+
+var POS = ["حارس مرمى","مدافع","وسط","مهاجم"];
+
+var SECTIONS = [
+  ["dash","📊","لوحة القيادة"],
+  ["players","👥","اللاعبون"],
+  ["matches","⚽","المباريات"],
+  ["standings","🏆","جدول الترتيب"],
+  ["news","📰","الأخبار"],
+  ["gallery","📸","معرض الصور"],
+  ["honors","🏅","سجل الشرف"],
+  ["board","🧑‍💼","الإدارة"],
+  ["messages","✉️","الرسائل"],
+  ["settings","⚙️","الإعدادات"]
+];
+
+/* ===== دوال مساعدة ===== */
+function $(s){return document.querySelector(s)}
+function esc(s){return String(s||"").replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+
+function toast(m){
+  var t=$("#toast");t.textContent=m;t.classList.add("on");
+  setTimeout(function(){t.classList.remove("on")},3000);
+}
+
+function api(path,opts){
+  opts = opts||{};
+  opts.headers = Object.assign({"Content-Type":"application/json"},opts.headers||{});
+  if(TOKEN)opts.headers["Authorization"]="Bearer "+TOKEN;
+  return fetch(API+path,opts).then(function(r){
+    if(!r.ok)throw new Error("خطأ: "+r.status);
+    return r.json();
+  });
+}
+
+/* ===== الدخول والخروج ===== */
+window.login = function(){
+  var u=$("#username").value.trim()||"admin";
+  var p=$("#password").value;
+  api("/login",{method:"POST",body:JSON.stringify({username:u,password:p})})
+    .then(function(r){
+      TOKEN=r.token;
+      localStorage.setItem("wadi_token",TOKEN);
+      localStorage.setItem("wadi_user",r.username||u);
+      boot();
+    })
+    .catch(function(){toast("❌ بيانات الدخول خاطئة")});
+};
+
+window.logout = function(){
+  api("/logout",{method:"POST"}).catch(function(){});
+  TOKEN="";localStorage.removeItem("wadi_token");localStorage.removeItem("wadi_user");
+  location.reload();
+};
+
+/* ===== التمهيد ===== */
+function boot(){
+  api("/admin").then(function(r){
+    C=r.content;
+    $("#userName").textContent=r.username||"admin";
+    $("#loginView").style.display="none";
+    $("#appView").style.display="block";
+    buildSidebar();
+    go("dash");
+  }).catch(function(){
+    // في حالة عدم وجود Backend، نستخدم البيانات المحلية
+    var local = localStorage.getItem(KEY);
+    C = local ? JSON.parse(local) : getDefaultData();
+    $("#loginView").style.display="none";
+    $("#appView").style.display="block";
+    $("#userName").textContent="admin (وضع محلي)";
+    buildSidebar();
+    go("dash");
+  });
+}
+
+function getDefaultData(){
+  return {
+    settings:{name:"وادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",address:"",phone:"",email:"",about:"",f1:{name:"ميدان الوادي",map:""},f2:{name:"ميدان الهاشماب",map:""},social:{fb:"",wa:"",yt:"",ig:"",tt:""}},
+    players:[],matches:[],news:[],standings:[],gallery:[],honors:[],board:[],timeline:[],messages:[]
+  };
+}
+
+function saveLocal(){
+  localStorage.setItem(KEY,JSON.stringify(C));
+}
+
+function saveRemote(){
+  api("/admin",{method:"POST",body:JSON.stringify(C)})
+    .then(function(){toast("✅ تم الحفظ")})
+    .catch(function(){saveLocal();toast("✅ تم الحفظ محلياً")});
+}
+
+/* ===== الشريط الجانبي ===== */
+function buildSidebar(){
+  $("#sidebar").innerHTML = SECTIONS.map(function(s){
+    return '<a href="#" data-sec="'+s[0]+'"><i>'+s[1]+'</i>'+s[2]+'</a>';
+  }).join("");
+  $$("#sidebar a").forEach(function(a){
+    a.onclick=function(e){e.preventDefault();go(a.dataset.sec)};
+  });
+}
+
+function $$(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+
+function go(sec){
+  cur=sec;
+  $$("#sidebar a").forEach(function(a){a.classList.toggle("on",a.dataset.sec===sec)});
+  var fn={dash:dash,players:players,matches:matches,standings:standings,news:news,gallery:gallery,honors:honors,board:board,messages:messages,settings:settings};
+  if(fn[sec])fn[sec]();
+}
+
+/* ===== لوحة القيادة ===== */
+function dash(){
+  var up=C.matches.filter(function(m){return m.status==="upcoming"}).length;
+  var fin=C.matches.filter(function(m){return m.status==="finished"});
+  var w=fin.filter(function(m){return m.my>m.op}).length;
+  var unread=C.messages.filter(function(m){return !m.read}).length;
+  
+  $("#content").innerHTML = 
+    '<h3>📊 لوحة القيادة</h3>'+
+    '<div class="stats">'+
+    '<div class="stat"><b>'+C.players.length+'</b><small>لاعب</small></div>'+
+    '<div class="stat"><b>'+C.matches.length+'</b><small>مباراة</small></div>'+
+    '<div class="stat"><b>'+up+'</b><small>قادمة</small></div>'+
+    '<div class="stat"><b>'+w+'</b><small>فوز</small></div>'+
+    '<div class="stat"><b>'+C.news.length+'</b><small>خبر</small></div>'+
+    '<div class="stat"><b>'+C.gallery.length+'</b><small>صورة</small></div>'+
+    '<div class="stat"><b>'+(C.standings.length||0)+'</b><small>فريق في الترتيب</small></div>'+
+    '<div class="stat"><b>'+unread+'</b><small>رسالة جديدة</small></div>'+
+    '</div>'+
+    '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">'+
+    '<button class="btn" onclick="go(\'players\');openPlayerForm()">➕ إضافة لاعب</button>'+
+    '<button class="btn" onclick="go(\'matches\');openMatchForm()">➕ إضافة مباراة</button>'+
+    '<button class="btn" onclick="go(\'news\');openNewsForm()">➕ إضافة خبر</button>'+
+    '<button class="btn" onclick="go(\'gallery\');openGalleryForm()">➕ إضافة صورة</button>'+
+    '</div>';
+}
+
+/* ===== اللاعبون ===== */
+function players(){
+  $("#content").innerHTML = 
+    '<div class="section-head"><h3>👥 اللاعبون ('+C.players.length+')</h3><button class="btn" onclick="openPlayerForm()">➕ إضافة</button></div>'+
+    '<div class="list" id="list"></div>';
+  renderPlayers();
+}
+
+function renderPlayers(){
+  var list=C.players.map(function(p,i){
+    return '<div class="item"><div class="info"><b>#'+esc(p.num)+' '+esc(p.name)+'</b><small>'+esc(p.pos)+(p.age?' • '+p.age+' سنة':'')+' • ⚽ '+(p.goals||0)+' هدف • 🎯 '+(p.assists||0)+' صناعة</small></div><div class="actions"><button class="edit" onclick="openPlayerForm('+i+')">✏️</button><button class="del" onclick="delItem(\'players\','+i+')">🗑️</button></div></div>';
+  }).join("");
+  $("#list").innerHTML=list||'<div class="empty"><i>👥</i>لا لاعبين بعد</div>';
+}
+
+window.openPlayerForm = function(i){
+  var p=i!==undefined?C.players[i]:{name:"",num:"",age:"",pos:"مهاجم",goals:0,assists:0,clean:0,apps:0,photo:""};
+  $("#modalBox").innerHTML = 
+    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' لاعب</h3>'+
+    '<div class="field"><label>الاسم</label><input id="pName" value="'+esc(p.name)+'"></div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>رقم القميص</label><input id="pNum" type="number" value="'+esc(p.num)+'"></div>'+
+    '<div class="field"><label>العمر</label><input id="pAge" type="number" value="'+esc(p.age||"")+'"></div>'+
+    '</div>'+
+    '<div class="field"><label>الخانة</label><select id="pPos">'+POS.map(function(x){return '<option'+(p.pos===x?' selected':'')+'>'+x+'</option>'}).join("")+'</select></div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>أهداف</label><input id="pGoals" type="number" value="'+(p.goals||0)+'"></div>'+
+    '<div class="field"><label>صناعة أهداف</label><input id="pAssists" type="number" value="'+(p.assists||0)+'"></div>'+
+    '</div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>كلين شيت (للحراس)</label><input id="pClean" type="number" value="'+(p.clean||0)+'"></div>'+
+    '<div class="field"><label>مباريات</label><input id="pApps" type="number" value="'+(p.apps||0)+'"></div>'+
+    '</div>'+
+    '<div class="field"><label>رابط الصورة</label><input id="pPhoto" value="'+esc(p.photo)+'" placeholder="https://..."></div>'+
+    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="savePlayer('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+};
+
+window.savePlayer = function(i){
+  var p={
+    id:i>=0?C.players[i].id:Date.now(),
+    name:$("#pName").value.trim(),
+    num:+$("#pNum").value||0,
+    age:+$("#pAge").value||0,
+    pos:$("#pPos").value,
+    goals:+$("#pGoals").value||0,
+    assists:+$("#pAssists").value||0,
+    clean:+$("#pClean").value||0,
+    apps:+$("#pApps").value||0,
+    photo:$("#pPhoto").value.trim()
+  };
+  if(!p.name){toast("❌ أدخل الاسم");return}
+  if(i>=0)C.players[i]=p;else C.players.push(p);
+  saveRemote();closeModal();renderPlayers();toast("✅ تم حفظ اللاعب");
+};
+
+/* ===== المباريات ===== */
+function matches(){
+  $("#content").innerHTML = 
+    '<div class="section-head"><h3>⚽ المباريات ('+C.matches.length+')</h3><button class="btn" onclick="openMatchForm()">➕ إضافة</button></div>'+
+    '<div class="list" id="list"></div>';
+  renderMatches();
+}
+
+function renderMatches(){
+  var list=C.matches.map(function(m,i){
+    var status=m.status==="upcoming"?"🔵 قادمة":(m.my>m.op?"🟢 فوز "+m.my+"-"+m.op:(m.my===m.op?"🟡 تعادل "+m.my+"-"+m.op:"🔴 خسارة "+m.op+"-"+m.my));
+    return '<div class="item"><div class="info"><b>'+(m.home?"🏠 ":"✈️ ")+esc(m.opponent)+'</b><small>'+esc(m.comp||"")+' • '+esc(m.venue)+' • '+new Date(m.date).toLocaleDateString("ar")+' — '+status+'</small></div><div class="actions"><button class="edit" onclick="openMatchForm('+i+')">✏️</button><button class="del" onclick="delItem(\'matches\','+i+')">🗑️</button></div></div>';
+  }).join("");
+  $("#list").innerHTML=list||'<div class="empty"><i>⚽</i>لا مباريات بعد</div>';
+}
+
+window.openMatchForm = function(i){
+  var m=i!==undefined?C.matches[i]:{opponent:"",date:"",venue:"",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,img:""};
+  $("#modalBox").innerHTML = 
+    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' مباراة</h3>'+
+    '<div class="field"><label>الخصم</label><input id="mOpp" value="'+esc(m.opponent)+'"></div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>التاريخ والوقت</label><input id="mDate" type="datetime-local" value="'+esc(m.date)+'"></div>'+
+    '<div class="field"><label>الملعب</label><input id="mVenue" value="'+esc(m.venue)+'"></div>'+
+    '</div>'+
+    '<div class="field"><label>البطولة</label><input id="mComp" value="'+esc(m.comp)+'"></div>'+
+    '<div class="field"><label>الحالة</label><select id="mStatus"><option value="upcoming"'+(m.status==="upcoming"?' selected':'')+'>قادمة</option><option value="finished"'+(m.status==="finished"?' selected':'')+'>منتهية</option></select></div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>أهدافنا</label><input id="mMy" type="number" value="'+(m.my||0)+'"></div>'+
+    '<div class="field"><label>أهداف الخصم</label><input id="mOp" type="number" value="'+(m.op||0)+'"></div>'+
+    '</div>'+
+    '<div class="field"><label><input type="checkbox" id="mHome" '+(m.home?"checked":"")+'> المباراة على أرضنا</label></div>'+
+    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveMatch('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+};
+
+window.saveMatch = function(i){
+  var m={
+    id:i>=0?C.matches[i].id:Date.now(),
+    opponent:$("#mOpp").value.trim(),
+    date:$("#mDate").value,
+    venue:$("#mVenue").value.trim(),
+    comp:$("#mComp").value.trim(),
+    home:$("#mHome").checked,
+    status:$("#mStatus").value,
+    my:+$("#mMy").value||0,
+    op:+$("#mOp").value||0,
+    img:i>=0?C.matches[i].img:""
+  };
+  if(!m.opponent||!m.date){toast("❌ أدخل الخصم والتاريخ");return}
+  if(i>=0)C.matches[i]=m;else C.matches.push(m);
+  saveRemote();closeModal();renderMatches();toast("✅ تم حفظ المباراة");
+};
+
+/* ===== جدول الترتيب ===== */
+function standings(){
+  $("#content").innerHTML = 
+    '<div class="section-head"><h3>🏆 جدول الترتيب</h3><button class="btn" onclick="openStandingForm()">➕ إضافة فريق</button></div>'+
+    '<div style="overflow-x:auto"><table class="tbl" id="stbl"><thead><tr><th>الفريق</th><th>لعب</th><th>فوز</th><th>تعادل</th><th>خسارة</th><th>له</th><th>عليه</th><th>نقاط</th><th></th></tr></thead><tbody id="stbody"></tbody></table></div>'+
+    '<div style="margin-top:16px;display:flex;gap:10px"><button class="btn green" onclick="saveStandings()">💾 حفظ الترتيب</button><button class="btn ghost" onclick="calcStandings()">🔄 حساب تلقائي من المباريات</button></div>';
+  renderStandings();
+}
+
+function renderStandings(){
+  var sorted=C.standings.slice().sort(function(a,b){
+    if(b.pts!==a.pts)return b.pts-a.pts;
+    return (b.gf-b.ga)-(a.gf-a.ga);
+  });
+  $("#stbody").innerHTML = sorted.map(function(t,i){
+    var idx=C.standings.indexOf(t);
+    var my=t.team===C.settings.name;
+    return '<tr'+(my?' style="background:rgba(242,184,75,.1)"':'')+'>'+
+    '<td><input value="'+esc(t.team)+'" data-i="'+idx+'" data-f="team" style="width:120px;text-align:start"'+(my?' disabled':'')+'></td>'+
+    '<td><input type="number" value="'+t.p+'" data-i="'+idx+'" data-f="p"></td>'+
+    '<td><input type="number" value="'+t.w+'" data-i="'+idx+'" data-f="w"></td>'+
+    '<td><input type="number" value="'+t.d+'" data-i="'+idx+'" data-f="d"></td>'+
+    '<td><input type="number" value="'+t.l+'" data-i="'+idx+'" data-f="l"></td>'+
+    '<td><input type="number" value="'+t.gf+'" data-i="'+idx+'" data-f="gf"></td>'+
+    '<td><input type="number" value="'+t.ga+'" data-i="'+idx+'" data-f="ga"></td>'+
+    '<td><input type="number" value="'+t.pts+'" data-i="'+idx+'" data-f="pts" style="font-weight:bold"></td>'+
+    '<td><button class="del" onclick="delStanding('+idx+')" style="width:28px;height:28px;border-radius:6px;background:rgba(194,65,12,.1);color:var(--red)">🗑️</button></td></tr>';
+  }).join("");
+  
+  $$("#stbody input").forEach(function(inp){
+    inp.onchange=function(){
+      var i=+inp.dataset.i,f=inp.dataset.f;
+      C.standings[i][f]=f==="team"?inp.value:+inp.value||0;
+      if(f!=="pts"&&f!=="team"){
+        var t=C.standings[i];
+        t.pts=t.w*3+t.d;
+      }
+      renderStandings();
+    };
+  });
+}
+
+window.saveStandings = function(){saveRemote();toast("✅ تم حفظ الترتيب")};
+
+window.delStanding = function(i){
+  if(confirm("حذف الفريق؟")){
+    C.standings.splice(i,1);
+    saveRemote();renderStandings();
+  }
+};
+
+window.openStandingForm = function(){
+  $("#modalBox").innerHTML = 
+    '<h3>إضافة فريق للترتيب</h3>'+
+    '<div class="field"><label>اسم الفريق</label><input id="sTeam"></div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>لعب</label><input id="sP" type="number" value="0"></div>'+
+    '<div class="field"><label>فوز</label><input id="sW" type="number" value="0"></div>'+
+    '</div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>تعادل</label><input id="sD" type="number" value="0"></div>'+
+    '<div class="field"><label>خسارة</label><input id="sL" type="number" value="0"></div>'+
+    '</div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>أهداف له</label><input id="sGF" type="number" value="0"></div>'+
+    '<div class="field"><label>أهداف عليه</label><input id="sGA" type="number" value="0"></div>'+
+    '</div>'+
+    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveStanding()">💾 إضافة</button></div>';
+  $("#modal").classList.add("on");
+};
+
+window.saveStanding = function(){
+  var t={
+    team:$("#sTeam").value.trim(),
+    p:+$("#sP").value||0,
+    w:+$("#sW").value||0,
+    d:+$("#sD").value||0,
+    l:+$("#sL").value||0,
+    gf:+$("#sGF").value||0,
+    ga:+$("#sGA").value||0,
+    pts:(+$("#sW").value||0)*3+(+$("#sD").value||0)
+  };
+  if(!t.team){toast("❌ أدخل اسم الفريق");return}
+  C.standings.push(t);
+  saveRemote();closeModal();renderStandings();toast("✅ تم إضافة الفريق");
+};
+
+window.calcStandings = function(){
+  if(!confirm("سيتم إعادة حساب الترتيب من نتائج المباريات المسجلة. متابعة؟"))return;
+  var teams={};
+  C.standings.forEach(function(t){
+    teams[t.team]={team:t.team,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0};
+  });
+  C.matches.filter(function(m){return m.status==="finished"}).forEach(function(m){
+    var myName=C.settings.name;
+    var oppName=m.opponent;
+    if(!teams[myName])teams[myName]={team:myName,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0};
+    if(!teams[oppName])teams[oppName]={team:oppName,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0};
+    
+    var my=m.home?m.my:m.op;
+    var op=m.home?m.op:m.my;
+    
+    teams[myName].p++;teams[oppName].p++;
+    teams[myName].gf+=my;teams[myName].ga+=op;
+    teams[oppName].gf+=op;teams[oppName].ga+=my;
+    
+    if(my>op){teams[myName].w++;teams[myName].pts+=3;teams[oppName].l++;}
+    else if(my===op){teams[myName].d++;teams[oppName].d++;teams[myName].pts++;teams[oppName].pts++;}
+    else{teams[oppName].w++;teams[oppName].pts+=3;teams[myName].l++;}
+  });
+  C.standings=Object.values(teams);
+  saveRemote();renderStandings();toast("✅ تم الحساب التلقائي");
+};
+
+/* ===== الأخبار ===== */
+function news(){
+  $("#content").innerHTML = 
+    '<div class="section-head"><h3>📰 الأخبار ('+C.news.length+')</h3><button class="btn" onclick="openNewsForm()">➕ إضافة</button></div>'+
+    '<div class="list" id="list"></div>';
+  renderNews();
+}
+
+function renderNews(){
+  var list=C.news.map(function(n,i){
+    return '<div class="item"><div class="info"><b>'+esc(n.title)+'</b><small>'+new Date(n.date).toLocaleDateString("ar")+'</small></div><div class="actions"><button class="edit" onclick="openNewsForm('+i+')">✏️</button><button class="del" onclick="delItem(\'news\','+i+')">🗑️</button></div></div>';
+  }).join("");
+  $("#list").innerHTML=list||'<div class="empty"><i>📰</i>لا أخبار بعد</div>';
+}
+
+window.openNewsForm = function(i){
+  var n=i!==undefined?C.news[i]:{title:"",date:new Date().toISOString().slice(0,10),ex:"",img:""};
+  $("#modalBox").innerHTML = 
+    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' خبر</h3>'+
+    '<div class="field"><label>العنوان</label><input id="nTitle" value="'+esc(n.title)+'"></div>'+
+    '<div class="field"><label>التاريخ</label><input id="nDate" type="date" value="'+esc(n.date)+'"></div>'+
+    '<div class="field"><label>المحتوى</label><textarea id="nEx">'+esc(n.ex)+'</textarea></div>'+
+    '<div class="field"><label>رابط الصورة</label><input id="nImg" value="'+esc(n.img)+'" placeholder="https://..."></div>'+
+    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveNews('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+};
+
+window.saveNews = function(i){
+  var n={
+    id:i>=0?C.news[i].id:Date.now(),
+    title:$("#nTitle").value.trim(),
+    date:$("#nDate").value,
+    ex:$("#nEx").value.trim(),
+    img:$("#nImg").value.trim()
+  };
+  if(!n.title){toast("❌ أدخل العنوان");return}
+  if(i>=0)C.news[i]=n;else C.news.unshift(n);
+  saveRemote();closeModal();renderNews();toast("✅ تم حفظ الخبر");
+};
+
+/* ===== معرض الصور ===== */
+function gallery(){
+  $("#content").innerHTML = 
+    '<div class="section-head"><h3>📸 معرض الصور ('+C.gallery.length+')</h3><button class="btn" onclick="openGalleryForm()">➕ إضافة صورة</button></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px" id="glist"></div>';
+  renderGallery();
+}
+
+function renderGallery(){
+  var list=C.gallery.map(function(g,i){
+    return '<div style="position:relative;border-radius:12px;overflow:hidden;background:var(--srf2);aspect-ratio:1">'+
+    (g.src?'<img src="'+esc(g.src)+'" style="width:100%;height:100%;object-fit:cover">':'<div style="display:grid;place-items:center;height:100%;font-size:2rem;opacity:.3">📷</div>')+
+    '<div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);color:#fff;padding:6px 8px;font-size:.7rem">'+esc(g.cap||"بدون وصف")+'</div>'+
+    '<div style="position:absolute;top:6px;inset-inline-end:6px;display:flex;gap:4px">'+
+    '<button onclick="openGalleryForm('+i+')" style="width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.9);color:var(--blue);font-size:.7rem">✏️</button>'+
+    '<button onclick="delItem(\'gallery\','+i+');renderGallery()" style="width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.9);color:var(--red);font-size:.7rem">🗑️</button>'+
+    '</div></div>';
+  }).join("");
+  $("#glist").innerHTML=list||'<div class="empty" style="grid-column:1/-1"><i>📸</i>لا صور بعد</div>';
+}
+
+window.openGalleryForm = function(i){
+  var g=i!==undefined?C.gallery[i]:{src:"",cap:""};
+  $("#modalBox").innerHTML = 
+    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' صورة</h3>'+
+    '<div class="field"><label>رابط الصورة</label><input id="gSrc" value="'+esc(g.src)+'" placeholder="https://..."></div>'+
+    '<div class="field"><label>الوصف</label><input id="gCap" value="'+esc(g.cap)+'" placeholder="وصف الصورة"></div>'+
+    (g.src?'<img class="img-preview" src="'+esc(g.src)+'" onerror="this.style.display=\'none\'">':'')+
+    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveGallery('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+};
+
+window.saveGallery = function(i){
+  var g={
+    id:i>=0?C.gallery[i].id:Date.now(),
+    src:$("#gSrc").value.trim(),
+    cap:$("#gCap").value.trim()
+  };
+  if(i>=0)C.gallery[i]=g;else C.gallery.push(g);
+  saveRemote();closeModal();renderGallery();toast("✅ تم حفظ الصورة");
+};
+
+/* ===== سجل الشرف ===== */
+function honors(){
+  $("#content").innerHTML = 
+    '<div class="section-head"><h3>🏅 سجل الشرف ('+C.honors.length+')</h3><button class="btn" onclick="openHonorForm()">➕ إضافة</button></div>'+
+    '<div class="list" id="list"></div>';
+  renderHonors();
+}
+
+function renderHonors(){
+  var list=C.honors.map(function(h,i){
+    return '<div class="item"><div class="info"><b>'+(h.kind==="club"?"🏆":"🏅")+' '+esc(h.title)+'</b><small>'+(h.season?esc(h.season)+" • ":"")+(h.holder?esc(h.holder):"")+'</small></div><div class="actions"><button class="edit" onclick="openHonorForm('+i+')">✏️</button><button class="del" onclick="delItem(\'honors\','+i+')">🗑️</button></div></div>';
+  }).join("");
+  $("#list").innerHTML=list||'<div class="empty"><i>🏅</i>لا ألقاب بعد</div>';
+}
+
+window.openHonorForm = function(i){
+  var h=i!==undefined?C.honors[i]:{kind:"club",title:"",season:"",holder:"",role:"",note:""};
+  $("#modalBox").innerHTML = 
+    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' لقب/جائزة</h3>'+
+    '<div class="field"><label>النوع</label><select id="hKind"><option value="club"'+(h.kind==="club"?' selected':'')+'>بطولة جماعية</option><option value="player"'+(h.kind!=="club"?' selected':'')+'>جائزة فردية</option></select></div>'+
+    '<div class="field"><label>اللقب</label><input id="hTitle" value="'+esc(h.title)+'"></div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>الموسم</label><input id="hSeason" value="'+esc(h.season)+'"></div>'+
+    '<div class="field"><label>الحامل (اختياري)</label><input id="hHolder" value="'+esc(h.holder)+'"></div>'+
+    '</div>'+
+    '<div class="field"><label>المنصب (اختياري)</label><input id="hRole" value="'+esc(h.role)+'"></div>'+
+    '<div class="field"><label>ملاحظة</label><textarea id="hNote">'+esc(h.note)+'</textarea></div>'+
+    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveHonor('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+};
+
+window.saveHonor = function(i){
+  var h={
+    id:i>=0?C.honors[i].id:Date.now(),
+    kind:$("#hKind").value,
+    title:$("#hTitle").value.trim(),
+    season:$("#hSeason").value.trim(),
+    holder:$("#hHolder").value.trim(),
+    role:$("#hRole").value.trim(),
+    note:$("#hNote").value.trim()
+  };
+  if(!h.title){toast("❌ أدخل اللقب");return}
+  if(i>=0)C.honors[i]=h;else C.honors.push(h);
+  saveRemote();closeModal();renderHonors();toast("✅ تم الحفظ");
+};
+
+/* ===== الإدارة ===== */
+function board(){
+  $("#content").innerHTML = 
+    '<div class="section-head"><h3>🧑‍💼 الإدارة ('+C.board.length+')</h3><button class="btn" onclick="openBoardForm()">➕ إضافة</button></div>'+
+    '<div class="list" id="list"></div>';
+  renderBoard();
+}
+
+function renderBoard(){
+  var list=C.board.map(function(b,i){
+    return '<div class="item"><div class="info"><b>'+esc(b.name)+'</b><small>'+esc(b.role)+(b.phone?" • "+esc(b.phone):"")+'</small></div><div class="actions"><button class="edit" onclick="openBoardForm('+i+')">✏️</button><button class="del" onclick="delItem(\'board\','+i+')">🗑️</button></div></div>';
+  }).join("");
+  $("#list").innerHTML=list||'<div class="empty"><i>🧑‍💼</i>لا أعضاء بعد</div>';
+}
+
+window.openBoardForm = function(i){
+  var b=i!==undefined?C.board[i]:{name:"",role:"",phone:"",photo:""};
+  $("#modalBox").innerHTML = 
+    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' عضو</h3>'+
+    '<div class="field"><label>الاسم</label><input id="bName" value="'+esc(b.name)+'"></div>'+
+    '<div class="field"><label>المنصب</label><input id="bRole" value="'+esc(b.role)+'" placeholder="رئيس، نائب، مدرب..."></div>'+
+    '<div class="field"><label>الهاتف</label><input id="bPhone" value="'+esc(b.phone)+'"></div>'+
+    '<div class="field"><label>رابط الصورة</label><input id="bPhoto" value="'+esc(b.photo)+'"></div>'+
+    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveBoard('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+};
+
+window.saveBoard = function(i){
+  var b={
+    id:i>=0?C.board[i].id:Date.now(),
+    name:$("#bName").value.trim(),
+    role:$("#bRole").value.trim(),
+    phone:$("#bPhone").value.trim(),
+    photo:$("#bPhoto").value.trim()
+  };
+  if(!b.name){toast("❌ أدخل الاسم");return}
+  if(i>=0)C.board[i]=b;else C.board.push(b);
+  saveRemote();closeModal();renderBoard();toast("✅ تم الحفظ");
+};
+
+/* ===== الرسائل ===== */
+function messages(){
+  var list=C.messages.map(function(m,i){
+    return '<div class="msg'+(m.read?" read":"")+'"><div class="head"><b>'+esc(m.name)+'</b><time>'+new Date(m.created_at).toLocaleString("ar")+'</time></div><p>'+esc(m.body)+'</p><div class="meta">📱 '+esc(m.phone||"—")+' • 📋 '+esc(m.topic||"أخرى")+'</div>'+(m.read?"":'<button class="btn sm" onclick="markRead('+i+')" style="margin-top:8px">✓ تعليم كمقروءة</button>')+'</div>';
+  }).join("");
+  $("#content").innerHTML = '<h3>✉️ الرسائل ('+C.messages.length+')</h3>'+(list||'<div class="empty"><i>✉️</i>لا رسائل بعد</div>');
+}
+
+window.markRead = function(i){
+  C.messages[i].read=true;
+  saveRemote();messages();toast("✅ تم");
+};
+
+/* ===== الإعدادات ===== */
+function settings(){
+  var s=C.settings;
+  $("#content").innerHTML = 
+    '<h3>⚙️ الإعدادات</h3>'+
+    '<div class="field"><label>اسم النادي</label><input id="setName" value="'+esc(s.name)+'"></div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>المنطقة</label><input id="setRegion" value="'+esc(s.region)+'"></div>'+
+    '<div class="field"><label>الشعار</label><input id="setMotto" value="'+esc(s.motto)+'"></div>'+
+    '</div>'+
+    '<div class="field"><label>عن النادي</label><textarea id="setAbout">'+esc(s.about)+'</textarea></div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>الهاتف</label><input id="setPhone" value="'+esc(s.phone)+'"></div>'+
+    '<div class="field"><label>البريد</label><input id="setEmail" value="'+esc(s.email)+'"></div>'+
+    '</div>'+
+    '<div class="field"><label>العنوان</label><input id="setAddress" value="'+esc(s.address)+'"></div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>الميدان الأول</label><input id="setF1" value="'+esc(s.f1.name)+'"></div>'+
+    '<div class="field"><label>رابط الخريطة</label><input id="setF1Map" value="'+esc(s.f1.map)+'"></div>'+
+    '</div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>الميدان الثاني</label><input id="setF2" value="'+esc(s.f2.name)+'"></div>'+
+    '<div class="field"><label>رابط الخريطة</label><input id="setF2Map" value="'+esc(s.f2.map)+'"></div>'+
+    '</div>'+
+    '<h4 style="margin:20px 0 10px">🔗 روابط التواصل الاجتماعي</h4>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>Facebook</label><input id="socFb" value="'+esc(s.social.fb)+'"></div>'+
+    '<div class="field"><label>WhatsApp</label><input id="socWa" value="'+esc(s.social.wa)+'"></div>'+
+    '</div>'+
+    '<div class="field-row">'+
+    '<div class="field"><label>YouTube</label><input id="socYt" value="'+esc(s.social.yt)+'"></div>'+
+    '<div class="field"><label>Instagram</label><input id="socIg" value="'+esc(s.social.ig)+'"></div>'+
+    '</div>'+
+    '<div class="field"><label>TikTok</label><input id="socTt" value="'+esc(s.social.tt)+'"></div>'+
+    '<div style="margin-top:20px"><button class="btn" onclick="saveSettings()">💾 حفظ الإعدادات</button></div>';
+}
+
+window.saveSettings = function(){
+  C.settings.name=$("#setName").value.trim();
+  C.settings.region=$("#setRegion").value.trim();
+  C.settings.motto=$("#setMotto").value.trim();
+  C.settings.about=$("#setAbout").value.trim();
+  C.settings.phone=$("#setPhone").value.trim();
+  C.settings.email=$("#setEmail").value.trim();
+  C.settings.address=$("#setAddress").value.trim();
+  C.settings.f1.name=$("#setF1").value.trim();
+  C.settings.f1.map=$("#setF1Map").value.trim();
+  C.settings.f2.name=$("#setF2").value.trim();
+  C.settings.f2.map=$("#setF2Map").value.trim();
+  C.settings.social.fb=$("#socFb").value.trim();
+  C.settings.social.wa=$("#socWa").value.trim();
+  C.settings.social.yt=$("#socYt").value.trim();
+  C.settings.social.ig=$("#socIg").value.trim();
+  C.settings.social.tt=$("#socTt").value.trim();
+  saveRemote();toast("✅ تم حفظ الإعدادات");
+};
+
+/* ===== دوال عامة ===== */
+window.delItem = function(key,i){
+  if(confirm("تأكيد الحذف؟")){
+    C[key].splice(i,1);
+    saveRemote();
+    if(key==="players")renderPlayers();
+    else if(key==="matches")renderMatches();
+    else if(key==="news")renderNews();
+    else if(key==="honors")renderHonors();
+    else if(key==="board")renderBoard();
+    toast("🗑️ تم الحذف");
+  }
+};
+
+window.closeModal = function(){$("#modal").classList.remove("on")};
+window.go = go;
+
+$("#modal").onclick=function(e){if(e.target.id==="modal")closeModal()};
+
+/* بدء التشغيل */
+if(TOKEN)boot();
+else $("#loginView").style.display="grid";
+
 })();
 </script>
 </body>
