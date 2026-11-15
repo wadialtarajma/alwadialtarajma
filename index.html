@@ -1,70 +1,480 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
-<title>وادي التراجمة ريفي رفاعة | الموقع الرسمي</title>
-<meta name="description" content="الموقع الرسمي لنادي وادي التراجمة ريفي رفاعة — المباراة القادمة، النتائج، الأخبار، الفريق والإدارة">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://wadialtarajma.pages.dev/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="وادي التراجمة | من قلب الوادي نلعب باسم الديار">
-<meta property="og:description" content="المباراة القادمة والنتائج والأخبار والفريق — نادي وادي التراجمة ريفي رفاعة">
-<meta property="og:locale" content="ar_AR">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SportsTeam","name":"نادي وادي التراجمة","sport":"http://schema.org/Soccer","foundingDate":"2019","memberOf":{"@type":"SportsOrganization","name":"اتحاد رفاعة المحلي لكرة القدم"}}
-</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة التحكم | وادي التراجمة</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("wadi_theme")||"light")}catch(e){}</script>
-<link rel="stylesheet" href="style.css">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Changa:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap");
+:root{--bg:#f5f7f5;--srf:#fff;--srf2:#f0f3f0;--txt:#101815;--muted:#57665e;--line:rgba(16,24,21,.12);
+--gold:#f2b84b;--goldD:#b57e1f;--gold-ink:#8a5f00;--blue:#2e5bff;--green:#1f8a4c;--red:#c2410c;
+--df:"Changa",sans-serif;--bf:"IBM Plex Sans Arabic",sans-serif;--r:16px;--shadow:0 8px 30px rgba(16,24,21,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--bf);background:var(--bg);color:var(--txt);min-height:100vh}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:none;background:none}
+h1,h2,h3,h4{font-family:var(--df)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.login-card{background:var(--srf);padding:34px;border-radius:var(--r);box-shadow:var(--shadow);width:100%;max-width:400px;text-align:center}
+.login-card h1{font-size:1.4rem;margin-bottom:6px}
+.login-card p{color:var(--muted);font-size:.86rem;margin-bottom:20px}
+.login-card input{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:12px;margin-bottom:12px}
+.login-card input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,184,75,.15)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--goldD));color:#fff;padding:12px 24px;border-radius:12px;font-family:var(--df);font-weight:700;font-size:.92rem;box-shadow:0 6px 20px rgba(242,184,75,.3)}
+.btn.full{width:100%}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--txt);box-shadow:none}
+.btn.sm{padding:7px 14px;font-size:.8rem}
+.btn.danger{background:linear-gradient(135deg,var(--red),#a03008)}
+.header{background:var(--srf);border-bottom:1px solid var(--line);padding:12px 0;position:sticky;top:0;z-index:50}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.header h2{font-size:1.1rem}
+.banner{background:rgba(46,91,255,.1);color:var(--blue);border:1px solid rgba(46,91,255,.3);border-radius:10px;padding:8px 14px;font-size:.8rem;margin-top:8px}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:18px;padding:18px 0}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static}}
+.sidebar{background:var(--srf);border-radius:var(--r);padding:12px;height:fit-content;position:sticky;top:70px}
+.sidebar a{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;color:var(--muted);font-weight:600;font-size:.88rem;margin-bottom:3px;text-decoration:none}
+.sidebar a:hover{background:var(--srf2)}
+.sidebar a.on{background:rgba(242,184,75,.16);color:var(--gold-ink)}
+.sidebar a i{width:22px;text-align:center;font-style:normal}
+.content{background:var(--srf);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.content h3{font-size:1.2rem;margin-bottom:14px}
+.list{display:grid;gap:10px}
+.item{background:var(--srf2);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.item .info{flex:1;min-width:140px}
+.item .info b{display:block;font-family:var(--df);font-size:.92rem}
+.item .info small{color:var(--muted);font-size:.76rem}
+.item .actions{display:flex;gap:6px}
+.item .actions button{width:32px;height:32px;border-radius:8px;display:grid;place-items:center}
+.item .edit{background:rgba(46,91,255,.12);color:var(--blue)}
+.item .del{background:rgba(194,65,12,.12);color:var(--red)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);display:none;place-items:center;z-index:100;padding:16px}
+.modal.on{display:grid}
+.modal-box{background:var(--srf);border-radius:var(--r);width:100%;max-width:600px;max-height:88vh;overflow-y:auto;padding:20px}
+.modal-box h3{margin-bottom:14px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;padding:11px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.field textarea{min-height:90px;resize:vertical}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:600px){.field-row{grid-template-columns:1fr}}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:20px}
+.stat{background:var(--srf2);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+.stat b{display:block;font-family:var(--df);font-size:1.5rem;color:var(--gold-ink)}
+.stat small{color:var(--muted);font-size:.74rem}
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;max-height:220px;overflow-y:auto;border:1px solid var(--line);border-radius:10px;padding:8px;background:var(--bg)}
+.pick{display:flex;align-items:center;gap:8px;font-size:.8rem;background:var(--srf);border:1px solid var(--line);border-radius:8px;padding:6px 8px;cursor:pointer}
+.pick input{width:auto}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.thumbs div{position:relative}
+.thumbs img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.thumbs button{position:absolute;top:-6px;inset-inline-end:-6px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font-size:.6rem}
+.grow{display:flex;gap:6px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.grow select,.grow input{padding:8px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);font-size:.82rem}
+.grow .g-pid{flex:1;min-width:120px}
+.grow .g-name{flex:1;min-width:120px}
+.grow .g-min{width:80px}
+.grow .g-del{width:30px;height:30px;border-radius:8px;background:rgba(194,65,12,.12);color:var(--red)}
+.msg{background:var(--srf2);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:8px}
+.msg.read{opacity:.6}
+.msg .head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.msg p{font-size:.86rem}
+.msg .meta{font-size:.74rem;color:var(--muted);margin-top:4px}
+.empty{text-align:center;padding:34px;color:var(--muted)}
+.empty i{font-size:2.2rem;display:block;margin-bottom:8px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+.section-head h3{margin:0}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--txt);color:#fff;padding:11px 22px;border-radius:100px;font-size:.86rem;box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:200;opacity:0;transition:.3s;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(-5px)}
+.img-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;margin-top:8px}
+</style>
 </head>
-<body class="pub">
+<body>
 
-<header class="topbar">
-  <div class="topbar-in">
-    <button class="burger" id="burger" aria-label="القائمة"><i></i><i></i><i></i></button>
-    <a class="brand" href="#/home" data-nav="home">
-      <span data-crest="34"></span>
-      <span class="brand-t"><b class="js-name">وادي التراجمة</b><small class="js-region">ريفي رفاعة</small></span>
-    </a>
-    <nav class="qnav" id="qnav"></nav>
-    <button class="theme-btn" id="themeBtn" aria-label="تبديل الوضع"><span class="sun">☀</span><span class="moon">🌙</span></button>
-  </div>
-</header>
-
-<aside class="drawer" id="drawer">
-  <div class="dhead">
-    <span data-crest="42"></span>
-    <div><b class="js-name">وادي التراجمة</b><small class="js-region">ريفي رفاعة</small></div>
-    <button class="dclose" id="dclose" aria-label="إغلاق">✕</button>
-  </div>
-  <nav class="dnav" id="dnav"></nav>
-</aside>
-<div class="scrim" id="scrim"></div>
-
-<main id="main"></main>
-
-<nav class="dock" id="dock"></nav>
-
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <button class="modal-x" id="modalX" aria-label="إغلاق">✕</button>
-    <div id="modalBody"></div>
+<div class="login" id="loginView">
+  <div class="login-card">
+    <h1>🏟️ وادي التراجمة</h1>
+    <p>لوحة تحكم النادي — تسجيل الدخول</p>
+    <input type="text" id="username" placeholder="اسم المستخدم" value="admin" autocomplete="username">
+    <input type="password" id="password" placeholder="كلمة المرور" autocomplete="current-password">
+    <button class="btn full" id="loginBtn">دخول</button>
   </div>
 </div>
 
+<div id="appView" style="display:none">
+  <header class="header">
+    <div class="wrap">
+      <div>
+        <h2>⚽ لوحة التحكم</h2>
+        <div class="banner" id="modeBanner" hidden></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span id="userName" style="color:var(--muted);font-size:.84rem">admin</span>
+        <button class="btn sm ghost" id="logoutBtn">خروج</button>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+    <div class="layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <main class="content" id="content"></main>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 <div class="toast" id="toast"></div>
 
-<footer class="foot">
-  <div class="wrap foot-in">
-    <div class="foot-brand"><span data-crest="36"></span><div><b class="js-name">وادي التراجمة</b><small>«من قلب الوادي.. نلعب باسم الديار»</small></div></div>
-    <nav class="foot-links" id="footLinks"></nav>
-    <div class="foot-copy">© <span id="yr"></span> — اتحاد رفاعة المحلي</div>
-  </div>
-</footer>
+<script>
+(function(){
+"use strict";
+var API="/api", KEY="wadi_data_v2", TOKEN=localStorage.getItem("wadi_token")||"";
+var C=null, MODE="", POS=["حارس مرمى","مدافع","وسط","مهاجم"];
+var SECTIONS=[["dash","📊","لوحة القيادة"],["players","👥","اللاعبون"],["matches","⚽","المباريات"],["news","📰","الأخبار"],["board","🧑‍","الإدارة"],["messages","✉️","الرسائل"],["settings","⚙️","الإعدادات"]];
 
-<script src="main.js"></script>
+function $(s){return document.querySelector(s)}
+function $$(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(function(){t.classList.remove("on")},3000)}
+function localPass(){return localStorage.getItem("wadi_pass")||"wadi2026"}
+
+function DEFAULT(){return{settings:{name:"وادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",about:"",defaultXI:[],f1:{name:"ميدان الوادي",map:"https://maps.app.goo.gl/5omSxgEUMPaeguno7"},f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"},social:{fb:"",wa:"",yt:"",ig:"",tt:""}},players:[],matches:[],news:[],board:[],messages:[]}}
+
+function loadLocal(){
+  try{var r=localStorage.getItem(KEY);C=r?JSON.parse(r):DEFAULT()}catch(e){C=DEFAULT()}
+  ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+  C.settings=C.settings||DEFAULT().settings;
+  if(!C.settings.social)C.settings.social={fb:"",wa:"",yt:"",ig:"",tt:""};
+  if(!Array.isArray(C.settings.defaultXI))C.settings.defaultXI=[];
+  C.matches.forEach(function(m){if(!Array.isArray(m.lineup))m.lineup=[];if(!Array.isArray(m.oppLineup))m.oppLineup=[];if(!Array.isArray(m.goals))m.goals=[]});
+  C.news.forEach(function(n){if(!Array.isArray(n.imgs))n.imgs=n.img?[n.img]:[]});
+}
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(C));
+  if(MODE==="api"){
+    fetch(API+"/admin",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+TOKEN},body:JSON.stringify(C)})
+      .then(function(){toast("✅ تم الحفظ (سحابي + محلي)")})
+      .catch(function(){toast("✅ تم الحفظ محليًا")});
+  }else toast("✅ تم الحفظ");
+}
+
+/* ضغط الصور */
+function compress(file,cb){
+  var r=new FileReader();
+  r.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      var max=700,w=img.width,h=img.height;
+      if(w>max){h=Math.round(h*max/w);w=max}
+      var c=document.createElement("canvas");c.width=w;c.height=h;
+      c.getContext("2d").drawImage(img,0,0,w,h);
+      cb(c.toDataURL("image/jpeg",.8));
+    };
+    img.src=r.result;
+  };
+  r.readAsDataURL(file);
+}
+
+/* ===== الدخول ===== */
+function enter(mode,user){
+  MODE=mode;
+  $("#loginView").style.display="none";
+  $("#appView").style.display="block";
+  $("#userName").textContent=user||"admin";
+  var b=$("#modeBanner");
+  if(mode==="local"){b.hidden=false;b.textContent="وضع محلي: تُحفظ البيانات في هذا المتصفح ويعرضها الموقع على نفس الجهاز."}
+  else{b.hidden=false;b.textContent="وضع متصل: تُحفظ البيانات في السحابة ويعرضها الموقع لكل الزوار."}
+  buildSidebar();go("dash");
+}
+function login(){
+  var u=$("#username").value.trim()||"admin", p=$("#password").value;
+  fetch(API+"/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:u,password:p})})
+    .then(function(r){
+      if(r.status===404||r.status===500||r.status===405)throw{net:true};
+      if(!r.ok)throw{net:false};
+      return r.json();
+    })
+    .then(function(r){
+      TOKEN=r.token;localStorage.setItem("wadi_token",TOKEN);
+      fetch(API+"/admin",{headers:{"Authorization":"Bearer "+TOKEN}}).then(function(x){return x.json()}).then(function(d){
+        C=d.content||DEFAULT();
+        ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+        enter("api",r.username||u);
+      });
+    })
+    .catch(function(err){
+      if(err&&err.net){
+        if(p===localPass()){loadLocal();enter("local",u)}
+        else toast("❌ كلمة المرور خاطئة (الافتراضية: wadi2026)");
+      }else toast("❌ بيانات الدخول خاطئة");
+    });
+}
+$("#loginBtn").onclick=login;
+$("#password").addEventListener("keydown",function(e){if(e.key==="Enter")login()});
+$("#logoutBtn").onclick=function(){
+  if(MODE==="api")fetch(API+"/logout",{method:"POST",headers:{"Authorization":"Bearer "+TOKEN}}).catch(function(){});
+  localStorage.removeItem("wadi_token");TOKEN="";location.reload();
+};
+
+/* ===== التنقل ===== */
+function buildSidebar(){
+  $("#sidebar").innerHTML=SECTIONS.map(function(s){return '<a href="#" data-sec="'+s[0]+'"><i>'+s[1]+'</i>'+s[2]+'</a>'}).join("");
+  $$("#sidebar a").forEach(function(a){a.onclick=function(e){e.preventDefault();go(a.dataset.sec)}});
+}
+function go(sec){
+  $$("#sidebar a").forEach(function(a){a.classList.toggle("on",a.dataset.sec===sec)});
+  ({dash:dash,players:players,matches:matches,news:news,board:board,messages:messages,settings:settings})[sec]();
+}
+
+/* ===== لوحة القيادة ===== */
+function dash(){
+  var up=C.matches.filter(function(m){return m.status==="upcoming"}).length;
+  var unread=C.messages.filter(function(m){return !m.read}).length;
+  $("#content").innerHTML='<h3>📊 لوحة القيادة</h3>'+
+    '<div class="stats">'+
+    '<div class="stat"><b>'+C.players.length+'</b><small>لاعب</small></div>'+
+    '<div class="stat"><b>'+C.matches.length+'</b><small>مباراة</small></div>'+
+    '<div class="stat"><b>'+up+'</b><small>قادمة</small></div>'+
+    '<div class="stat"><b>'+C.news.length+'</b><small>خبر</small></div>'+
+    '<div class="stat"><b>'+C.board.length+'</b><small>إداري</small></div>'+
+    '<div class="stat"><b>'+unread+'</b><small>رسائل جديدة</small></div></div>'+
+    '<div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">'+
+    '<button class="btn" id="q1">➕ إضافة لاعب</button>'+
+    '<button class="btn" id="q2">➕ إضافة مباراة</button>'+
+    '<button class="btn" id="q3">➕ إضافة خبر</button>'+
+    '<button class="btn" id="q4">➕ إضافة عضو إدارة</button></div>';
+  $("#q1").onclick=function(){go("players");openPlayer(-1)};
+  $("#q2").onclick=function(){go("matches");openMatch(-1)};
+  $("#q3").onclick=function(){go("news");openNews(-1)};
+  $("#q4").onclick=function(){go("board");openBoard(-1)};
+}
+
+/* ===== اللاعبون ===== */
+function players(){
+  $("#content").innerHTML='<div class="section-head"><h3>👥 اللاعبون ('+C.players.length+')</h3><button class="btn" id="addP">➕ إضافة</button></div><div class="list" id="list"></div>';
+  $("#addP").onclick=function(){openPlayer(-1)};
+  renderPlayers();
+}
+function renderPlayers(){
+  $("#list").innerHTML=C.players.map(function(p,i){
+    return '<div class="item"><div class="info"><b>#'+esc(p.num)+' '+esc(p.name)+'</b><small>'+esc(p.pos)+(p.age?' • '+p.age+' سنة':'')+(p.apps?' • '+p.apps+' مباراة':'')+'</small></div><div class="actions"><button class="edit" data-e="'+i+'">✏️</button><button class="del" data-d="'+i+'">🗑️</button></div></div>';
+  }).join("")||'<div class="empty"><i>👥</i>لا لاعبين بعد</div>';
+  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openPlayer(+b.dataset.e)}});
+  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف اللاعب؟")){C.players.splice(+b.dataset.d,1);save();renderPlayers()}}});
+}
+var TMP={photo:""};
+function openPlayer(i){
+  var p=i>=0?C.players[i]:{name:"",num:"",age:"",pos:"مهاجم",apps:0,photo:""};
+  TMP.photo=p.photo||"";
+  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' لاعب</h3>'+
+    '<div class="field"><label>الاسم</label><input id="pName" value="'+esc(p.name)+'"></div>'+
+    '<div class="field-row"><div class="field"><label>رقم القميص</label><input id="pNum" type="number" value="'+esc(p.num)+'"></div><div class="field"><label>العمر</label><input id="pAge" type="number" value="'+esc(p.age||"")+'"></div></div>'+
+    '<div class="field-row"><div class="field"><label>الخانة</label><select id="pPos">'+POS.map(function(x){return '<option'+(p.pos===x?' selected':'')+'>'+x+'</option>'}).join("")+'</select></div><div class="field"><label>عدد المباريات</label><input id="pApps" type="number" value="'+(p.apps||0)+'"></div></div>'+
+    '<div class="field"><label>صورة اللاعب</label><input type="file" id="pFile" accept="image/*">'+(TMP.photo?'<img class="img-preview" id="pPrev" src="'+esc(TMP.photo)+'">':'<img class="img-preview" id="pPrev" style="display:none">')+'<button class="btn sm ghost" id="pRm" style="margin-top:6px" type="button">إزالة الصورة</button></div>'+
+    '<div class="modal-actions"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+  $("#pFile").onchange=function(){var f=this.files[0];if(!f)return;compress(f,function(d){TMP.photo=d;$("#pPrev").src=d;$("#pPrev").style.display="block"})};
+  $("#pRm").onclick=function(){TMP.photo="";$("#pPrev").style.display="none"};
+  $("#mX").onclick=closeModal;
+  $("#mS").onclick=function(){
+    var o={id:i>=0?C.players[i].id:Date.now(),name:$("#pName").value.trim(),num:+$("#pNum").value||0,age:+$("#pAge").value||0,pos:$("#pPos").value,apps:+$("#pApps").value||0,photo:TMP.photo};
+    if(!o.name){toast("❌ أدخل الاسم");return}
+    if(i>=0)C.players[i]=o;else C.players.push(o);
+    save();closeModal();renderPlayers();
+  };
+}
+
+/* ===== المباريات ===== */
+function matches(){
+  $("#content").innerHTML='<div class="section-head"><h3>⚽ المباريات ('+C.matches.length+')</h3><button class="btn" id="addM">➕ إضافة</button></div><div class="list" id="list"></div>';
+  $("#addM").onclick=function(){openMatch(-1)};
+  renderMatches();
+}
+function renderMatches(){
+  $("#list").innerHTML=C.matches.map(function(m,i){
+    var st=m.status==="upcoming"?"🔵 قادمة":(m.my>m.op?"🟢 فوز "+m.my+"-"+m.op:(m.my===m.op?"🟡 تعادل "+m.my+"-"+m.op:"🔴 خسارة "+m.op+"-"+m.my));
+    return '<div class="item"><div class="info"><b>'+(m.home?"🏠 ":"✈️ ")+esc(m.opponent)+'</b><small>'+esc(m.venue||"")+' • '+new Date(m.date).toLocaleDateString("ar")+' — '+st+(m.goals&&m.goals.length?' • ⚽ '+m.goals.length:'')+'</small></div><div class="actions"><button class="edit" data-e="'+i+'">✏️</button><button class="del" data-d="'+i+'">🗑️</button></div></div>';
+  }).join("")||'<div class="empty"><i>⚽</i>لا مباريات بعد</div>';
+  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openMatch(+b.dataset.e)}});
+  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف المباراة؟")){C.matches.splice(+b.dataset.d,1);save();renderMatches()}}});
+}
+function goalRow(g){
+  g=g||{team:"my",pid:C.players[0]?C.players[0].id:0,name:"",min:""};
+  return '<div class="grow"><select class="g-team"><option value="my"'+(g.team==="my"?" selected":"")+'>هدفنا</option><option value="op"'+(g.team==="op"?" selected":"")+'>الخصم</option></select>'+
+    '<select class="g-pid" style="'+(g.team==="op"?"display:none":"")+'">'+C.players.map(function(p){return '<option value="'+p.id+'"'+(g.pid===p.id?" selected":"")+'>'+esc(p.name)+'</option>'}).join("")+'</select>'+
+    '<input class="g-name" placeholder="اسم لاعب الخصم" value="'+esc(g.name||"")+'" style="'+(g.team==="my"?"display:none":"")+'">'+
+    '<input class="g-min" type="number" placeholder="الدقيقة" value="'+esc(g.min||"")+'">'+
+    '<button type="button" class="g-del">✕</button></div>';
+}
+function openMatch(i){
+  var m=i>=0?C.matches[i]:{opponent:"",date:"",venue:"",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,lineup:[],oppLineup:[],goals:[]};
+  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' مباراة</h3>'+
+    '<div class="field"><label>الخصم</label><input id="mOpp" value="'+esc(m.opponent)+'"></div>'+
+    '<div class="field-row"><div class="field"><label>التاريخ والوقت</label><input id="mDate" type="datetime-local" value="'+esc(m.date)+'"></div><div class="field"><label>الملعب</label><input id="mVenue" value="'+esc(m.venue)+'"></div></div>'+
+    '<div class="field"><label>البطولة</label><input id="mComp" value="'+esc(m.comp)+'"></div>'+
+    '<div class="field-row"><div class="field"><label>الحالة</label><select id="mStatus"><option value="upcoming"'+(m.status==="upcoming"?" selected":"")+'>قادمة</option><option value="finished"'+(m.status==="finished"?" selected":"")+'>منتهية</option></select></div><div class="field"><label><input type="checkbox" id="mHome"'+(m.home?" checked":"")+' style="width:auto"> على أرضنا</label></div></div>'+
+    '<div class="field-row"><div class="field"><label>أهدافنا</label><input id="mMy" type="number" value="'+(m.my||0)+'"></div><div class="field"><label>أهداف الخصم</label><input id="mOp" type="number" value="'+(m.op||0)+'"></div></div>'+
+    '<div class="field"><label>تشكيلتنا (اختر 11)</label><div class="picks" id="luPick">'+C.players.map(function(p){return '<label class="pick"><input type="checkbox" value="'+p.id+'"'+((m.lineup||[]).indexOf(p.id)>-1?" checked":"")+'><span>#'+p.num+' '+esc(p.name)+'</span></label>'}).join("")+'</div></div>'+
+    '<div class="field"><label>تشكيلة الخصم (اسم في كل سطر)</label><textarea id="mOppLu">'+esc((m.oppLineup||[]).join("\n"))+'</textarea></div>'+
+    '<div class="field"><label>الأهداف والهدافون</label><div id="gRows">'+(m.goals||[]).map(goalRow).join("")+'</div><button class="btn sm ghost" id="gAdd" type="button">➕ إضافة هدف</button></div>'+
+    '<div class="modal-actions"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+  $("#gAdd").onclick=function(){$("#gRows").insertAdjacentHTML("beforeend",goalRow())};
+  $("#gRows").addEventListener("click",function(e){
+    if(e.target.classList.contains("g-del"))e.target.closest(".grow").remove();
+  });
+  $("#gRows").addEventListener("change",function(e){
+    if(e.target.classList.contains("g-team")){
+      var row=e.target.closest(".grow"),op=e.target.value==="op";
+      row.querySelector(".g-pid").style.display=op?"none":"";
+      row.querySelector(".g-name").style.display=op?"":"none";
+    }
+  });
+  $("#mX").onclick=closeModal;
+  $("#mS").onclick=function(){
+    var lineup=$$("#luPick input:checked").map(function(x){return +x.value});
+    var goals=$$("#gRows .grow").map(function(r){
+      var team=r.querySelector(".g-team").value;
+      return {team:team,pid:team==="my"?+r.querySelector(".g-pid").value:0,name:team==="op"?r.querySelector(".g-name").value.trim():"",min:+r.querySelector(".g-min").value||0};
+    });
+    var o={id:i>=0?C.matches[i].id:Date.now(),opponent:$("#mOpp").value.trim(),date:$("#mDate").value,venue:$("#mVenue").value.trim(),comp:$("#mComp").value.trim(),home:$("#mHome").checked,status:$("#mStatus").value,my:+$("#mMy").value||0,op:+$("#mOp").value||0,lineup:lineup,oppLineup:$("#mOppLu").value.split("\n").map(function(s){return s.trim()}).filter(Boolean),goals:goals};
+    if(!o.opponent||!o.date){toast("❌ أدخل الخصم والتاريخ");return}
+    if(i>=0)C.matches[i]=o;else C.matches.push(o);
+    save();closeModal();renderMatches();
+  };
+}
+
+/* ===== الأخبار ===== */
+function news(){
+  $("#content").innerHTML='<div class="section-head"><h3>📰 الأخبار ('+C.news.length+')</h3><button class="btn" id="addN">➕ إضافة</button></div><div class="list" id="list"></div>';
+  $("#addN").onclick=function(){openNews(-1)};
+  renderNews();
+}
+function renderNews(){
+  $("#list").innerHTML=C.news.map(function(n,i){
+    return '<div class="item"><div class="info"><b>'+esc(n.title)+'</b><small>'+new Date(n.date).toLocaleDateString("ar")+((n.imgs&&n.imgs.length)?' • 📷 '+n.imgs.length:"")+'</small></div><div class="actions"><button class="edit" data-e="'+i+'">✏️</button><button class="del" data-d="'+i+'">🗑️</button></div></div>';
+  }).join("")||'<div class="empty"><i>📰</i>لا أخبار بعد</div>';
+  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openNews(+b.dataset.e)}});
+  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف الخبر؟")){C.news.splice(+b.dataset.d,1);save();renderNews()}}});
+}
+var TMPN=[];
+function thumbsRender(){
+  $("#nThumbs").innerHTML=TMPN.map(function(s,i){return '<div><img src="'+esc(s)+'"><button type="button" data-r="'+i+'">✕</button></div>'}).join("");
+  $$("#nThumbs [data-r]").forEach(function(b){b.onclick=function(){TMPN.splice(+b.dataset.r,1);thumbsRender()}});
+}
+function openNews(i){
+  var n=i>=0?C.news[i]:{title:"",date:new Date().toISOString().slice(0,10),ex:"",imgs:[]};
+  TMPN=(n.imgs||[]).slice();
+  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' خبر</h3>'+
+    '<div class="field"><label>العنوان</label><input id="nTitle" value="'+esc(n.title)+'"></div>'+
+    '<div class="field"><label>التاريخ</label><input id="nDate" type="date" value="'+esc(n.date)+'"></div>'+
+    '<div class="field"><label>محتوى الخبر</label><textarea id="nEx">'+esc(n.ex)+'</textarea></div>'+
+    '<div class="field"><label>صور الخبر (عدة صور)</label><input type="file" id="nFile" accept="image/*" multiple><div class="thumbs" id="nThumbs"></div></div>'+
+    '<div class="modal-actions"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+  thumbsRender();
+  $("#nFile").onchange=function(){
+    var files=Array.prototype.slice.call(this.files);
+    files.forEach(function(f){compress(f,function(d){TMPN.push(d);thumbsRender()})});
+  };
+  $("#mX").onclick=closeModal;
+  $("#mS").onclick=function(){
+    var o={id:i>=0?C.news[i].id:Date.now(),title:$("#nTitle").value.trim(),date:$("#nDate").value,ex:$("#nEx").value.trim(),imgs:TMPN.slice()};
+    if(!o.title){toast("❌ أدخل العنوان");return}
+    if(i>=0)C.news[i]=o;else C.news.unshift(o);
+    save();closeModal();renderNews();
+  };
+}
+
+/* ===== الإدارة ===== */
+function board(){
+  $("#content").innerHTML='<div class="section-head"><h3>🧑‍ الإدارة ('+C.board.length+')</h3><button class="btn" id="addB">➕ إضافة</button></div><div class="list" id="list"></div>';
+  $("#addB").onclick=function(){openBoard(-1)};
+  renderBoard();
+}
+function renderBoard(){
+  $("#list").innerHTML=C.board.map(function(b,i){
+    return '<div class="item"><div class="info"><b>'+esc(b.name)+'</b><small>'+esc(b.role||"")+(b.phone?" • "+esc(b.phone):"")+'</small></div><div class="actions"><button class="edit" data-e="'+i+'">✏️</button><button class="del" data-d="'+i+'">🗑️</button></div></div>';
+  }).join("")||'<div class="empty"><i>🧑‍</i>لا أعضاء بعد</div>';
+  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openBoard(+b.dataset.e)}});
+  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف العضو؟")){C.board.splice(+b.dataset.d,1);save();renderBoard()}}});
+}
+function openBoard(i){
+  var b=i>=0?C.board[i]:{name:"",role:"",phone:"",photo:""};
+  TMP.photo=b.photo||"";
+  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' عضو</h3>'+
+    '<div class="field"><label>الاسم</label><input id="bName" value="'+esc(b.name)+'"></div>'+
+    '<div class="field-row"><div class="field"><label>المنصب</label><input id="bRole" value="'+esc(b.role)+'"></div><div class="field"><label>الهاتف</label><input id="bPhone" value="'+esc(b.phone)+'"></div></div>'+
+    '<div class="field"><label>الصورة</label><input type="file" id="bFile" accept="image/*">'+(TMP.photo?'<img class="img-preview" id="bPrev" src="'+esc(TMP.photo)+'">':'<img class="img-preview" id="bPrev" style="display:none">')+'</div>'+
+    '<div class="modal-actions"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+  $("#bFile").onchange=function(){var f=this.files[0];if(!f)return;compress(f,function(d){TMP.photo=d;$("#bPrev").src=d;$("#bPrev").style.display="block"})};
+  $("#mX").onclick=closeModal;
+  $("#mS").onclick=function(){
+    var o={id:i>=0?C.board[i].id:Date.now(),name:$("#bName").value.trim(),role:$("#bRole").value.trim(),phone:$("#bPhone").value.trim(),photo:TMP.photo};
+    if(!o.name){toast("❌ أدخل الاسم");return}
+    if(i>=0)C.board[i]=o;else C.board.push(o);
+    save();closeModal();renderBoard();
+  };
+}
+
+/* ===== الرسائل ===== */
+function messages(){
+  $("#content").innerHTML='<h3>✉️ الرسائل ('+C.messages.length+')</h3>'+
+    (C.messages.map(function(m,i){
+      return '<div class="msg'+(m.read?" read":"")+'"><div class="head"><b>'+esc(m.name)+'</b><time style="font-size:.72rem;color:var(--muted)">'+new Date(m.created_at||Date.now()).toLocaleString("ar")+'</time></div><p>'+esc(m.body)+'</p><div class="meta">📱 '+esc(m.phone||"—")+' • 📋 '+esc(m.topic||"أخرى")+'</div><div style="margin-top:8px;display:flex;gap:6px">'+(m.read?"":'<button class="btn sm" data-r="'+i+'">✓ مقروءة</button>')+'<button class="btn sm danger" data-d="'+i+'">🗑️</button></div></div>';
+    }).join("")||'<div class="empty"><i>✉️</i>لا رسائل</div>');
+  $$("#content [data-r]").forEach(function(b){b.onclick=function(){C.messages[+b.dataset.r].read=true;save();messages()}});
+  $$("#content [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف الرسالة؟")){C.messages.splice(+b.dataset.d,1);save();messages()}}});
+}
+
+/* ===== الإعدادات ===== */
+function settings(){
+  var s=C.settings;
+  $("#content").innerHTML='<h3>⚙️ الإعدادات</h3>'+
+    '<div class="field-row"><div class="field"><label>اسم النادي</label><input id="setName" value="'+esc(s.name)+'"></div><div class="field"><label>المنطقة</label><input id="setRegion" value="'+esc(s.region)+'"></div></div>'+
+    '<div class="field"><label>الشعار</label><input id="setMotto" value="'+esc(s.motto)+'"></div>'+
+    '<div class="field"><label>عن النادي</label><textarea id="setAbout">'+esc(s.about||"")+'</textarea></div>'+
+    '<div class="field-row"><div class="field"><label>الميدان الأول</label><input id="setF1" value="'+esc(s.f1.name)+'"></div><div class="field"><label>رابط خريطته</label><input id="setF1M" value="'+esc(s.f1.map)+'"></div></div>'+
+    '<div class="field-row"><div class="field"><label>الميدان الثاني</label><input id="setF2" value="'+esc(s.f2.name)+'"></div><div class="field"><label>رابط خريطته</label><input id="setF2M" value="'+esc(s.f2.map)+'"></div></div>'+
+    '<div class="field"><label>التشكيلة الأساسية (11 لاعبًا)</label><div class="picks" id="xiPick">'+C.players.map(function(p){return '<label class="pick"><input type="checkbox" value="'+p.id+'"'+((s.defaultXI||[]).indexOf(p.id)>-1?" checked":"")+'><span>#'+p.num+' '+esc(p.name)+'</span></label>'}).join("")+'</div></div>'+
+    '<h4 style="margin:14px 0 8px">🔗 التواصل الاجتماعي</h4>'+
+    '<div class="field-row"><div class="field"><label>Facebook</label><input id="socFb" value="'+esc(s.social.fb)+'"></div><div class="field"><label>WhatsApp</label><input id="socWa" value="'+esc(s.social.wa)+'"></div></div>'+
+    '<div class="field-row"><div class="field"><label>YouTube</label><input id="socYt" value="'+esc(s.social.yt)+'"></div><div class="field"><label>Instagram</label><input id="socIg" value="'+esc(s.social.ig)+'"></div></div>'+
+    '<div class="field"><label>TikTok</label><input id="socTt" value="'+esc(s.social.tt)+'"></div>'+
+    '<div class="field"><label>تغيير كلمة مرور الوضع المحلي</label><input id="newPass" type="password" placeholder="اتركها فارغة للإبقاء على الحالية"></div>'+
+    '<button class="btn" id="saveS">💾 حفظ الإعدادات</button>';
+  $("#saveS").onclick=function(){
+    C.settings.name=$("#setName").value.trim();C.settings.region=$("#setRegion").value.trim();
+    C.settings.motto=$("#setMotto").value.trim();C.settings.about=$("#setAbout").value.trim();
+    C.settings.f1.name=$("#setF1").value.trim();C.settings.f1.map=$("#setF1M").value.trim();
+    C.settings.f2.name=$("#setF2").value.trim();C.settings.f2.map=$("#setF2M").value.trim();
+    C.settings.social.fb=$("#socFb").value.trim();C.settings.social.wa=$("#socWa").value.trim();
+    C.settings.social.yt=$("#socYt").value.trim();C.settings.social.ig=$("#socIg").value.trim();
+    C.settings.social.tt=$("#socTt").value.trim();
+    C.settings.defaultXI=$$("#xiPick input:checked").map(function(x){return +x.value});
+    var np=$("#newPass").value;
+    if(np.length>=4)localStorage.setItem("wadi_pass",np);
+    save();toast("✅ تم حفظ الإعدادات");
+  };
+}
+
+function closeModal(){$("#modal").classList.remove("on")}
+$("#modal").onclick=function(e){if(e.target.id==="modal")closeModal()};
+
+/* بدء */
+if(TOKEN){
+  fetch(API+"/admin",{headers:{"Authorization":"Bearer "+TOKEN}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+    C=d.content||DEFAULT();
+    ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+    enter("api",localStorage.getItem("wadi_user")||"admin");
+  }).catch(function(){TOKEN="";loadLocal();enter("local","admin")});
+}else{loadLocal();/* يظهر نموذج الدخول */}
+})();
+</script>
 </body>
 </html>
