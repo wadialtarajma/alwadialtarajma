@@ -6,795 +6,792 @@
 <title>لوحة التحكم | وادي التراجمة</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Changa:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Changa:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap");
 :root{
-  --bg:#f5f7f5;--srf:#fff;--srf2:#f0f3f0;--txt:#101815;--muted:#57665e;
-  --line:rgba(16,24,21,.12);--gold:#f2b84b;--goldD:#b57e1f;--gold-ink:#9a6e00;
-  --blue:#2e5bff;--green:#1f8a4c;--red:#c2410c;
+  --bg:#0a0f14;--soft:#111820;--srf:#161f2a;--srf2:#1c2733;--srf3:#24323f;
+  --txt:#e8ecef;--muted:#93a3b2;--dim:#6b7b8a;
+  --line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.04);
+  --gold:#f2b84b;--gold2:#ffd98a;--goldD:#b57e1f;--gold-ink:#ffd98a;
+  --blue:#2e5bff;--blue2:#7c9bff;--green:#35e08d;--red:#ff5c5c;--amber:#ffb020;
   --df:"Changa",sans-serif;--bf:"IBM Plex Sans Arabic",sans-serif;
-  --r:16px;--shadow:0 8px 30px rgba(16,24,21,.08);
+  --r:16px;--sh:0 8px 32px rgba(0,0,0,.4);--sh2:0 16px 48px rgba(0,0,0,.5);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--bf);background:var(--bg);color:var(--txt);min-height:100vh}
+html,body{height:100%}
+body{font-family:var(--bf);background:var(--bg);color:var(--txt);overflow:hidden}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;border:none;background:none}
-h1,h2,h3,h4{font-family:var(--df)}
-.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+h1,h2,h3,h4{font-family:var(--df);line-height:1.3}
+input:focus,select:focus,textarea:focus{outline:none}
+
+/* الخلفية المتحركة */
+body::before{content:"";position:fixed;inset:0;background:
+  radial-gradient(800px 500px at 15% -10%,rgba(242,184,75,.08),transparent 60%),
+  radial-gradient(600px 400px at 110% 10%,rgba(46,91,255,.08),transparent 60%);
+  pointer-events:none;z-index:0}
 
 /* شاشة الدخول */
-.login{min-height:100vh;display:grid;place-items:center;padding:20px}
-.login-card{background:var(--srf);padding:40px;border-radius:var(--r);box-shadow:var(--shadow);width:100%;max-width:400px;text-align:center}
-.login-card h1{font-size:1.5rem;margin-bottom:8px}
-.login-card p{color:var(--muted);font-size:.88rem;margin-bottom:24px}
-.login-card input{width:100%;padding:14px;border:1.5px solid var(--line);border-radius:12px;margin-bottom:14px;font-size:.95rem}
-.login-card input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,184,75,.15)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--goldD));color:#fff;padding:13px 28px;border-radius:12px;font-family:var(--df);font-weight:700;font-size:.95rem;transition:.2s;box-shadow:0 6px 20px rgba(242,184,75,.3)}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;position:relative;z-index:1;overflow-y:auto}
+.login-card{background:linear-gradient(160deg,var(--srf),var(--srf2));padding:40px 34px;border-radius:24px;box-shadow:var(--sh2);width:100%;max-width:420px;border:1px solid var(--line);position:relative;overflow:hidden}
+.login-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold) 0 33%,var(--blue) 33% 66%,var(--gold) 66% 100%)}
+.login-logo{width:72px;height:80px;margin:0 auto 18px;display:grid;place-items:center;background:linear-gradient(145deg,var(--gold),var(--goldD));border-radius:18px;box-shadow:0 12px 32px rgba(242,184,75,.3);color:#0a0f14;font-family:var(--df);font-weight:800;font-size:1.4rem}
+.login-card h1{font-size:1.5rem;margin-bottom:6px;text-align:center}
+.login-card p{color:var(--muted);font-size:.88rem;margin-bottom:26px;text-align:center}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:.8rem;color:var(--muted);font-weight:600;margin-bottom:6px;letter-spacing:.3px}
+.fld input{width:100%;padding:13px 16px;background:var(--soft);border:1.5px solid var(--line);border-radius:12px;font-size:.92rem;transition:.2s}
+.fld input:focus{border-color:var(--gold);background:var(--srf);box-shadow:0 0 0 4px rgba(242,184,75,.12)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--goldD));color:#0a0f14;padding:13px 26px;border-radius:12px;font-family:var(--df);font-weight:700;font-size:.92rem;box-shadow:0 8px 24px rgba(242,184,75,.3);transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(242,184,75,.4)}
 .btn.full{width:100%}
 .btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--txt);box-shadow:none}
-.btn.ghost:hover{border-color:var(--gold);color:var(--gold-ink)}
-.btn.sm{padding:8px 16px;font-size:.82rem}
-.btn.danger{background:linear-gradient(135deg,var(--red),#a03008)}
-.btn.green{background:linear-gradient(135deg,var(--green),#166a3a)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold-ink);background:rgba(242,184,75,.06)}
+.btn.sm{padding:8px 16px;font-size:.82rem;min-height:38px;border-radius:10px}
+.btn.danger{background:linear-gradient(135deg,var(--red),#c2410c);color:#fff}
+.btn.blue{background:linear-gradient(135deg,var(--blue),#1d4ed8);color:#fff}
+.btn.green{background:linear-gradient(135deg,var(--green),#16a34a);color:#0a0f14}
 
-/* الهيدر */
-.header{background:var(--srf);border-bottom:1px solid var(--line);padding:14px 0;position:sticky;top:0;z-index:50}
-.header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.header h2{font-size:1.2rem}
-.header .user{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.85rem}
+/* التطبيق */
+.app{display:grid;grid-template-columns:260px 1fr;height:100vh;position:relative;z-index:1}
+.sidebar{background:var(--srf);border-inline-end:1px solid var(--line);display:flex;flex-direction:column;overflow-y:auto}
+.sb-head{padding:22px 18px;border-bottom:1px solid var(--line)}
+.sb-brand{display:flex;align-items:center;gap:11px}
+.sb-logo{width:42px;height:46px;border-radius:11px;background:linear-gradient(145deg,var(--gold),var(--goldD));display:grid;place-items:center;color:#0a0f14;font-family:var(--df);font-weight:800;font-size:.95rem;box-shadow:0 6px 16px rgba(242,184,75,.3);flex-shrink:0}
+.sb-brand b{font-family:var(--df);font-size:1rem;display:block;line-height:1.2}
+.sb-brand small{color:var(--gold-ink);font-size:.7rem;font-weight:600}
+.sb-nav{flex:1;padding:14px 10px;display:flex;flex-direction:column;gap:3px}
+.sb-nav .group{font-size:.68rem;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:14px 12px 6px}
+.sb-nav a{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;color:var(--muted);font-weight:600;font-size:.88rem;text-decoration:none;position:relative;transition:.2s;margin-bottom:2px}
+.sb-nav a:hover{background:var(--srf2);color:var(--txt)}
+.sb-nav a.on{background:linear-gradient(90deg,rgba(242,184,75,.15),rgba(46,91,255,.05));color:var(--gold-ink)}
+.sb-nav a.on::before{content:"";position:absolute;inset-inline-start:0;top:8px;bottom:8px;width:3px;background:linear-gradient(180deg,var(--gold),var(--blue));border-radius:3px}
+.sb-nav a i{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;background:var(--srf2);font-style:normal;font-size:.95rem}
+.sb-nav a.on i{background:linear-gradient(135deg,var(--gold),var(--goldD));color:#0a0f14}
+.sb-foot{padding:14px 16px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.sb-foot .usr{flex:1;min-width:0}
+.sb-foot .usr b{display:block;font-size:.86rem;font-family:var(--df)}
+.sb-foot .usr small{color:var(--dim);font-size:.7rem}
+.sb-foot .usr-ic{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;display:grid;place-items:center;font-weight:700;flex-shrink:0}
 
-/* التخطيط */
-.layout{display:grid;grid-template-columns:240px 1fr;gap:24px;padding:24px 0}
-@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static;width:100%}}
-.sidebar{background:var(--srf);border-radius:var(--r);padding:16px;height:fit-content;position:sticky;top:80px}
-.sidebar a{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;color:var(--muted);font-weight:600;font-size:.9rem;margin-bottom:4px;transition:.2s;text-decoration:none}
-.sidebar a:hover{background:var(--srf2);color:var(--txt)}
-.sidebar a.on{background:linear-gradient(135deg,rgba(242,184,75,.15),rgba(46,91,255,.08));color:var(--gold-ink)}
-.sidebar a i{width:24px;height:24px;display:grid;place-items:center;font-style:normal}
-
-.content{background:var(--srf);border-radius:var(--r);padding:24px;box-shadow:var(--shadow)}
-.content h3{font-size:1.3rem;margin-bottom:16px}
-
-/* القوائم */
-.list{display:grid;gap:12px}
-.item{background:var(--srf2);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.item .info{flex:1;min-width:150px}
-.item .info b{display:block;font-family:var(--df);font-size:.95rem}
-.item .info small{color:var(--muted);font-size:.78rem}
-.item .actions{display:flex;gap:6px}
-.item .actions button{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;transition:.2s}
-.item .actions .edit{background:rgba(46,91,255,.12);color:var(--blue)}
-.item .actions .edit:hover{background:var(--blue);color:#fff}
-.item .actions .del{background:rgba(194,65,12,.12);color:var(--red)}
-.item .actions .del:hover{background:var(--red);color:#fff}
-
-/* النماذج */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);display:none;place-items:center;z-index:100;padding:20px}
-.modal.on{display:grid}
-.modal-box{background:var(--srf);border-radius:var(--r);width:100%;max-width:560px;max-height:85vh;overflow-y:auto;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-.modal-box h3{margin-bottom:16px;font-size:1.2rem}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:.85rem;color:var(--muted);font-weight:600;margin-bottom:6px}
-.field input,.field select,.field textarea{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg)}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,184,75,.12)}
-.field textarea{min-height:100px;resize:vertical}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:600px){.field-row{grid-template-columns:1fr}}
-.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+/* المحتوى */
+.main{overflow-y:auto;display:flex;flex-direction:column}
+.top{background:var(--srf);border-bottom:1px solid var(--line);padding:14px 26px;display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:10;backdrop-filter:blur(10px)}
+.top h2{font-size:1.15rem;font-family:var(--df)}
+.top .mode{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:.72rem;font-weight:700;font-family:var(--df)}
+.mode.local{background:rgba(124,155,255,.14);color:var(--blue2);border:1px solid rgba(124,155,255,.3)}
+.mode.api{background:rgba(53,224,141,.14);color:var(--green);border:1px solid rgba(53,224,141,.3)}
+.mode::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;animation:blip 1.6s infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.3}}
+.content{padding:24px 26px;flex:1}
 
 /* الإحصائيات */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px}
-.stat{background:var(--srf2);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
-.stat b{display:block;font-family:var(--df);font-size:1.6rem;color:var(--gold-ink)}
-.stat small{color:var(--muted);font-size:.78rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:26px}
+.stat{background:linear-gradient(145deg,var(--srf),var(--srf2));border:1px solid var(--line);border-radius:var(--r);padding:18px;position:relative;overflow:hidden;transition:.2s}
+.stat:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:rgba(242,184,75,.25)}
+.stat::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--kit,linear-gradient(90deg,var(--gold),var(--blue)))}
+.stat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.stat-ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem;background:rgba(242,184,75,.14);color:var(--gold-ink)}
+.stat b{display:block;font-family:var(--df);font-size:2rem;font-weight:800;line-height:1;color:var(--txt)}
+.stat small{color:var(--muted);font-size:.76rem;display:block;margin-top:4px}
 
-/* الجدول */
-.tbl{width:100%;border-collapse:collapse;font-size:.85rem}
-.tbl th,.tbl td{padding:10px;text-align:center;border-bottom:1px solid var(--line)}
-.tbl th{background:var(--srf2);font-weight:700;font-size:.8rem;color:var(--muted)}
-.tbl tr:hover{background:rgba(242,184,75,.05)}
-.tbl input{width:70px;padding:6px;border:1px solid var(--line);border-radius:6px;text-align:center}
-.tbl input:focus{outline:none;border-color:var(--gold)}
+/* الأزرار السريعة */
+.quick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:22px}
+.qbtn{background:linear-gradient(145deg,var(--srf),var(--srf2));border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;align-items:center;gap:12px;transition:.2s;color:var(--txt);font-family:var(--df);font-weight:700;font-size:.9rem;text-align:start}
+.qbtn:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:var(--sh)}
+.qbtn i{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-size:1.15rem;font-style:normal;flex-shrink:0}
+.qbtn.g i{background:linear-gradient(135deg,rgba(242,184,75,.2),rgba(242,184,75,.08));color:var(--gold-ink)}
+.qbtn.b i{background:linear-gradient(135deg,rgba(46,91,255,.2),rgba(46,91,255,.08));color:var(--blue2)}
+.qbtn.gr i{background:linear-gradient(135deg,rgba(53,224,141,.2),rgba(53,224,141,.08));color:var(--green)}
+.qbtn.r i{background:linear-gradient(135deg,rgba(255,92,92,.2),rgba(255,92,92,.08));color:var(--red)}
+
+/* العناوين */
+.sec-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+.sec-head h3{font-size:1.15rem;display:flex;align-items:center;gap:10px}
+.sec-head h3 .count{font-size:.72rem;font-weight:700;background:var(--srf2);color:var(--gold-ink);padding:3px 10px;border-radius:100px;border:1px solid rgba(242,184,75,.25)}
+
+/* القائمة */
+.list{display:grid;gap:10px}
+.it{background:var(--srf);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;transition:.2s}
+.it:hover{border-color:rgba(255,255,255,.14);background:var(--srf2)}
+.it-ic{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(242,184,75,.15),rgba(46,91,255,.08));display:grid;place-items:center;font-size:1.1rem;flex-shrink:0}
+.it-ic img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.it-bd{flex:1;min-width:0}
+.it-bd b{font-family:var(--df);font-size:.95rem;display:block}
+.it-bd small{color:var(--muted);font-size:.76rem;display:block;margin-top:2px}
+.it-tags{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap}
+.tag{font-size:.66rem;font-weight:700;padding:2px 8px;border-radius:100px;font-family:var(--df)}
+.tag.gold{background:rgba(242,184,75,.14);color:var(--gold-ink);border:1px solid rgba(242,184,75,.3)}
+.tag.blue{background:rgba(46,91,255,.14);color:var(--blue2);border:1px solid rgba(46,91,255,.3)}
+.tag.green{background:rgba(53,224,141,.14);color:var(--green);border:1px solid rgba(53,224,141,.3)}
+.tag.red{background:rgba(255,92,92,.14);color:var(--red);border:1px solid rgba(255,92,92,.3)}
+.tag.amber{background:rgba(255,176,32,.14);color:var(--amber);border:1px solid rgba(255,176,32,.3)}
+.it-acts{display:flex;gap:5px}
+.it-acts button{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;transition:.2s;font-size:.9rem}
+.it-acts .e{background:rgba(46,91,255,.12);color:var(--blue2)}
+.it-acts .e:hover{background:var(--blue);color:#fff}
+.it-acts .d{background:rgba(255,92,92,.12);color:var(--red)}
+.it-acts .d:hover{background:var(--red);color:#fff}
+
+/* مودال */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;place-items:center;z-index:100;padding:16px;overflow-y:auto}
+.modal.on{display:grid}
+.modal-box{background:linear-gradient(160deg,var(--srf),var(--srf2));border:1px solid var(--line);border-radius:20px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;padding:24px;box-shadow:var(--sh2);position:relative}
+.modal-box.lg{max-width:900px}
+.modal-box h3{font-size:1.25rem;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.modal-box h3::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,var(--gold),var(--blue));border-radius:3px}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:.78rem;color:var(--muted);font-weight:600;margin-bottom:6px;letter-spacing:.3px}
+.fld input,.fld select,.fld textarea{width:100%;padding:11px 14px;background:var(--soft);border:1.5px solid var(--line);border-radius:10px;font-size:.9rem;transition:.2s}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,184,75,.1)}
+.fld textarea{min-height:90px;resize:vertical}
+.fld-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:600px){.fld-row{grid-template-columns:1fr}}
+.modal-acts{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+
+/* محرر التشكيلة المتقدم */
+.lu-editor{display:grid;grid-template-columns:1fr 1.1fr;gap:16px;margin-top:10px}
+@media(max-width:760px){.lu-editor{grid-template-columns:1fr}}
+.lu-side{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:14px;max-height:440px;overflow-y:auto}
+.lu-group{margin-bottom:14px}
+.lu-group-title{display:flex;align-items:center;gap:8px;font-family:var(--df);font-weight:700;font-size:.85rem;color:var(--gold-ink);margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+.lu-group-title::before{content:"";width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--gold),var(--goldD))}
+.lu-group-title .n{margin-inline-start:auto;font-size:.68rem;background:var(--srf3);padding:2px 8px;border-radius:100px;color:var(--muted)}
+.lu-player{display:flex;align-items:center;gap:10px;padding:7px 9px;background:var(--srf);border:1px solid var(--line);border-radius:9px;margin-bottom:5px;cursor:pointer;transition:.2s}
+.lu-player:hover{border-color:var(--gold)}
+.lu-player.in{background:linear-gradient(135deg,rgba(242,184,75,.15),rgba(46,91,255,.08));border-color:rgba(242,184,75,.4)}
+.lu-player .num{width:26px;height:26px;border-radius:8px;background:var(--srf2);display:grid;place-items:center;font-family:var(--df);font-weight:800;font-size:.72rem;flex-shrink:0}
+.lu-player.in .num{background:linear-gradient(135deg,var(--gold),var(--goldD));color:#0a0f14}
+.lu-player .nm{flex:1;font-size:.82rem;min-width:0}
+.lu-player .nm b{display:block;font-family:var(--df);font-weight:700}
+.lu-player .nm small{color:var(--muted);font-size:.7rem}
+.lu-player .x{width:22px;height:22px;border-radius:6px;background:rgba(255,92,92,.14);color:var(--red);display:grid;place-items:center;font-size:.7rem;opacity:0;transition:.2s}
+.lu-player.in .x{opacity:1}
+
+/* الملعب المنظوري للمعاينة */
+.pitch-mini{position:relative;width:100%;aspect-ratio:.85/1;margin:0 auto;
+  clip-path:polygon(14% 0,86% 0,100% 100%,0 100%);
+  background:
+    radial-gradient(circle at 50% 50%,transparent 26px,rgba(255,255,255,.3) 26px 28px,transparent 29px),
+    linear-gradient(180deg,transparent 49%,rgba(255,255,255,.3) 49% 51%,transparent 51%),
+    repeating-linear-gradient(0deg,#1e8049 0 28px,#187040 28px 56px);
+  box-shadow:0 8px 24px rgba(0,0,0,.4);overflow:hidden}
+.pitch-mini::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),transparent 28%,transparent 72%,rgba(0,0,0,.22));pointer-events:none}
+.pitch-mini-in{position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:5% 4%}
+.pm-row{display:flex;justify-content:center;gap:3%;margin:0 auto}
+.pm-row.r1{width:56%}.pm-row.r2{width:70%}.pm-row.r3{width:86%}.pm-row.r4{width:34%}
+.pm-p{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;max-width:68px}
+.pm-p .jsy{width:100%;max-width:38px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.4))}
+.pm-p span{color:#fff;font-size:.55rem;font-weight:700;text-align:center;line-height:1.2;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.pm-row.r1 .pm-p{transform:scale(.85)}.pm-row.r2 .pm-p{transform:scale(.92)}
+.pm-row.r4 .pm-p .jsy{max-width:42px}
+.pm-empty{position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.6);font-size:.8rem;text-align:center;padding:20px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+
+/* قائمة الخصم */
+.opl{display:grid;gap:6px;margin-top:8px}
+.opl .r{display:flex;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:7px 10px}
+.opl .r .n{width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;display:grid;place-items:center;font-size:.7rem;font-family:var(--df);font-weight:700;flex-shrink:0}
+.opl .r input{flex:1;background:transparent;border:none;padding:4px}
+.opl .r button{width:24px;height:24px;border-radius:6px;background:rgba(255,92,92,.12);color:var(--red);font-size:.7rem}
+
+/* الأهداف */
+.gl{display:grid;gap:6px;margin-top:8px}
+.gl .r{display:flex;align-items:center;gap:6px;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:6px 10px;flex-wrap:wrap}
+.gl .r select,.gl .r input{background:var(--srf);border:1px solid var(--line);border-radius:7px;padding:6px 8px;font-size:.8rem}
+.gl .r .tm{width:80px;font-family:var(--df);font-weight:700}
+.gl .r .pl{flex:1;min-width:120px}
+.gl .r .mi{width:72px}
+.gl .r .x{width:26px;height:26px;border-radius:6px;background:rgba(255,92,92,.12);color:var(--red)}
+
+/* الصور المصغرة */
+.thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.thumbs div{position:relative}
+.thumbs img{width:72px;height:72px;object-fit:cover;border-radius:9px;border:1px solid var(--line)}
+.thumbs button{position:absolute;top:-6px;inset-inline-end:-6px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font-size:.65rem;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.img-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;margin-top:8px;border:1px solid var(--line)}
 
 /* الرسائل */
-.msg{background:var(--srf2);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
-.msg.read{opacity:.6}
-.msg .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+.msg{background:var(--srf);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+.msg.read{opacity:.55}
+.msg .head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px;align-items:center}
 .msg .head b{font-family:var(--df);font-size:.92rem}
-.msg .head time{font-size:.75rem;color:var(--muted)}
-.msg p{font-size:.88rem;color:var(--txt)}
-.msg .meta{font-size:.78rem;color:var(--muted);margin-top:6px}
+.msg .head time{font-size:.72rem;color:var(--dim)}
+.msg p{font-size:.86rem;line-height:1.6}
+.msg .meta{font-size:.74rem;color:var(--muted);margin-top:6px;display:flex;gap:10px;flex-wrap:wrap}
+.msg .acts{margin-top:10px;display:flex;gap:6px}
 
-/* صور */
-.img-preview{width:100%;max-height:200px;object-fit:cover;border-radius:10px;margin-top:10px;background:var(--srf2)}
-.upload-area{border:2px dashed var(--line);border-radius:12px;padding:30px;text-align:center;cursor:pointer;transition:.2s;background:var(--bg)}
-.upload-area:hover{border-color:var(--gold);background:rgba(242,184,75,.05)}
-.upload-area input{display:none}
+.empty{text-align:center;padding:50px 20px;color:var(--muted);background:var(--srf);border:1px dashed var(--line);border-radius:var(--r)}
+.empty i{font-size:3rem;display:block;margin-bottom:10px;opacity:.5}
+.empty h3{font-size:1.05rem;color:var(--txt);margin-bottom:4px}
+.empty p{font-size:.84rem}
 
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--txt);color:#fff;padding:12px 24px;border-radius:100px;font-size:.88rem;box-shadow:0 10px 30px rgba(0,0,0,.2);z-index:200;opacity:0;transition:.3s;pointer-events:none}
-.toast.on{opacity:1;transform:translateX(-50%) translateY(-5px)}
+/* إعدادات الشبكة */
+.set-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:800px){.set-grid{grid-template-columns:1fr 1fr}}
+.set-card{background:var(--srf);border:1px solid var(--line);border-radius:16px;padding:20px}
+.set-card h4{font-family:var(--df);font-size:1rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--gold-ink)}
+.set-card h4::before{content:"";width:10px;height:10px;border-radius:3px;background:linear-gradient(135deg,var(--gold),var(--goldD))}
 
-.empty{text-align:center;padding:40px;color:var(--muted)}
-.empty i{font-size:2.5rem;display:block;margin-bottom:10px}
+/* توست */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(140%);background:linear-gradient(135deg,var(--srf),var(--srf2));border:1px solid var(--line);color:var(--txt);padding:12px 24px;border-radius:100px;font-size:.88rem;font-family:var(--df);box-shadow:var(--sh2);z-index:200;transition:transform .4s cubic-bezier(.2,.8,.2,1);display:flex;align-items:center;gap:8px}
+.toast.on{transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:rgba(53,224,141,.4)}
+.toast.err{border-color:rgba(255,92,92,.4)}
 
-.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px}
-.section-head h3{margin:0}
+/* متجاوب */
+.menu-btn{display:none;width:40px;height:40px;border-radius:10px;background:var(--srf);border:1px solid var(--line);place-items:center;font-size:1.1rem;color:var(--txt)}
+@media(max-width:900px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:fixed;inset-inline-end:0;top:0;bottom:0;width:280px;z-index:50;transform:translateX(105%);transition:transform .3s}
+  .sidebar.on{transform:translateX(0)}
+  .menu-btn{display:grid}
+  .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40;display:none}
+  .backdrop.on{display:block}
+}
 </style>
 </head>
 <body>
 
-<!-- شاشة الدخول -->
 <div class="login" id="loginView">
   <div class="login-card">
-    <h1>🏟️ وادي التراجمة</h1>
-    <p>لوحة تحكم النادي — تسجيل الدخول</p>
-    <input type="text" id="username" placeholder="اسم المستخدم" autocomplete="username">
-    <input type="password" id="password" placeholder="كلمة المرور" autocomplete="current-password">
-    <button class="btn full" onclick="login()">دخول</button>
+    <div class="login-logo">و</div>
+    <h1>وادي التراجمة</h1>
+    <p>لوحة التحكم — إدارة الموقع والمحتوى</p>
+    <div class="fld"><label>اسم المستخدم</label><input type="text" id="username" value="admin" autocomplete="username"></div>
+    <div class="fld"><label>كلمة المرور</label><input type="password" id="password" autocomplete="current-password"></div>
+    <button class="btn full" id="loginBtn">🔓 دخول</button>
   </div>
 </div>
 
-<!-- لوحة التحكم -->
-<div id="appView" style="display:none">
-  <header class="header">
-    <div class="wrap">
-      <h2>⚽ لوحة التحكم</h2>
-      <div class="user">
-        <span id="userName">admin</span>
-        <button class="btn sm ghost" onclick="logout()">خروج</button>
+<div class="app" id="appView" style="display:none">
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-head">
+      <div class="sb-brand">
+        <div class="sb-logo">و</div>
+        <div><b>وادي التراجمة</b><small>لوحة التحكم</small></div>
       </div>
     </div>
-  </header>
-  
-  <div class="wrap">
-    <div class="layout">
-      <aside class="sidebar" id="sidebar"></aside>
-      <main class="content" id="content"></main>
+    <nav class="sb-nav" id="sbNav"></nav>
+    <div class="sb-foot">
+      <div class="usr-ic" id="usrIc">A</div>
+      <div class="usr"><b id="userName">admin</b><small id="modeSmall">—</small></div>
+      <button class="btn sm ghost" id="logoutBtn" style="padding:6px 10px" title="خروج">🚪</button>
     </div>
-  </div>
+  </aside>
+
+  <main class="main">
+    <div class="top">
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <h2 id="pageTitle">لوحة القيادة</h2>
+      </div>
+      <span class="mode" id="modeTag">محلي</span>
+    </div>
+    <div class="content" id="content"></div>
+  </main>
 </div>
 
-<!-- المودال -->
-<div class="modal" id="modal">
-  <div class="modal-box" id="modalBox"></div>
-</div>
-
+<div class="backdrop" id="backdrop"></div>
+<div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
 (function(){
 "use strict";
-
-var API = "/api";
-var KEY = "wadi_data_v2";
-var TOKEN = localStorage.getItem("wadi_token")||"";
-var C = null;
-var cur = "dash";
-
-var POS = ["حارس مرمى","مدافع","وسط","مهاجم"];
-
-var SECTIONS = [
-  ["dash","📊","لوحة القيادة"],
-  ["players","👥","اللاعبون"],
-  ["matches","⚽","المباريات"],
-  ["standings","🏆","جدول الترتيب"],
-  ["news","📰","الأخبار"],
-  ["gallery","📸","معرض الصور"],
-  ["honors","🏅","سجل الشرف"],
-  ["board","🧑‍💼","الإدارة"],
-  ["messages","✉️","الرسائل"],
-  ["settings","⚙️","الإعدادات"]
+var API="/api",KEY="wadi_data_v2",TOKEN=localStorage.getItem("wadi_token")||"";
+var C=null,MODE="",POS=["حارس مرمى","مدافع","وسط","مهاجم"];
+var SECTIONS=[
+  {g:"الرئيسية",items:[["dash","📊","لوحة القيادة"]]},
+  {g:"المحتوى",items:[["players","👥","اللاعبون"],["matches","⚽","المباريات"],["news","📰","الأخبار"]]},
+  {g:"النادي",items:[["board","🧑‍","الإدارة"],["messages","✉️","الرسائل"]]},
+  {g:"النظام",items:[["settings","⚙️","الإعدادات"]]}
 ];
 
-/* ===== دوال مساعدة ===== */
 function $(s){return document.querySelector(s)}
-function esc(s){return String(s||"").replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
-
-function toast(m){
-  var t=$("#toast");t.textContent=m;t.classList.add("on");
-  setTimeout(function(){t.classList.remove("on")},3000);
-}
-
-function api(path,opts){
-  opts = opts||{};
-  opts.headers = Object.assign({"Content-Type":"application/json"},opts.headers||{});
-  if(TOKEN)opts.headers["Authorization"]="Bearer "+TOKEN;
-  return fetch(API+path,opts).then(function(r){
-    if(!r.ok)throw new Error("خطأ: "+r.status);
-    return r.json();
-  });
-}
-
-/* ===== الدخول والخروج ===== */
-window.login = function(){
-  var u=$("#username").value.trim()||"admin";
-  var p=$("#password").value;
-  api("/login",{method:"POST",body:JSON.stringify({username:u,password:p})})
-    .then(function(r){
-      TOKEN=r.token;
-      localStorage.setItem("wadi_token",TOKEN);
-      localStorage.setItem("wadi_user",r.username||u);
-      boot();
-    })
-    .catch(function(){toast("❌ بيانات الدخول خاطئة")});
-};
-
-window.logout = function(){
-  api("/logout",{method:"POST"}).catch(function(){});
-  TOKEN="";localStorage.removeItem("wadi_token");localStorage.removeItem("wadi_user");
-  location.reload();
-};
-
-/* ===== التمهيد ===== */
-function boot(){
-  api("/admin").then(function(r){
-    C=r.content;
-    $("#userName").textContent=r.username||"admin";
-    $("#loginView").style.display="none";
-    $("#appView").style.display="block";
-    buildSidebar();
-    go("dash");
-  }).catch(function(){
-    // في حالة عدم وجود Backend، نستخدم البيانات المحلية
-    var local = localStorage.getItem(KEY);
-    C = local ? JSON.parse(local) : getDefaultData();
-    $("#loginView").style.display="none";
-    $("#appView").style.display="block";
-    $("#userName").textContent="admin (وضع محلي)";
-    buildSidebar();
-    go("dash");
-  });
-}
-
-function getDefaultData(){
-  return {
-    settings:{name:"وادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",address:"",phone:"",email:"",about:"",f1:{name:"ميدان الوادي",map:""},f2:{name:"ميدان الهاشماب",map:""},social:{fb:"",wa:"",yt:"",ig:"",tt:""}},
-    players:[],matches:[],news:[],standings:[],gallery:[],honors:[],board:[],timeline:[],messages:[]
-  };
-}
-
-function saveLocal(){
-  localStorage.setItem(KEY,JSON.stringify(C));
-}
-
-function saveRemote(){
-  api("/admin",{method:"POST",body:JSON.stringify(C)})
-    .then(function(){toast("✅ تم الحفظ")})
-    .catch(function(){saveLocal();toast("✅ تم الحفظ محلياً")});
-}
-
-/* ===== الشريط الجانبي ===== */
-function buildSidebar(){
-  $("#sidebar").innerHTML = SECTIONS.map(function(s){
-    return '<a href="#" data-sec="'+s[0]+'"><i>'+s[1]+'</i>'+s[2]+'</a>';
-  }).join("");
-  $$("#sidebar a").forEach(function(a){
-    a.onclick=function(e){e.preventDefault();go(a.dataset.sec)};
-  });
-}
-
 function $$(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function toast(m,type){var t=$("#toast");t.textContent=m;t.className="toast on "+(type||"ok");setTimeout(function(){t.className="toast"},3000)}
+function localPass(){return localStorage.getItem("wadi_pass")||"wadi2026"}
+
+function DEFAULT(){return{settings:{name:"وادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",about:"",defaultXI:[],f1:{name:"ميدان الوادي",map:"https://maps.app.goo.gl/5omSxgEUMPaeguno7"},f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"},social:{fb:"",wa:"",yt:"",ig:"",tt:""}},players:[],matches:[],news:[],board:[],messages:[]}}
+
+function loadLocal(){
+  try{var r=localStorage.getItem(KEY);C=r?JSON.parse(r):DEFAULT()}catch(e){C=DEFAULT()}
+  ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+  C.settings=C.settings||DEFAULT().settings;
+  if(!C.settings.social)C.settings.social={fb:"",wa:"",yt:"",ig:"",tt:""};
+  if(!Array.isArray(C.settings.defaultXI))C.settings.defaultXI=[];
+  C.matches.forEach(function(m){if(!Array.isArray(m.lineup))m.lineup=[];if(!Array.isArray(m.oppLineup))m.oppLineup=[];if(!Array.isArray(m.goals))m.goals=[]});
+  C.news.forEach(function(n){if(!Array.isArray(n.imgs))n.imgs=n.img?[n.img]:[]});
+}
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(C));
+  if(MODE==="api"){
+    fetch(API+"/admin",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+TOKEN},body:JSON.stringify(C)})
+      .then(function(){toast("✅ تم الحفظ (سحابي + محلي)","ok")})
+      .catch(function(){toast("✅ تم الحفظ محليًا","ok")});
+  }else toast("✅ تم الحفظ","ok");
+}
+
+function compress(file,cb){
+  var r=new FileReader();
+  r.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      var max=700,w=img.width,h=img.height;
+      if(w>max){h=Math.round(h*max/w);w=max}
+      var c=document.createElement("canvas");c.width=w;c.height=h;
+      c.getContext("2d").drawImage(img,0,0,w,h);
+      cb(c.toDataURL("image/jpeg",.8));
+    };
+    img.src=r.result;
+  };
+  r.readAsDataURL(file);
+}
+
+function enter(mode,user){
+  MODE=mode;
+  $("#loginView").style.display="none";
+  $("#appView").style.display="grid";
+  $("#userName").textContent=user||"admin";
+  $("#usrIc").textContent=(user||"A").charAt(0).toUpperCase();
+  $("#modeTag").textContent=mode==="api"?"متصل":"محلي";
+  $("#modeTag").className="mode "+(mode==="api"?"api":"local");
+  $("#modeSmall").textContent=mode==="api"?"وضع متصل":"وضع محلي";
+  buildSidebar();go("dash");
+}
+function login(){
+  var u=$("#username").value.trim()||"admin",p=$("#password").value;
+  fetch(API+"/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:u,password:p})})
+    .then(function(r){
+      if(r.status===404||r.status===500||r.status===405||r.status===403)throw{net:true};
+      if(!r.ok)throw{net:false};
+      return r.json();
+    })
+    .then(function(r){
+      TOKEN=r.token;localStorage.setItem("wadi_token",TOKEN);localStorage.setItem("wadi_user",r.username||u);
+      fetch(API+"/admin",{headers:{"Authorization":"Bearer "+TOKEN}}).then(function(x){return x.json()}).then(function(d){
+        C=d.content||DEFAULT();
+        ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+        enter("api",r.username||u);
+      });
+    })
+    .catch(function(err){
+      if(err&&err.net){
+        if(p===localPass()){loadLocal();enter("local",u)}
+        else toast("❌ كلمة المرور خاطئة (الافتراضية: wadi2026)","err");
+      }else toast("❌ بيانات الدخول خاطئة","err");
+    });
+}
+$("#loginBtn").onclick=login;
+$("#password").addEventListener("keydown",function(e){if(e.key==="Enter")login()});
+$("#logoutBtn").onclick=function(){
+  if(MODE==="api")fetch(API+"/logout",{method:"POST",headers:{"Authorization":"Bearer "+TOKEN}}).catch(function(){});
+  localStorage.removeItem("wadi_token");TOKEN="";location.reload();
+};
+
+function buildSidebar(){
+  var h="";
+  SECTIONS.forEach(function(s){
+    h+='<div class="group">'+s.g+'</div>';
+    s.items.forEach(function(it){h+='<a href="#" data-sec="'+it[0]+'"><i>'+it[1]+'</i>'+it[2]+'</a>'});
+  });
+  $("#sbNav").innerHTML=h;
+  $$("#sbNav a").forEach(function(a){a.onclick=function(e){e.preventDefault();go(a.dataset.sec)}});
+}
+
+var PAGE_TITLES={dash:"لوحة القيادة",players:"اللاعبون",matches:"المباريات والنتائج",news:"أخبار النادي",board:"إدارة النادي",messages:"الرسائل الواردة",settings:"الإعدادات"};
 
 function go(sec){
-  cur=sec;
-  $$("#sidebar a").forEach(function(a){a.classList.toggle("on",a.dataset.sec===sec)});
-  var fn={dash:dash,players:players,matches:matches,standings:standings,news:news,gallery:gallery,honors:honors,board:board,messages:messages,settings:settings};
-  if(fn[sec])fn[sec]();
+  $$("#sbNav a").forEach(function(a){a.classList.toggle("on",a.dataset.sec===sec)});
+  $("#pageTitle").textContent=PAGE_TITLES[sec]||"لوحة التحكم";
+  $("#sidebar").classList.remove("on");$("#backdrop").classList.remove("on");
+  ({dash:dash,players:players,matches:matches,news:news,board:board,messages:messages,settings:settings})[sec]();
 }
 
-/* ===== لوحة القيادة ===== */
+$("#menuBtn").onclick=function(){$("#sidebar").classList.add("on");$("#backdrop").classList.add("on")};
+$("#backdrop").onclick=function(){$("#sidebar").classList.remove("on");$("#backdrop").classList.remove("on")};
+
 function dash(){
   var up=C.matches.filter(function(m){return m.status==="upcoming"}).length;
-  var fin=C.matches.filter(function(m){return m.status==="finished"});
-  var w=fin.filter(function(m){return m.my>m.op}).length;
+  var fin=C.matches.filter(function(m){return m.status==="finished"}).length;
   var unread=C.messages.filter(function(m){return !m.read}).length;
-  
-  $("#content").innerHTML = 
-    '<h3>📊 لوحة القيادة</h3>'+
+  var lastMatch=C.matches.filter(function(m){return m.status==="finished"}).sort(function(a,b){return new Date(b.date)-new Date(a.date)})[0];
+  $("#content").innerHTML=
     '<div class="stats">'+
-    '<div class="stat"><b>'+C.players.length+'</b><small>لاعب</small></div>'+
-    '<div class="stat"><b>'+C.matches.length+'</b><small>مباراة</small></div>'+
-    '<div class="stat"><b>'+up+'</b><small>قادمة</small></div>'+
-    '<div class="stat"><b>'+w+'</b><small>فوز</small></div>'+
-    '<div class="stat"><b>'+C.news.length+'</b><small>خبر</small></div>'+
-    '<div class="stat"><b>'+C.gallery.length+'</b><small>صورة</small></div>'+
-    '<div class="stat"><b>'+(C.standings.length||0)+'</b><small>فريق في الترتيب</small></div>'+
-    '<div class="stat"><b>'+unread+'</b><small>رسالة جديدة</small></div>'+
+    '<div class="stat"><div class="stat-top"><div class="stat-ic">👥</div></div><b>'+C.players.length+'</b><small>لاعب مسجل</small></div>'+
+    '<div class="stat"><div class="stat-top"><div class="stat-ic">⚽</div></div><b>'+fin+'</b><small>مباراة منتهية</small></div>'+
+    '<div class="stat"><div class="stat-top"><div class="stat-ic">📅</div></div><b>'+up+'</b><small>مباراة قادمة</small></div>'+
+    '<div class="stat"><div class="stat-top"><div class="stat-ic">📰</div></div><b>'+C.news.length+'</b><small>خبر منشور</small></div>'+
+    '<div class="stat"><div class="stat-top"><div class="stat-ic">🧑‍</div></div><b>'+C.board.length+'</b><small>عضو إدارة</small></div>'+
+    '<div class="stat"><div class="stat-top"><div class="stat-ic">✉️</div></div><b>'+unread+'</b><small>رسائل جديدة</small></div>'+
     '</div>'+
-    '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">'+
-    '<button class="btn" onclick="go(\'players\');openPlayerForm()">➕ إضافة لاعب</button>'+
-    '<button class="btn" onclick="go(\'matches\');openMatchForm()">➕ إضافة مباراة</button>'+
-    '<button class="btn" onclick="go(\'news\');openNewsForm()">➕ إضافة خبر</button>'+
-    '<button class="btn" onclick="go(\'gallery\');openGalleryForm()">➕ إضافة صورة</button>'+
+    '<div class="quick-grid">'+
+    '<button class="qbtn g" data-q="p"><i>👥</i>إضافة لاعب</button>'+
+    '<button class="qbtn b" data-q="m"><i>⚽</i>إضافة مباراة</button>'+
+    '<button class="qbtn gr" data-q="n"><i>📰</i>إضافة خبر</button>'+
+    '<button class="qbtn r" data-q="b"><i>🧑‍</i>إضافة إداري</button>'+
+    '</div>'+
+    '<div class="set-grid">'+
+    '<div class="set-card"><h4>🔥 آخر نتيجة</h4><div id="lastRes">'+(lastMatch?'<div style="font-family:var(--df);font-size:1.2rem;font-weight:800">'+esc(C.settings.name)+' <span style="color:var(--gold-ink)">'+lastMatch.my+' – '+lastMatch.op+'</span> '+esc(lastMatch.opponent)+'</div><div style="color:var(--muted);font-size:.78rem;margin-top:4px">'+new Date(lastMatch.date).toLocaleDateString("ar")+' • '+esc(lastMatch.venue)+'</div>':'<div style="color:var(--dim);font-size:.85rem">لا نتائج مسجلة بعد</div>')+'</div></div>'+
+    '<div class="set-card"><h4>⏰ المباراة القادمة</h4><div id="nextMt">'+(function(){var nm=C.matches.filter(function(m){return m.status==="upcoming"&&new Date(m.date)>new Date()}).sort(function(a,b){return new Date(a.date)-new Date(b.date)})[0];if(!nm)return '<div style="color:var(--dim);font-size:.85rem">لا مباريات قادمة</div>';return '<div style="font-family:var(--df);font-size:1.1rem;font-weight:700">ضد '+esc(nm.opponent)+'</div><div style="color:var(--muted);font-size:.78rem;margin-top:4px">📅 '+new Date(nm.date).toLocaleDateString("ar",{weekday:"long",day:"numeric",month:"long"})+' • ⏰ '+new Date(nm.date).toLocaleTimeString("ar",{hour:"2-digit",minute:"2-digit"})+'</div><div style="color:var(--muted);font-size:.78rem">📍 '+esc(nm.venue)+'</div>'})()+'</div></div>'+
     '</div>';
+  $("#content .qbtn").forEach(function(b){b.onclick=function(){var q=b.dataset.q;go(q==="p"?"players":q==="m"?"matches":q==="n"?"news":"board");setTimeout(function(){({p:function(){openPlayer(-1)},m:function(){openMatch(-1)},n:function(){openNews(-1)},b:function(){openBoard(-1)}})[q]()},50)}});
 }
 
-/* ===== اللاعبون ===== */
 function players(){
-  $("#content").innerHTML = 
-    '<div class="section-head"><h3>👥 اللاعبون ('+C.players.length+')</h3><button class="btn" onclick="openPlayerForm()">➕ إضافة</button></div>'+
-    '<div class="list" id="list"></div>';
+  $("#content").innerHTML='<div class="sec-head"><h3>قائمة اللاعبين <span class="count">'+C.players.length+'</span></h3><button class="btn" id="addP">➕ إضافة لاعب</button></div><div class="list" id="list"></div>';
+  $("#addP").onclick=function(){openPlayer(-1)};
   renderPlayers();
 }
-
 function renderPlayers(){
-  var list=C.players.map(function(p,i){
-    return '<div class="item"><div class="info"><b>#'+esc(p.num)+' '+esc(p.name)+'</b><small>'+esc(p.pos)+(p.age?' • '+p.age+' سنة':'')+' • ⚽ '+(p.goals||0)+' هدف • 🎯 '+(p.assists||0)+' صناعة</small></div><div class="actions"><button class="edit" onclick="openPlayerForm('+i+')">✏️</button><button class="del" onclick="delItem(\'players\','+i+')">🗑️</button></div></div>';
-  }).join("");
-  $("#list").innerHTML=list||'<div class="empty"><i>👥</i>لا لاعبين بعد</div>';
+  var byPos={};POS.forEach(function(p){byPos[p]=[]});
+  C.players.forEach(function(p,i){if(byPos[p.pos])byPos[p.pos].push({p:p,i:i})});
+  var h="";
+  POS.forEach(function(pos){
+    if(!byPos[pos].length)return;
+    h+='<div style="margin-bottom:14px"><h4 style="font-size:.88rem;color:var(--gold-ink);margin-bottom:8px">'+pos+' ('+byPos[pos].length+')</h4>';
+    byPos[pos].forEach(function(x){
+      var p=x.p,i=x.i;
+      h+='<div class="it"><div class="it-ic">'+(p.photo?'<img src="'+esc(p.photo)+'">':'<span>👕</span>')+'</div><div class="it-bd"><b>#'+esc(p.num)+' '+esc(p.name)+'</b><small>'+(p.age?p.age+' سنة':'')+(p.apps?' • '+p.apps+' مباراة':'')+'</small></div><div class="it-acts"><button class="e" data-e="'+i+'">✏️</button><button class="d" data-d="'+i+'">🗑️</button></div></div>';
+    });
+    h+='</div>';
+  });
+  $("#list").innerHTML=h||'<div class="empty"><i>👥</i><h3>لا لاعبون بعد</h3><p>ابدأ بإضافة لاعبي الفريق</p></div>';
+  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openPlayer(+b.dataset.e)}});
+  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف اللاعب؟")){C.players.splice(+b.dataset.d,1);save();renderPlayers()}}});
 }
 
-window.openPlayerForm = function(i){
-  var p=i!==undefined?C.players[i]:{name:"",num:"",age:"",pos:"مهاجم",goals:0,assists:0,clean:0,apps:0,photo:""};
-  $("#modalBox").innerHTML = 
-    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' لاعب</h3>'+
-    '<div class="field"><label>الاسم</label><input id="pName" value="'+esc(p.name)+'"></div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>رقم القميص</label><input id="pNum" type="number" value="'+esc(p.num)+'"></div>'+
-    '<div class="field"><label>العمر</label><input id="pAge" type="number" value="'+esc(p.age||"")+'"></div>'+
-    '</div>'+
-    '<div class="field"><label>الخانة</label><select id="pPos">'+POS.map(function(x){return '<option'+(p.pos===x?' selected':'')+'>'+x+'</option>'}).join("")+'</select></div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>أهداف</label><input id="pGoals" type="number" value="'+(p.goals||0)+'"></div>'+
-    '<div class="field"><label>صناعة أهداف</label><input id="pAssists" type="number" value="'+(p.assists||0)+'"></div>'+
-    '</div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>كلين شيت (للحراس)</label><input id="pClean" type="number" value="'+(p.clean||0)+'"></div>'+
-    '<div class="field"><label>مباريات</label><input id="pApps" type="number" value="'+(p.apps||0)+'"></div>'+
-    '</div>'+
-    '<div class="field"><label>رابط الصورة</label><input id="pPhoto" value="'+esc(p.photo)+'" placeholder="https://..."></div>'+
-    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="savePlayer('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
+var TMP={photo:""};
+function openPlayer(i){
+  var p=i>=0?C.players[i]:{name:"",num:"",age:"",pos:"مهاجم",apps:0,photo:""};
+  TMP.photo=p.photo||"";
+  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' لاعب</h3>'+
+    '<div class="fld"><label>الاسم الكامل</label><input id="pName" value="'+esc(p.name)+'" placeholder="مثال: أحمد الطيب"></div>'+
+    '<div class="fld-row"><div class="fld"><label>رقم القميص</label><input id="pNum" type="number" value="'+esc(p.num)+'" placeholder="مثال: 10"></div><div class="fld"><label>العمر</label><input id="pAge" type="number" value="'+esc(p.age||"")+'" placeholder="مثال: 24"></div></div>'+
+    '<div class="fld-row"><div class="fld"><label>الخانة</label><select id="pPos">'+POS.map(function(x){return '<option'+(p.pos===x?' selected':'')+'>'+x+'</option>'}).join("")+'</select></div><div class="fld"><label>عدد المباريات</label><input id="pApps" type="number" value="'+(p.apps||0)+'"></div></div>'+
+    '<div class="fld"><label>صورة اللاعب</label><input type="file" id="pFile" accept="image/*">'+(TMP.photo?'<img class="img-preview" id="pPrev" src="'+esc(TMP.photo)+'">':'<img class="img-preview" id="pPrev" style="display:none">')+'<button class="btn sm ghost" id="pRm" style="margin-top:8px" type="button">🗑️ إزالة الصورة</button></div>'+
+    '<div class="modal-acts"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 حفظ</button></div>';
   $("#modal").classList.add("on");
-};
-
-window.savePlayer = function(i){
-  var p={
-    id:i>=0?C.players[i].id:Date.now(),
-    name:$("#pName").value.trim(),
-    num:+$("#pNum").value||0,
-    age:+$("#pAge").value||0,
-    pos:$("#pPos").value,
-    goals:+$("#pGoals").value||0,
-    assists:+$("#pAssists").value||0,
-    clean:+$("#pClean").value||0,
-    apps:+$("#pApps").value||0,
-    photo:$("#pPhoto").value.trim()
+  $("#pFile").onchange=function(){var f=this.files[0];if(!f)return;compress(f,function(d){TMP.photo=d;$("#pPrev").src=d;$("#pPrev").style.display="block"})};
+  $("#pRm").onclick=function(){TMP.photo="";$("#pPrev").style.display="none"};
+  $("#mX").onclick=closeModal;
+  $("#mS").onclick=function(){
+    var o={id:i>=0?C.players[i].id:Date.now(),name:$("#pName").value.trim(),num:+$("#pNum").value||0,age:+$("#pAge").value||0,pos:$("#pPos").value,apps:+$("#pApps").value||0,photo:TMP.photo};
+    if(!o.name){toast("❌ أدخل الاسم","err");return}
+    if(i>=0)C.players[i]=o;else C.players.push(o);
+    save();closeModal();renderPlayers();
   };
-  if(!p.name){toast("❌ أدخل الاسم");return}
-  if(i>=0)C.players[i]=p;else C.players.push(p);
-  saveRemote();closeModal();renderPlayers();toast("✅ تم حفظ اللاعب");
-};
+}
 
-/* ===== المباريات ===== */
 function matches(){
-  $("#content").innerHTML = 
-    '<div class="section-head"><h3>⚽ المباريات ('+C.matches.length+')</h3><button class="btn" onclick="openMatchForm()">➕ إضافة</button></div>'+
-    '<div class="list" id="list"></div>';
+  $("#content").innerHTML='<div class="sec-head"><h3>جميع المباريات <span class="count">'+C.matches.length+'</span></h3><button class="btn" id="addM">➕ إضافة مباراة</button></div><div class="list" id="list"></div>';
+  $("#addM").onclick=function(){openMatch(-1)};
   renderMatches();
 }
-
 function renderMatches(){
-  var list=C.matches.map(function(m,i){
-    var status=m.status==="upcoming"?"🔵 قادمة":(m.my>m.op?"🟢 فوز "+m.my+"-"+m.op:(m.my===m.op?"🟡 تعادل "+m.my+"-"+m.op:"🔴 خسارة "+m.op+"-"+m.my));
-    return '<div class="item"><div class="info"><b>'+(m.home?"🏠 ":"✈️ ")+esc(m.opponent)+'</b><small>'+esc(m.comp||"")+' • '+esc(m.venue)+' • '+new Date(m.date).toLocaleDateString("ar")+' — '+status+'</small></div><div class="actions"><button class="edit" onclick="openMatchForm('+i+')">✏️</button><button class="del" onclick="delItem(\'matches\','+i+')">🗑️</button></div></div>';
-  }).join("");
-  $("#list").innerHTML=list||'<div class="empty"><i>⚽</i>لا مباريات بعد</div>';
-}
-
-window.openMatchForm = function(i){
-  var m=i!==undefined?C.matches[i]:{opponent:"",date:"",venue:"",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,img:""};
-  $("#modalBox").innerHTML = 
-    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' مباراة</h3>'+
-    '<div class="field"><label>الخصم</label><input id="mOpp" value="'+esc(m.opponent)+'"></div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>التاريخ والوقت</label><input id="mDate" type="datetime-local" value="'+esc(m.date)+'"></div>'+
-    '<div class="field"><label>الملعب</label><input id="mVenue" value="'+esc(m.venue)+'"></div>'+
-    '</div>'+
-    '<div class="field"><label>البطولة</label><input id="mComp" value="'+esc(m.comp)+'"></div>'+
-    '<div class="field"><label>الحالة</label><select id="mStatus"><option value="upcoming"'+(m.status==="upcoming"?' selected':'')+'>قادمة</option><option value="finished"'+(m.status==="finished"?' selected':'')+'>منتهية</option></select></div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>أهدافنا</label><input id="mMy" type="number" value="'+(m.my||0)+'"></div>'+
-    '<div class="field"><label>أهداف الخصم</label><input id="mOp" type="number" value="'+(m.op||0)+'"></div>'+
-    '</div>'+
-    '<div class="field"><label><input type="checkbox" id="mHome" '+(m.home?"checked":"")+'> المباراة على أرضنا</label></div>'+
-    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveMatch('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
-  $("#modal").classList.add("on");
-};
-
-window.saveMatch = function(i){
-  var m={
-    id:i>=0?C.matches[i].id:Date.now(),
-    opponent:$("#mOpp").value.trim(),
-    date:$("#mDate").value,
-    venue:$("#mVenue").value.trim(),
-    comp:$("#mComp").value.trim(),
-    home:$("#mHome").checked,
-    status:$("#mStatus").value,
-    my:+$("#mMy").value||0,
-    op:+$("#mOp").value||0,
-    img:i>=0?C.matches[i].img:""
-  };
-  if(!m.opponent||!m.date){toast("❌ أدخل الخصم والتاريخ");return}
-  if(i>=0)C.matches[i]=m;else C.matches.push(m);
-  saveRemote();closeModal();renderMatches();toast("✅ تم حفظ المباراة");
-};
-
-/* ===== جدول الترتيب ===== */
-function standings(){
-  $("#content").innerHTML = 
-    '<div class="section-head"><h3>🏆 جدول الترتيب</h3><button class="btn" onclick="openStandingForm()">➕ إضافة فريق</button></div>'+
-    '<div style="overflow-x:auto"><table class="tbl" id="stbl"><thead><tr><th>الفريق</th><th>لعب</th><th>فوز</th><th>تعادل</th><th>خسارة</th><th>له</th><th>عليه</th><th>نقاط</th><th></th></tr></thead><tbody id="stbody"></tbody></table></div>'+
-    '<div style="margin-top:16px;display:flex;gap:10px"><button class="btn green" onclick="saveStandings()">💾 حفظ الترتيب</button><button class="btn ghost" onclick="calcStandings()">🔄 حساب تلقائي من المباريات</button></div>';
-  renderStandings();
-}
-
-function renderStandings(){
-  var sorted=C.standings.slice().sort(function(a,b){
-    if(b.pts!==a.pts)return b.pts-a.pts;
-    return (b.gf-b.ga)-(a.gf-a.ga);
-  });
-  $("#stbody").innerHTML = sorted.map(function(t,i){
-    var idx=C.standings.indexOf(t);
-    var my=t.team===C.settings.name;
-    return '<tr'+(my?' style="background:rgba(242,184,75,.1)"':'')+'>'+
-    '<td><input value="'+esc(t.team)+'" data-i="'+idx+'" data-f="team" style="width:120px;text-align:start"'+(my?' disabled':'')+'></td>'+
-    '<td><input type="number" value="'+t.p+'" data-i="'+idx+'" data-f="p"></td>'+
-    '<td><input type="number" value="'+t.w+'" data-i="'+idx+'" data-f="w"></td>'+
-    '<td><input type="number" value="'+t.d+'" data-i="'+idx+'" data-f="d"></td>'+
-    '<td><input type="number" value="'+t.l+'" data-i="'+idx+'" data-f="l"></td>'+
-    '<td><input type="number" value="'+t.gf+'" data-i="'+idx+'" data-f="gf"></td>'+
-    '<td><input type="number" value="'+t.ga+'" data-i="'+idx+'" data-f="ga"></td>'+
-    '<td><input type="number" value="'+t.pts+'" data-i="'+idx+'" data-f="pts" style="font-weight:bold"></td>'+
-    '<td><button class="del" onclick="delStanding('+idx+')" style="width:28px;height:28px;border-radius:6px;background:rgba(194,65,12,.1);color:var(--red)">🗑️</button></td></tr>';
-  }).join("");
-  
-  $$("#stbody input").forEach(function(inp){
-    inp.onchange=function(){
-      var i=+inp.dataset.i,f=inp.dataset.f;
-      C.standings[i][f]=f==="team"?inp.value:+inp.value||0;
-      if(f!=="pts"&&f!=="team"){
-        var t=C.standings[i];
-        t.pts=t.w*3+t.d;
-      }
-      renderStandings();
-    };
-  });
-}
-
-window.saveStandings = function(){saveRemote();toast("✅ تم حفظ الترتيب")};
-
-window.delStanding = function(i){
-  if(confirm("حذف الفريق؟")){
-    C.standings.splice(i,1);
-    saveRemote();renderStandings();
+  var up=C.matches.filter(function(m){return m.status==="upcoming"}).sort(function(a,b){return new Date(a.date)-new Date(b.date)});
+  var fin=C.matches.filter(function(m){return m.status==="finished"}).sort(function(a,b){return new Date(b.date)-new Date(a.date)});
+  var h="";
+  if(up.length){
+    h+='<h4 style="font-size:.88rem;color:var(--blue2);margin-bottom:8px;display:flex;align-items:center;gap:8px">📅 المباريات القادمة <span class="count" style="background:rgba(46,91,255,.15);color:var(--blue2);border-color:rgba(46,91,255,.3)">'+up.length+'</span></h4>';
+    up.forEach(function(m){h+=matchItem(m,C.matches.indexOf(m))});
   }
-};
-
-window.openStandingForm = function(){
-  $("#modalBox").innerHTML = 
-    '<h3>إضافة فريق للترتيب</h3>'+
-    '<div class="field"><label>اسم الفريق</label><input id="sTeam"></div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>لعب</label><input id="sP" type="number" value="0"></div>'+
-    '<div class="field"><label>فوز</label><input id="sW" type="number" value="0"></div>'+
-    '</div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>تعادل</label><input id="sD" type="number" value="0"></div>'+
-    '<div class="field"><label>خسارة</label><input id="sL" type="number" value="0"></div>'+
-    '</div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>أهداف له</label><input id="sGF" type="number" value="0"></div>'+
-    '<div class="field"><label>أهداف عليه</label><input id="sGA" type="number" value="0"></div>'+
-    '</div>'+
-    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveStanding()">💾 إضافة</button></div>';
+  if(fin.length){
+    h+='<h4 style="font-size:.88rem;color:var(--green);margin:18px 0 8px;display:flex;align-items:center;gap:8px">✅ النتائج <span class="count" style="background:rgba(53,224,141,.15);color:var(--green);border-color:rgba(53,224,141,.3)">'+fin.length+'</span></h4>';
+    fin.forEach(function(m){h+=matchItem(m,C.matches.indexOf(m))});
+  }
+  $("#list").innerHTML=h||'<div class="empty"><i>⚽</i><h3>لا مباريات بعد</h3><p>ابدأ بتسجيل مباريات الفريق</p></div>';
+  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openMatch(+b.dataset.e)}});
+  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف المباراة؟")){C.matches.splice(+b.dataset.d,1);save();renderMatches()}}});
+}
+function matchItem(m,i){
+  var fin=m.status==="finished",w=m.my>m.op,d=m.my===m.op;
+  var tags=[];
+  if(m.home)tags.push('<span class="tag gold">🏠 أرضنا</span>');
+  if(fin){
+    tags.push(w?'<span class="tag green">فوز</span>':d?'<span class="tag amber">تعادل</span>':'<span class="tag red">خسارة</span>');
+    tags.push('<span class="tag blue">'+m.my+' – '+m.op+'</span>');
+  }else tags.push('<span class="tag blue">قادمة</span>');
+  if(m.goals&&m.goals.length)tags.push('<span class="tag gold">⚽ '+m.goals.length+' أهداف</span>');
+  return '<div class="it"><div class="it-ic">⚽</div><div class="it-bd"><b>'+esc(m.opponent)+'</b><small>'+esc(m.venue||"—")+' • '+new Date(m.date).toLocaleDateString("ar")+'</small><div class="it-tags">'+tags.join("")+'</div></div><div class="it-acts"><button class="e" data-e="'+i+'">✏️</button><button class="d" data-d="'+i+'">🗑️</button></div></div>';
+}
+function goalRow(g){
+  g=g||{team:"my",pid:C.players[0]?C.players[0].id:0,name:"",min:""};
+  var players=C.players.map(function(p){return '<option value="'+p.id+'"'+(g.pid===p.id?" selected":"")+'>'+esc(p.name)+'</option>'}).join("");
+  return '<div class="r"><select class="tm"><option value="my"'+(g.team==="my"?" selected":"")+'>🟢 لنا</option><option value="op"'+(g.team==="op"?" selected":"")+'>🔴 الخصم</option></select><select class="pl" style="'+(g.team==="op"?"display:none":"")+'">'+players+'</select><input class="pl g-name" placeholder="اسم لاعب الخصم" value="'+esc(g.name||"")+'" style="'+(g.team==="my"?"display:none":"")+'"><input class="mi" type="number" placeholder="الدقيقة" value="'+esc(g.min||"")+'"><button type="button" class="x">✕</button></div>';
+}
+function openMatch(i){
+  var m=i>=0?C.matches[i]:{opponent:"",date:"",venue:"",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,lineup:[],oppLineup:[],goals:[]};
+  var currentXI=(m.lineup||[]).slice();
+  var currentOppLu=(m.oppLineup||[]).slice();
+  $("#modalBox").className="modal-box lg";
+  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' مباراة</h3>'+
+    '<div class="fld"><label>اسم الفريق الخصم</label><input id="mOpp" value="'+esc(m.opponent)+'" placeholder="مثال: الهلال رفاعة"></div>'+
+    '<div class="fld-row"><div class="fld"><label>التاريخ والوقت</label><input id="mDate" type="datetime-local" value="'+esc(m.date)+'"></div><div class="fld"><label>الملعب</label><input id="mVenue" value="'+esc(m.venue)+'" placeholder="مثال: ميدان الوادي"></div></div>'+
+    '<div class="fld-row"><div class="fld"><label>البطولة</label><input id="mComp" value="'+esc(m.comp)+'"></div><div class="fld"><label>الحالة</label><select id="mStatus"><option value="upcoming"'+(m.status==="upcoming"?" selected":"")+'>قادمة</option><option value="finished"'+(m.status==="finished"?" selected":"")+'>منتهية</option></select></div></div>'+
+    '<div class="fld"><label><input type="checkbox" id="mHome"'+(m.home?" checked":"")+' style="width:auto;margin-inline-start:6px"> المباراة على أرضنا</label></div>'+
+    '<div class="fld-row"><div class="fld"><label>أهدافنا</label><input id="mMy" type="number" value="'+(m.my||0)+'"></div><div class="fld"><label>أهداف الخصم</label><input id="mOp" type="number" value="'+(m.op||0)+'"></div></div>'+
+    '<div style="margin-top:16px"><label style="display:block;font-size:.82rem;color:var(--gold-ink);font-weight:700;margin-bottom:10px;font-family:var(--df)">🎯 التشكيلة المتقدمة</label>'+
+    '<div class="lu-editor"><div class="lu-side" id="luSide"></div><div><div class="pitch-mini"><div class="pitch-mini-in" id="pitchIn"></div></div></div></div></div>'+
+    '<div style="margin-top:14px"><label style="display:block;font-size:.82rem;color:var(--gold-ink);font-weight:700;margin-bottom:8px;font-family:var(--df)">👥 تشكيلة الخصم</label><div class="opl" id="oplList"></div><button class="btn sm ghost" id="opAdd" type="button" style="margin-top:6px">➕ إضافة لاعب خصم</button></div>'+
+    '<div style="margin-top:14px"><label style="display:block;font-size:.82rem;color:var(--gold-ink);font-weight:700;margin-bottom:8px;font-family:var(--df)">⚽ الأهداف والهدافون</label><div class="gl" id="glList">'+(m.goals||[]).map(goalRow).join("")+'</div><button class="btn sm ghost" id="glAdd" type="button" style="margin-top:6px">➕ إضافة هدف</button></div>'+
+    '<div class="modal-acts"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 حفظ المباراة</button></div>';
   $("#modal").classList.add("on");
-};
 
-window.saveStanding = function(){
-  var t={
-    team:$("#sTeam").value.trim(),
-    p:+$("#sP").value||0,
-    w:+$("#sW").value||0,
-    d:+$("#sD").value||0,
-    l:+$("#sL").value||0,
-    gf:+$("#sGF").value||0,
-    ga:+$("#sGA").value||0,
-    pts:(+$("#sW").value||0)*3+(+$("#sD").value||0)
+  function renderLu(){
+    var byPos={};POS.forEach(function(p){byPos[p]=[]});
+    C.players.forEach(function(p){if(byPos[p.pos])byPos[p.pos].push(p)});
+    var h="";
+    POS.forEach(function(pos){
+      var cnt=currentXI.filter(function(id){var p=C.players.filter(function(x){return x.id===id})[0];return p&&p.pos===pos}).length;
+      var max=pos==="حارس مرمى"?1:pos==="مدافع"?5:pos==="وسط"?5:pos==="مهاجم"?3:11;
+      h+='<div class="lu-group"><div class="lu-group-title">'+pos+' <span class="n">'+cnt+'/'+max+'</span></div>';
+      byPos[pos].forEach(function(p){
+        var inXi=currentXI.indexOf(p.id)>-1;
+        h+='<div class="lu-player'+(inXi?" in":"")+'" data-pid="'+p.id+'" data-pos="'+pos+'" data-max="'+max+'"><span class="num">'+esc(p.num)+'</span><div class="nm"><b>'+esc(p.name)+'</b><small>'+(p.age?p.age+' سنة':'')+'</small></div><span class="x">'+(inXi?"✕":"")+'</span></div>';
+      });
+      h+='</div>';
+    });
+    $("#luSide").innerHTML=h||'<div style="color:var(--dim);text-align:center;padding:20px">لا لاعبون — أضفهم أولاً</div>';
+    $$("#luSide .lu-player").forEach(function(el){
+      el.onclick=function(){
+        var pid=+el.dataset.pid,pos=el.dataset.pos,max=+el.dataset.max;
+        var idx=currentXI.indexOf(pid);
+        if(idx>-1)currentXI.splice(idx,1);
+        else{
+          var cnt=currentXI.filter(function(id){var p=C.players.filter(function(x){return x.id===id})[0];return p&&p.pos===pos}).length;
+          if(cnt>=max){toast("❌ الحد الأقصى لـ "+pos+" هو "+max,"err");return}
+          currentXI.push(pid);
+        }
+        renderLu();renderPitch();
+      };
+    });
+  }
+  function renderPitch(){
+    var players=currentXI.map(function(id){return C.players.filter(function(p){return p.id===id})[0]}).filter(Boolean);
+    if(!players.length){$("#pitchIn").innerHTML='<div class="pm-empty">اختر 11 لاعباً لعرض التشكيلة</div>';return}
+    var rows=[["مهاجم","r1"],["وسط","r2"],["مدافع","r3"],["حارس مرمى","r4"]].map(function(r){
+      return {cls:r[1],ps:players.filter(function(p){return p.pos===r[0]})};
+    }).filter(function(r){return r.ps.length});
+    $("#pitchIn").innerHTML=rows.map(function(r){
+      return '<div class="pm-row '+r.cls+'">'+r.ps.map(function(p){
+        return '<div class="pm-p"><svg viewBox="0 0 44 38" class="jsy"><path d="M15 3 7 7 2 14l7 4 2-3v16h22V15l2 3 7-4-5-7-8-4c0 4-3 6-6 6s-6-2-6-6z" fill="#f2b84b" stroke="#123024" stroke-width="1.6"/><text x="22" y="28" text-anchor="middle" font-size="12" font-family="Changa" font-weight="800" fill="#123024">'+esc(p.num)+'</text></svg><span>'+esc(p.name.split(" ")[0])+'</span></div>';
+      }).join("")+'</div>';
+    }).join("");
+  }
+  function renderOpl(){
+    $("#oplList").innerHTML=currentOppLu.map(function(n,i){
+      return '<div class="r"><span class="n">'+(i+1)+'</span><input value="'+esc(n)+'" data-i="'+i+'"><button type="button" class="x" data-d="'+i+'">✕</button></div>';
+    }).join("");
+    $$("#oplList input").forEach(function(inp){inp.onchange=function(){currentOppLu[+inp.dataset.i]=inp.value}});
+    $$("#oplList [data-d]").forEach(function(b){b.onclick=function(){currentOppLu.splice(+b.dataset.d,1);renderOpl()}});
+  }
+  renderLu();renderPitch();renderOpl();
+  $("#opAdd").onclick=function(){currentOppLu.push("");renderOpl()};
+  $("#glAdd").onclick=function(){$("#glList").insertAdjacentHTML("beforeend",goalRow());bindGoals()};
+  function bindGoals(){
+    $$("#glList .r .tm").forEach(function(s){s.onchange=function(){var r=s.closest(".r");var op=s.value==="op";r.querySelector(".pl:not(.g-name)").style.display=op?"none":"";r.querySelector(".g-name").style.display=op?"":"none"}});
+    $$("#glList .r .x").forEach(function(b){b.onclick=function(){b.closest(".r").remove()}});
+  }
+  bindGoals();
+  $("#mX").onclick=closeModal;
+  $("#mS").onclick=function(){
+    var goals=$$("#glList .r").map(function(r){var team=r.querySelector(".tm").value;return{team:team,pid:team==="my"?+r.querySelector(".pl:not(.g-name)").value:0,name:team==="op"?r.querySelector(".g-name").value.trim():"",min:+r.querySelector(".mi").value||0}});
+    var o={id:i>=0?C.matches[i].id:Date.now(),opponent:$("#mOpp").value.trim(),date:$("#mDate").value,venue:$("#mVenue").value.trim(),comp:$("#mComp").value.trim(),home:$("#mHome").checked,status:$("#mStatus").value,my:+$("#mMy").value||0,op:+$("#mOp").value||0,lineup:currentXI.slice(),oppLineup:currentOppLu.filter(Boolean),goals:goals};
+    if(!o.opponent||!o.date){toast("❌ أدخل الخصم والتاريخ","err");return}
+    if(i>=0)C.matches[i]=o;else C.matches.push(o);
+    save();closeModal();renderMatches();
   };
-  if(!t.team){toast("❌ أدخل اسم الفريق");return}
-  C.standings.push(t);
-  saveRemote();closeModal();renderStandings();toast("✅ تم إضافة الفريق");
-};
+}
 
-window.calcStandings = function(){
-  if(!confirm("سيتم إعادة حساب الترتيب من نتائج المباريات المسجلة. متابعة؟"))return;
-  var teams={};
-  C.standings.forEach(function(t){
-    teams[t.team]={team:t.team,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0};
-  });
-  C.matches.filter(function(m){return m.status==="finished"}).forEach(function(m){
-    var myName=C.settings.name;
-    var oppName=m.opponent;
-    if(!teams[myName])teams[myName]={team:myName,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0};
-    if(!teams[oppName])teams[oppName]={team:oppName,p:0,w:0,d:0,l:0,gf:0,ga:0,pts:0};
-    
-    var my=m.home?m.my:m.op;
-    var op=m.home?m.op:m.my;
-    
-    teams[myName].p++;teams[oppName].p++;
-    teams[myName].gf+=my;teams[myName].ga+=op;
-    teams[oppName].gf+=op;teams[oppName].ga+=my;
-    
-    if(my>op){teams[myName].w++;teams[myName].pts+=3;teams[oppName].l++;}
-    else if(my===op){teams[myName].d++;teams[oppName].d++;teams[myName].pts++;teams[oppName].pts++;}
-    else{teams[oppName].w++;teams[oppName].pts+=3;teams[myName].l++;}
-  });
-  C.standings=Object.values(teams);
-  saveRemote();renderStandings();toast("✅ تم الحساب التلقائي");
-};
-
-/* ===== الأخبار ===== */
 function news(){
-  $("#content").innerHTML = 
-    '<div class="section-head"><h3>📰 الأخبار ('+C.news.length+')</h3><button class="btn" onclick="openNewsForm()">➕ إضافة</button></div>'+
-    '<div class="list" id="list"></div>';
+  $("#content").innerHTML='<div class="sec-head"><h3>أرشيف الأخبار <span class="count">'+C.news.length+'</span></h3><button class="btn" id="addN">➕ إضافة خبر</button></div><div class="list" id="list"></div>';
+  $("#addN").onclick=function(){openNews(-1)};
   renderNews();
 }
-
 function renderNews(){
-  var list=C.news.map(function(n,i){
-    return '<div class="item"><div class="info"><b>'+esc(n.title)+'</b><small>'+new Date(n.date).toLocaleDateString("ar")+'</small></div><div class="actions"><button class="edit" onclick="openNewsForm('+i+')">✏️</button><button class="del" onclick="delItem(\'news\','+i+')">🗑️</button></div></div>';
-  }).join("");
-  $("#list").innerHTML=list||'<div class="empty"><i>📰</i>لا أخبار بعد</div>';
+  var list=C.news.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});
+  $("#list").innerHTML=list.map(function(n){var i=C.news.indexOf(n);
+    return '<div class="it"><div class="it-ic">'+(n.imgs&&n.imgs.length?'<img src="'+esc(n.imgs[0])+'">':'<span>📰</span>')+'</div><div class="it-bd"><b>'+esc(n.title)+'</b><small>'+new Date(n.date).toLocaleDateString("ar")+'</small><div class="it-tags">'+(n.imgs&&n.imgs.length?'<span class="tag gold">📷 '+n.imgs.length+'</span>':"")+'</div></div><div class="it-acts"><button class="e" data-e="'+i+'">✏️</button><button class="d" data-d="'+i+'">🗑️</button></div></div>';
+  }).join("")||'<div class="empty"><i>📰</i><h3>لا أخبار بعد</h3><p>انشر أول خبر للنادي</p></div>';
+  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openNews(+b.dataset.e)}});
+  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف الخبر؟")){C.news.splice(+b.dataset.d,1);save();renderNews()}}});
 }
-
-window.openNewsForm = function(i){
-  var n=i!==undefined?C.news[i]:{title:"",date:new Date().toISOString().slice(0,10),ex:"",img:""};
-  $("#modalBox").innerHTML = 
-    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' خبر</h3>'+
-    '<div class="field"><label>العنوان</label><input id="nTitle" value="'+esc(n.title)+'"></div>'+
-    '<div class="field"><label>التاريخ</label><input id="nDate" type="date" value="'+esc(n.date)+'"></div>'+
-    '<div class="field"><label>المحتوى</label><textarea id="nEx">'+esc(n.ex)+'</textarea></div>'+
-    '<div class="field"><label>رابط الصورة</label><input id="nImg" value="'+esc(n.img)+'" placeholder="https://..."></div>'+
-    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveNews('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
+var TMPN=[];
+function thumbsRender(){
+  $("#nThumbs").innerHTML=TMPN.map(function(s,i){return '<div><img src="'+esc(s)+'"><button type="button" data-r="'+i+'">✕</button></div>'}).join("");
+  $$("#nThumbs [data-r]").forEach(function(b){b.onclick=function(){TMPN.splice(+b.dataset.r,1);thumbsRender()}});
+}
+function openNews(i){
+  var n=i>=0?C.news[i]:{title:"",date:new Date().toISOString().slice(0,10),ex:"",imgs:[]};
+  TMPN=(n.imgs||[]).slice();
+  $("#modalBox").className="modal-box";
+  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' خبر</h3>'+
+    '<div class="fld"><label>العنوان</label><input id="nTitle" value="'+esc(n.title)+'" placeholder="عنوان الخبر"></div>'+
+    '<div class="fld"><label>التاريخ</label><input id="nDate" type="date" value="'+esc(n.date)+'"></div>'+
+    '<div class="fld"><label>محتوى الخبر</label><textarea id="nEx" placeholder="اكتب محتوى الخبر...">'+esc(n.ex)+'</textarea></div>'+
+    '<div class="fld"><label>الصور (يمكن رفع عدة صور)</label><input type="file" id="nFile" accept="image/*" multiple><div class="thumbs" id="nThumbs"></div></div>'+
+    '<div class="modal-acts"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 نشر الخبر</button></div>';
   $("#modal").classList.add("on");
-};
-
-window.saveNews = function(i){
-  var n={
-    id:i>=0?C.news[i].id:Date.now(),
-    title:$("#nTitle").value.trim(),
-    date:$("#nDate").value,
-    ex:$("#nEx").value.trim(),
-    img:$("#nImg").value.trim()
+  thumbsRender();
+  $("#nFile").onchange=function(){
+    var files=Array.prototype.slice.call(this.files);
+    files.forEach(function(f){compress(f,function(d){TMPN.push(d);thumbsRender()})});
   };
-  if(!n.title){toast("❌ أدخل العنوان");return}
-  if(i>=0)C.news[i]=n;else C.news.unshift(n);
-  saveRemote();closeModal();renderNews();toast("✅ تم حفظ الخبر");
-};
-
-/* ===== معرض الصور ===== */
-function gallery(){
-  $("#content").innerHTML = 
-    '<div class="section-head"><h3>📸 معرض الصور ('+C.gallery.length+')</h3><button class="btn" onclick="openGalleryForm()">➕ إضافة صورة</button></div>'+
-    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px" id="glist"></div>';
-  renderGallery();
-}
-
-function renderGallery(){
-  var list=C.gallery.map(function(g,i){
-    return '<div style="position:relative;border-radius:12px;overflow:hidden;background:var(--srf2);aspect-ratio:1">'+
-    (g.src?'<img src="'+esc(g.src)+'" style="width:100%;height:100%;object-fit:cover">':'<div style="display:grid;place-items:center;height:100%;font-size:2rem;opacity:.3">📷</div>')+
-    '<div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);color:#fff;padding:6px 8px;font-size:.7rem">'+esc(g.cap||"بدون وصف")+'</div>'+
-    '<div style="position:absolute;top:6px;inset-inline-end:6px;display:flex;gap:4px">'+
-    '<button onclick="openGalleryForm('+i+')" style="width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.9);color:var(--blue);font-size:.7rem">✏️</button>'+
-    '<button onclick="delItem(\'gallery\','+i+');renderGallery()" style="width:26px;height:26px;border-radius:6px;background:rgba(255,255,255,.9);color:var(--red);font-size:.7rem">🗑️</button>'+
-    '</div></div>';
-  }).join("");
-  $("#glist").innerHTML=list||'<div class="empty" style="grid-column:1/-1"><i>📸</i>لا صور بعد</div>';
-}
-
-window.openGalleryForm = function(i){
-  var g=i!==undefined?C.gallery[i]:{src:"",cap:""};
-  $("#modalBox").innerHTML = 
-    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' صورة</h3>'+
-    '<div class="field"><label>رابط الصورة</label><input id="gSrc" value="'+esc(g.src)+'" placeholder="https://..."></div>'+
-    '<div class="field"><label>الوصف</label><input id="gCap" value="'+esc(g.cap)+'" placeholder="وصف الصورة"></div>'+
-    (g.src?'<img class="img-preview" src="'+esc(g.src)+'" onerror="this.style.display=\'none\'">':'')+
-    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveGallery('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
-  $("#modal").classList.add("on");
-};
-
-window.saveGallery = function(i){
-  var g={
-    id:i>=0?C.gallery[i].id:Date.now(),
-    src:$("#gSrc").value.trim(),
-    cap:$("#gCap").value.trim()
+  $("#mX").onclick=closeModal;
+  $("#mS").onclick=function(){
+    var o={id:i>=0?C.news[i].id:Date.now(),title:$("#nTitle").value.trim(),date:$("#nDate").value,ex:$("#nEx").value.trim(),imgs:TMPN.slice()};
+    if(!o.title){toast("❌ أدخل العنوان","err");return}
+    if(i>=0)C.news[i]=o;else C.news.unshift(o);
+    save();closeModal();renderNews();
   };
-  if(i>=0)C.gallery[i]=g;else C.gallery.push(g);
-  saveRemote();closeModal();renderGallery();toast("✅ تم حفظ الصورة");
-};
-
-/* ===== سجل الشرف ===== */
-function honors(){
-  $("#content").innerHTML = 
-    '<div class="section-head"><h3>🏅 سجل الشرف ('+C.honors.length+')</h3><button class="btn" onclick="openHonorForm()">➕ إضافة</button></div>'+
-    '<div class="list" id="list"></div>';
-  renderHonors();
 }
 
-function renderHonors(){
-  var list=C.honors.map(function(h,i){
-    return '<div class="item"><div class="info"><b>'+(h.kind==="club"?"🏆":"🏅")+' '+esc(h.title)+'</b><small>'+(h.season?esc(h.season)+" • ":"")+(h.holder?esc(h.holder):"")+'</small></div><div class="actions"><button class="edit" onclick="openHonorForm('+i+')">✏️</button><button class="del" onclick="delItem(\'honors\','+i+')">🗑️</button></div></div>';
-  }).join("");
-  $("#list").innerHTML=list||'<div class="empty"><i>🏅</i>لا ألقاب بعد</div>';
-}
-
-window.openHonorForm = function(i){
-  var h=i!==undefined?C.honors[i]:{kind:"club",title:"",season:"",holder:"",role:"",note:""};
-  $("#modalBox").innerHTML = 
-    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' لقب/جائزة</h3>'+
-    '<div class="field"><label>النوع</label><select id="hKind"><option value="club"'+(h.kind==="club"?' selected':'')+'>بطولة جماعية</option><option value="player"'+(h.kind!=="club"?' selected':'')+'>جائزة فردية</option></select></div>'+
-    '<div class="field"><label>اللقب</label><input id="hTitle" value="'+esc(h.title)+'"></div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>الموسم</label><input id="hSeason" value="'+esc(h.season)+'"></div>'+
-    '<div class="field"><label>الحامل (اختياري)</label><input id="hHolder" value="'+esc(h.holder)+'"></div>'+
-    '</div>'+
-    '<div class="field"><label>المنصب (اختياري)</label><input id="hRole" value="'+esc(h.role)+'"></div>'+
-    '<div class="field"><label>ملاحظة</label><textarea id="hNote">'+esc(h.note)+'</textarea></div>'+
-    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveHonor('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
-  $("#modal").classList.add("on");
-};
-
-window.saveHonor = function(i){
-  var h={
-    id:i>=0?C.honors[i].id:Date.now(),
-    kind:$("#hKind").value,
-    title:$("#hTitle").value.trim(),
-    season:$("#hSeason").value.trim(),
-    holder:$("#hHolder").value.trim(),
-    role:$("#hRole").value.trim(),
-    note:$("#hNote").value.trim()
-  };
-  if(!h.title){toast("❌ أدخل اللقب");return}
-  if(i>=0)C.honors[i]=h;else C.honors.push(h);
-  saveRemote();closeModal();renderHonors();toast("✅ تم الحفظ");
-};
-
-/* ===== الإدارة ===== */
 function board(){
-  $("#content").innerHTML = 
-    '<div class="section-head"><h3>🧑‍💼 الإدارة ('+C.board.length+')</h3><button class="btn" onclick="openBoardForm()">➕ إضافة</button></div>'+
-    '<div class="list" id="list"></div>';
+  $("#content").innerHTML='<div class="sec-head"><h3>إدارة النادي <span class="count">'+C.board.length+'</span></h3><button class="btn" id="addB">➕ إضافة عضو</button></div><div class="list" id="list"></div>';
+  $("#addB").onclick=function(){openBoard(-1)};
   renderBoard();
 }
-
 function renderBoard(){
-  var list=C.board.map(function(b,i){
-    return '<div class="item"><div class="info"><b>'+esc(b.name)+'</b><small>'+esc(b.role)+(b.phone?" • "+esc(b.phone):"")+'</small></div><div class="actions"><button class="edit" onclick="openBoardForm('+i+')">✏️</button><button class="del" onclick="delItem(\'board\','+i+')">🗑️</button></div></div>';
-  }).join("");
-  $("#list").innerHTML=list||'<div class="empty"><i>🧑‍💼</i>لا أعضاء بعد</div>';
+  $("#list").innerHTML=C.board.map(function(b,i){
+    return '<div class="it"><div class="it-ic">'+(b.photo?'<img src="'+esc(b.photo)+'">':'<span>🧑‍</span>')+'</div><div class="it-bd"><b>'+esc(b.name)+'</b><small>'+esc(b.role||"")+(b.phone?" • "+esc(b.phone):"")+'</small></div><div class="it-acts"><button class="e" data-e="'+i+'">✏️</button><button class="d" data-d="'+i+'">🗑️</button></div></div>';
+  }).join("")||'<div class="empty"><i>🧑‍</i><h3>لا أعضاء إدارة</h3><p>أضف الهيئة الإدارية للنادي</p></div>';
+  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openBoard(+b.dataset.e)}});
+  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف العضو؟")){C.board.splice(+b.dataset.d,1);save();renderBoard()}}});
 }
-
-window.openBoardForm = function(i){
-  var b=i!==undefined?C.board[i]:{name:"",role:"",phone:"",photo:""};
-  $("#modalBox").innerHTML = 
-    '<h3>'+(i!==undefined?"تعديل":"إضافة")+' عضو</h3>'+
-    '<div class="field"><label>الاسم</label><input id="bName" value="'+esc(b.name)+'"></div>'+
-    '<div class="field"><label>المنصب</label><input id="bRole" value="'+esc(b.role)+'" placeholder="رئيس، نائب، مدرب..."></div>'+
-    '<div class="field"><label>الهاتف</label><input id="bPhone" value="'+esc(b.phone)+'"></div>'+
-    '<div class="field"><label>رابط الصورة</label><input id="bPhoto" value="'+esc(b.photo)+'"></div>'+
-    '<div class="modal-actions"><button class="btn ghost" onclick="closeModal()">إلغاء</button><button class="btn" onclick="saveBoard('+(i!==undefined?i:-1)+')">💾 حفظ</button></div>';
+function openBoard(i){
+  var b=i>=0?C.board[i]:{name:"",role:"",phone:"",photo:""};
+  TMP.photo=b.photo||"";
+  $("#modalBox").className="modal-box";
+  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' عضو إدارة</h3>'+
+    '<div class="fld"><label>الاسم الكامل</label><input id="bName" value="'+esc(b.name)+'"></div>'+
+    '<div class="fld-row"><div class="fld"><label>المنصب</label><input id="bRole" value="'+esc(b.role)+'" placeholder="مثال: رئيس النادي"></div><div class="fld"><label>الهاتف</label><input id="bPhone" value="'+esc(b.phone)+'"></div></div>'+
+    '<div class="fld"><label>الصورة</label><input type="file" id="bFile" accept="image/*">'+(TMP.photo?'<img class="img-preview" id="bPrev" src="'+esc(TMP.photo)+'">':'<img class="img-preview" id="bPrev" style="display:none">')+'</div>'+
+    '<div class="modal-acts"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 حفظ</button></div>';
   $("#modal").classList.add("on");
-};
-
-window.saveBoard = function(i){
-  var b={
-    id:i>=0?C.board[i].id:Date.now(),
-    name:$("#bName").value.trim(),
-    role:$("#bRole").value.trim(),
-    phone:$("#bPhone").value.trim(),
-    photo:$("#bPhoto").value.trim()
+  $("#bFile").onchange=function(){var f=this.files[0];if(!f)return;compress(f,function(d){TMP.photo=d;$("#bPrev").src=d;$("#bPrev").style.display="block"})};
+  $("#mX").onclick=closeModal;
+  $("#mS").onclick=function(){
+    var o={id:i>=0?C.board[i].id:Date.now(),name:$("#bName").value.trim(),role:$("#bRole").value.trim(),phone:$("#bPhone").value.trim(),photo:TMP.photo};
+    if(!o.name){toast("❌ أدخل الاسم","err");return}
+    if(i>=0)C.board[i]=o;else C.board.push(o);
+    save();closeModal();renderBoard();
   };
-  if(!b.name){toast("❌ أدخل الاسم");return}
-  if(i>=0)C.board[i]=b;else C.board.push(b);
-  saveRemote();closeModal();renderBoard();toast("✅ تم الحفظ");
-};
-
-/* ===== الرسائل ===== */
-function messages(){
-  var list=C.messages.map(function(m,i){
-    return '<div class="msg'+(m.read?" read":"")+'"><div class="head"><b>'+esc(m.name)+'</b><time>'+new Date(m.created_at).toLocaleString("ar")+'</time></div><p>'+esc(m.body)+'</p><div class="meta">📱 '+esc(m.phone||"—")+' • 📋 '+esc(m.topic||"أخرى")+'</div>'+(m.read?"":'<button class="btn sm" onclick="markRead('+i+')" style="margin-top:8px">✓ تعليم كمقروءة</button>')+'</div>';
-  }).join("");
-  $("#content").innerHTML = '<h3>✉️ الرسائل ('+C.messages.length+')</h3>'+(list||'<div class="empty"><i>✉️</i>لا رسائل بعد</div>');
 }
 
-window.markRead = function(i){
-  C.messages[i].read=true;
-  saveRemote();messages();toast("✅ تم");
-};
+function messages(){
+  $("#content").innerHTML='<div class="sec-head"><h3>الرسائل الواردة <span class="count">'+C.messages.length+'</span></h3></div>'+
+    (C.messages.length?C.messages.map(function(m,i){
+      return '<div class="msg'+(m.read?" read":"")+'"><div class="head"><b>'+esc(m.name)+'</b><time>'+new Date(m.created_at||Date.now()).toLocaleString("ar")+'</time></div><p>'+esc(m.body)+'</p><div class="meta"><span>📱 '+esc(m.phone||"—")+'</span><span>📋 '+esc(m.topic||"أخرى")+'</span></div><div class="acts">'+(m.read?"":'<button class="btn sm" data-r="'+i+'">✓ تعليم كمقروءة</button>')+'<button class="btn sm danger" data-d="'+i+'">🗑️ حذف</button></div></div>';
+    }).join(""):'<div class="empty"><i>✉️</i><h3>لا رسائل واردة</h3><p>ستظهر هنا رسائل الزوار من صفحة التواصل</p></div>');
+  $$("#content [data-r]").forEach(function(b){b.onclick=function(){C.messages[+b.dataset.r].read=true;save();messages()}});
+  $$("#content [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف الرسالة؟")){C.messages.splice(+b.dataset.d,1);save();messages()}}});
+}
 
-/* ===== الإعدادات ===== */
 function settings(){
   var s=C.settings;
-  $("#content").innerHTML = 
-    '<h3>⚙️ الإعدادات</h3>'+
-    '<div class="field"><label>اسم النادي</label><input id="setName" value="'+esc(s.name)+'"></div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>المنطقة</label><input id="setRegion" value="'+esc(s.region)+'"></div>'+
-    '<div class="field"><label>الشعار</label><input id="setMotto" value="'+esc(s.motto)+'"></div>'+
+  $("#content").innerHTML='<div class="set-grid">'+
+    '<div class="set-card"><h4>🏟️ بيانات النادي</h4>'+
+    '<div class="fld"><label>اسم النادي</label><input id="setName" value="'+esc(s.name)+'"></div>'+
+    '<div class="fld"><label>المنطقة</label><input id="setRegion" value="'+esc(s.region)+'"></div>'+
+    '<div class="fld"><label>الشعار</label><input id="setMotto" value="'+esc(s.motto)+'"></div>'+
+    '<div class="fld"><label>عن النادي</label><textarea id="setAbout">'+esc(s.about||"")+'</textarea></div></div>'+
+    '<div class="set-card"><h4>📍 الميدانان</h4>'+
+    '<div class="fld"><label>اسم الميدان الأول</label><input id="setF1" value="'+esc(s.f1.name)+'"></div>'+
+    '<div class="fld"><label>رابط خريطته</label><input id="setF1M" value="'+esc(s.f1.map)+'" placeholder="https://maps.google.com/..."></div>'+
+    '<div class="fld"><label>اسم الميدان الثاني</label><input id="setF2" value="'+esc(s.f2.name)+'"></div>'+
+    '<div class="fld"><label>رابط خريطته</label><input id="setF2M" value="'+esc(s.f2.map)+'" placeholder="https://maps.google.com/..."></div></div>'+
     '</div>'+
-    '<div class="field"><label>عن النادي</label><textarea id="setAbout">'+esc(s.about)+'</textarea></div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>الهاتف</label><input id="setPhone" value="'+esc(s.phone)+'"></div>'+
-    '<div class="field"><label>البريد</label><input id="setEmail" value="'+esc(s.email)+'"></div>'+
-    '</div>'+
-    '<div class="field"><label>العنوان</label><input id="setAddress" value="'+esc(s.address)+'"></div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>الميدان الأول</label><input id="setF1" value="'+esc(s.f1.name)+'"></div>'+
-    '<div class="field"><label>رابط الخريطة</label><input id="setF1Map" value="'+esc(s.f1.map)+'"></div>'+
-    '</div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>الميدان الثاني</label><input id="setF2" value="'+esc(s.f2.name)+'"></div>'+
-    '<div class="field"><label>رابط الخريطة</label><input id="setF2Map" value="'+esc(s.f2.map)+'"></div>'+
-    '</div>'+
-    '<h4 style="margin:20px 0 10px">🔗 روابط التواصل الاجتماعي</h4>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>Facebook</label><input id="socFb" value="'+esc(s.social.fb)+'"></div>'+
-    '<div class="field"><label>WhatsApp</label><input id="socWa" value="'+esc(s.social.wa)+'"></div>'+
-    '</div>'+
-    '<div class="field-row">'+
-    '<div class="field"><label>YouTube</label><input id="socYt" value="'+esc(s.social.yt)+'"></div>'+
-    '<div class="field"><label>Instagram</label><input id="socIg" value="'+esc(s.social.ig)+'"></div>'+
-    '</div>'+
-    '<div class="field"><label>TikTok</label><input id="socTt" value="'+esc(s.social.tt)+'"></div>'+
-    '<div style="margin-top:20px"><button class="btn" onclick="saveSettings()">💾 حفظ الإعدادات</button></div>';
+    '<div class="set-card" style="margin-top:18px"><h4>🎯 التشكيلة الأساسية الثابتة</h4>'+
+    '<p style="color:var(--muted);font-size:.82rem;margin-bottom:12px">اختر 11 لاعبًا لعرضهم في الصفحة الرئيسية كالتشكيلة الأساسية للفريق. سيتم ترتيبهم تلقائيًا حسب خاناتهم.</p>'+
+    '<div class="lu-editor"><div class="lu-side" id="xiSide"></div><div><div class="pitch-mini"><div class="pitch-mini-in" id="xiPitch"></div></div></div></div></div>'+
+    '<div class="set-grid" style="margin-top:18px"><div class="set-card"><h4>🔗 وسائل التواصل الاجتماعي</h4>'+
+    '<div class="fld"><label>Facebook</label><input id="socFb" value="'+esc(s.social.fb)+'" placeholder="https://facebook.com/..."></div>'+
+    '<div class="fld"><label>WhatsApp</label><input id="socWa" value="'+esc(s.social.wa)+'" placeholder="https://wa.me/..."></div>'+
+    '<div class="fld"><label>YouTube</label><input id="socYt" value="'+esc(s.social.yt)+'"></div>'+
+    '<div class="fld"><label>Instagram</label><input id="socIg" value="'+esc(s.social.ig)+'"></div>'+
+    '<div class="fld"><label>TikTok</label><input id="socTt" value="'+esc(s.social.tt)+'"></div></div>'+
+    '<div class="set-card"><h4>🔐 كلمة المرور</h4>'+
+    '<div class="fld"><label>كلمة مرور الوضع المحلي الجديدة</label><input id="newPass" type="password" placeholder="اتركها فارغة للإبقاء على الحالية"></div>'+
+    '<p style="color:var(--muted);font-size:.78rem;margin-top:6px">الكلمة الحالية: <b style="color:var(--gold-ink)">'+esc(localPass())+'</b></p></div></div>'+
+    '<div style="margin-top:20px;text-align:end"><button class="btn" id="saveS">💾 حفظ كل الإعدادات</button></div>';
+  var xiCurrent=(s.defaultXI||[]).slice();
+  function renderXi(){
+    var byPos={};POS.forEach(function(p){byPos[p]=[]});
+    C.players.forEach(function(p){if(byPos[p.pos])byPos[p.pos].push(p)});
+    var h="";
+    POS.forEach(function(pos){
+      var cnt=xiCurrent.filter(function(id){var p=C.players.filter(function(x){return x.id===id})[0];return p&&p.pos===pos}).length;
+      var max=pos==="حارس مرمى"?1:pos==="مدافع"?5:pos==="وسط"?5:pos==="مهاجم"?3:11;
+      h+='<div class="lu-group"><div class="lu-group-title">'+pos+' <span class="n">'+cnt+'/'+max+'</span></div>';
+      byPos[pos].forEach(function(p){
+        var inXi=xiCurrent.indexOf(p.id)>-1;
+        h+='<div class="lu-player'+(inXi?" in":"")+'" data-pid="'+p.id+'" data-pos="'+pos+'" data-max="'+max+'"><span class="num">'+esc(p.num)+'</span><div class="nm"><b>'+esc(p.name)+'</b><small>'+(p.age?p.age+' سنة':'')+'</small></div><span class="x">'+(inXi?"✕":"")+'</span></div>';
+      });
+      h+='</div>';
+    });
+    $("#xiSide").innerHTML=h||'<div style="color:var(--dim);text-align:center;padding:20px">أضف اللاعبين أولاً</div>';
+    $$("#xiSide .lu-player").forEach(function(el){
+      el.onclick=function(){
+        var pid=+el.dataset.pid,pos=el.dataset.pos,max=+el.dataset.max;
+        var idx=xiCurrent.indexOf(pid);
+        if(idx>-1)xiCurrent.splice(idx,1);
+        else{
+          var cnt=xiCurrent.filter(function(id){var p=C.players.filter(function(x){return x.id===id})[0];return p&&p.pos===pos}).length;
+          if(cnt>=max){toast("❌ الحد الأقصى لـ "+pos+" هو "+max,"err");return}
+          xiCurrent.push(pid);
+        }
+        renderXi();renderXiPitch();
+      };
+    });
+  }
+  function renderXiPitch(){
+    var players=xiCurrent.map(function(id){return C.players.filter(function(p){return p.id===id})[0]}).filter(Boolean);
+    if(!players.length){$("#xiPitch").innerHTML='<div class="pm-empty">اختر اللاعبين لرؤية التشكيلة</div>';return}
+    var rows=[["مهاجم","r1"],["وسط","r2"],["مدافع","r3"],["حارس مرمى","r4"]].map(function(r){
+      return {cls:r[1],ps:players.filter(function(p){return p.pos===r[0]})};
+    }).filter(function(r){return r.ps.length});
+    $("#xiPitch").innerHTML=rows.map(function(r){
+      return '<div class="pm-row '+r.cls+'">'+r.ps.map(function(p){
+        return '<div class="pm-p"><svg viewBox="0 0 44 38" class="jsy"><path d="M15 3 7 7 2 14l7 4 2-3v16h22V15l2 3 7-4-5-7-8-4c0 4-3 6-6 6s-6-2-6-6z" fill="#f2b84b" stroke="#123024" stroke-width="1.6"/><text x="22" y="28" text-anchor="middle" font-size="12" font-family="Changa" font-weight="800" fill="#123024">'+esc(p.num)+'</text></svg><span>'+esc(p.name.split(" ")[0])+'</span></div>';
+      }).join("")+'</div>';
+    }).join("");
+  }
+  renderXi();renderXiPitch();
+  $("#saveS").onclick=function(){
+    C.settings.name=$("#setName").value.trim();
+    C.settings.region=$("#setRegion").value.trim();
+    C.settings.motto=$("#setMotto").value.trim();
+    C.settings.about=$("#setAbout").value.trim();
+    C.settings.f1.name=$("#setF1").value.trim();
+    C.settings.f1.map=$("#setF1M").value.trim();
+    C.settings.f2.name=$("#setF2").value.trim();
+    C.settings.f2.map=$("#setF2M").value.trim();
+    C.settings.social.fb=$("#socFb").value.trim();
+    C.settings.social.wa=$("#socWa").value.trim();
+    C.settings.social.yt=$("#socYt").value.trim();
+    C.settings.social.ig=$("#socIg").value.trim();
+    C.settings.social.tt=$("#socTt").value.trim();
+    C.settings.defaultXI=xiCurrent.slice();
+    var np=$("#newPass").value;
+    if(np.length>=4){localStorage.setItem("wadi_pass",np);toast("✅ تم تحديث كلمة المرور","ok")}
+    save();
+  };
 }
 
-window.saveSettings = function(){
-  C.settings.name=$("#setName").value.trim();
-  C.settings.region=$("#setRegion").value.trim();
-  C.settings.motto=$("#setMotto").value.trim();
-  C.settings.about=$("#setAbout").value.trim();
-  C.settings.phone=$("#setPhone").value.trim();
-  C.settings.email=$("#setEmail").value.trim();
-  C.settings.address=$("#setAddress").value.trim();
-  C.settings.f1.name=$("#setF1").value.trim();
-  C.settings.f1.map=$("#setF1Map").value.trim();
-  C.settings.f2.name=$("#setF2").value.trim();
-  C.settings.f2.map=$("#setF2Map").value.trim();
-  C.settings.social.fb=$("#socFb").value.trim();
-  C.settings.social.wa=$("#socWa").value.trim();
-  C.settings.social.yt=$("#socYt").value.trim();
-  C.settings.social.ig=$("#socIg").value.trim();
-  C.settings.social.tt=$("#socTt").value.trim();
-  saveRemote();toast("✅ تم حفظ الإعدادات");
-};
-
-/* ===== دوال عامة ===== */
-window.delItem = function(key,i){
-  if(confirm("تأكيد الحذف؟")){
-    C[key].splice(i,1);
-    saveRemote();
-    if(key==="players")renderPlayers();
-    else if(key==="matches")renderMatches();
-    else if(key==="news")renderNews();
-    else if(key==="honors")renderHonors();
-    else if(key==="board")renderBoard();
-    toast("🗑️ تم الحذف");
-  }
-};
-
-window.closeModal = function(){$("#modal").classList.remove("on")};
-window.go = go;
-
+function closeModal(){$("#modal").classList.remove("on");$("#modalBox").className="modal-box"}
 $("#modal").onclick=function(e){if(e.target.id==="modal")closeModal()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()});
 
-/* بدء التشغيل */
-if(TOKEN)boot();
-else $("#loginView").style.display="grid";
-
+/* بدء */
+if(TOKEN){
+  fetch(API+"/admin",{headers:{"Authorization":"Bearer "+TOKEN}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+    C=d.content||DEFAULT();
+    ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+    enter("api",localStorage.getItem("wadi_user")||"admin");
+  }).catch(function(){TOKEN="";/* يظهر الدخول */});
+}
 })();
 </script>
 </body>
