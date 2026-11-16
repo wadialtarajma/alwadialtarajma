@@ -14,18 +14,18 @@ var SEED={
     f1:{name:"ميدان الوادي",map:"https://maps.app.goo.gl/5omSxgEUMPaeguno7"},
     f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"}},
   players:[
-    {id:1,name:"أحمد الطيب",num:1,age:26,pos:"حارس مرمى",apps:5,photo:""},
-    {id:2,name:"محمد عثمان",num:2,age:23,pos:"مدافع",apps:5,photo:""},
-    {id:3,name:"عمر عبد الله",num:3,age:25,pos:"مدافع",apps:5,photo:""},
-    {id:4,name:"خالد إبراهيم",num:6,age:27,pos:"مدافع",apps:4,photo:""},
-    {id:5,name:"يوسف حسن",num:15,age:22,pos:"مدافع",apps:5,photo:""},
-    {id:6,name:"معاذ آدم",num:17,age:24,pos:"وسط",apps:5,photo:""},
-    {id:7,name:"النور محمد",num:12,age:21,pos:"وسط",apps:5,photo:""},
-    {id:8,name:"طارق سليمان",num:7,age:23,pos:"وسط",apps:5,photo:""},
-    {id:9,name:"صهيب علي",num:10,age:25,pos:"وسط",apps:5,photo:""},
-    {id:10,name:"مصعب أحمد",num:9,age:26,pos:"مهاجم",apps:5,photo:""},
-    {id:11,name:"أنس يحيى",num:11,age:22,pos:"مهاجم",apps:5,photo:""},
-    {id:12,name:"عوض الكريم",num:18,age:24,pos:"مهاجم",apps:4,photo:""}],
+    {id:1,name:"أحمد الطيب",num:1,age:26,pos:"حارس مرمى",apps:5,photo:"",medals:[]},
+    {id:2,name:"محمد عثمان",num:2,age:23,pos:"مدافع",apps:5,photo:"",medals:[]},
+    {id:3,name:"عمر عبد الله",num:3,age:25,pos:"مدافع",apps:5,photo:"",medals:[]},
+    {id:4,name:"خالد إبراهيم",num:6,age:27,pos:"مدافع",apps:4,photo:"",medals:[]},
+    {id:5,name:"يوسف حسن",num:15,age:22,pos:"مدافع",apps:5,photo:"",medals:[]},
+    {id:6,name:"معاذ آدم",num:17,age:24,pos:"وسط",apps:5,photo:"",medals:[]},
+    {id:7,name:"النور محمد",num:12,age:21,pos:"وسط",apps:5,photo:"",medals:[]},
+    {id:8,name:"طارق سليمان",num:7,age:23,pos:"وسط",apps:5,photo:"",medals:[]},
+    {id:9,name:"صهيب علي",num:10,age:25,pos:"وسط",apps:5,photo:"",medals:[]},
+    {id:10,name:"مصعب أحمد",num:9,age:26,pos:"مهاجم",apps:5,photo:"",medals:[{t:"gold",label:"هداف الجولة 3"}]},
+    {id:11,name:"أنس يحيى",num:11,age:22,pos:"مهاجم",apps:5,photo:"",medals:[]},
+    {id:12,name:"عوض الكريم",num:18,age:24,pos:"مهاجم",apps:4,photo:"",medals:[]}],
   matches:[
     {id:1,opponent:"الهلال رفاعة",date:"2026-11-21T15:30",venue:"ميدان الوادي",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,lineup:[1,2,3,4,5,6,7,8,9,10,11],oppLineup:[],goals:[]},
     {id:2,opponent:"المريخ رفاعة",date:"2026-11-28T15:00",venue:"ميدان الهاشماب",comp:"دوري الدرجة الثانية",home:true,status:"upcoming",my:0,op:0,lineup:[],oppLineup:[],goals:[]},
@@ -58,6 +58,7 @@ function load(){
   C.settings=merge(clone(SEED.settings),C.settings||{});
   C.matches.forEach(function(m){if(!Array.isArray(m.lineup))m.lineup=[];if(!Array.isArray(m.oppLineup))m.oppLineup=[];if(!Array.isArray(m.goals))m.goals=[]});
   C.news.forEach(function(n){if(!Array.isArray(n.imgs))n.imgs=n.img?[n.img]:[]});
+  C.players.forEach(function(p){if(!Array.isArray(p.medals))p.medals=[]});
 }
 function toast(m){var t=$("#toast");if(!t)return;t.textContent=m;t.classList.add("on");clearTimeout(t._x);t._x=setTimeout(function(){t.classList.remove("on")},3000)}
 
@@ -73,32 +74,19 @@ function setTheme(t){document.documentElement.setAttribute("data-theme",t);try{l
   var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="dark"?"#060d0a":"#ffffff")}
 function playerName(id){var p=C.players.filter(function(x){return x.id===id})[0];return p?p.name:"لاعب"}
 
-/* ===== حساب الأهداف تلقائياً من المباريات ===== */
+/* الأهداف تُحسب تلقائياً من أهداف المباريات المسجلة */
 function calcPlayerGoals(){
-  var goals={};
-  C.players.forEach(function(p){goals[p.id]=0});
+  var g={};
+  C.players.forEach(function(p){g[p.id]=0});
   C.matches.forEach(function(m){
-    if(m.status==="finished"&&m.goals&&m.goals.length){
-      m.goals.forEach(function(g){
-        if(g.team==="my"&&g.pid&&goals[g.pid]!==undefined){
-          goals[g.pid]++;
-        }
-      });
+    if(m.status==="finished"&&(m.goals||[]).length){
+      m.goals.forEach(function(x){if(x.team==="my"&&x.pid&&g[x.pid]!==undefined)g[x.pid]++});
     }
   });
-  return goals;
+  return g;
 }
 
-/* ===== حساب الميداليات/الأوسمة ===== */
-function calcPlayerMedals(){
-  var medals={};
-  C.players.forEach(function(p){medals[p.id]=[]});
-  // مثال: أفضل لاعب في المباراة، هداف الشهر، إلخ
-  // يمكن إضافة منطق هنا لحساب الميداليات بناءً على بيانات المباريات
-  return medals;
-}
-
-/* ===== الملعب المنظوري ===== */
+/* الملعب المنظوري */
 function jersey(num){
   return '<svg viewBox="0 0 44 38" class="jsy" aria-hidden="true"><path d="M15 3 7 7 2 14l7 4 2-3v16h22V15l2 3 7-4-5-7-8-4c0 4-3 6-6 6s-6-2-6-6z" fill="#f2b84b" stroke="#123024" stroke-width="1.6"/><text x="22" y="28" text-anchor="middle" font-size="12" font-family="Changa" font-weight="800" fill="#123024">'+esc(num)+'</text></svg>';
 }
@@ -113,10 +101,7 @@ function pitch3d(list){
   }).join("")+'</div></div>';
 }
 function playersOf(ids){return (ids||[]).map(function(id){return C.players.filter(function(p){return p.id===id})[0]}).filter(Boolean)}
-function defaultXI(){
-  var xi=playersOf(C.settings.defaultXI);
-  return xi.length>=7?xi:autoXI();
-}
+function defaultXI(){var xi=playersOf(C.settings.defaultXI);return xi.length>=7?xi:autoXI()}
 function autoXI(){
   var byApps=function(a,b){return (b.apps||0)-(a.apps||0)},xi=[];
   var g=C.players.filter(function(p){return p.pos==="حارس مرمى"}).sort(byApps)[0];
@@ -131,7 +116,7 @@ function oppListHTML(names){
   return '<ol class="oplist">'+names.map(function(n,i){return '<li><b>'+(i+1)+'</b>'+esc(n)+'</li>'}).join("")+'</ol>';
 }
 
-/* ===== المشاركة العامة ===== */
+/* المشاركة */
 function shareHTML(title){
   var u=location.origin+location.pathname+"#/news";
   var t=encodeURIComponent(title+" | "+C.settings.name);
@@ -143,7 +128,7 @@ function shareHTML(title){
     '<button class="sh cp" data-share="'+esc(title)+'" aria-label="مشاركة"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18 16.1a3 3 0 0 0-2.1.9l-7-4.1a3 3 0 0 0 0-1.8l7-4.1A3 3 0 1 0 15 4a3 3 0 0 0 .1.8l-7 4.1a3 3 0 1 0 0 6.2l7 4.1a3 3 0 1 0 2.9-3.1z"/></svg></button></div>';
 }
 
-/* ===== بطاقات ===== */
+/* البطاقات */
 function goalsHTML(m){
   if(!m.goals||!m.goals.length)return '<p class="dim">لا تفاصيل أهداف لهذه المباراة.</p>';
   return '<ul class="goals">'+m.goals.slice().sort(function(a,b){return (a.min||0)-(b.min||0)}).map(function(g){
@@ -166,32 +151,26 @@ function newsCard(n){
     '<div class="n2-ft"><button class="btn sm ghost" data-news="'+n.id+'">قراءة الخبر</button>'+shareHTML(n.title)+'</div></div></article>';
 }
 
-/* ===== بطاقة اللاعب العصرية ===== */
+/* بطاقة اللاعب العصرية: صورة + خانة + رقم + أوسمة + أهداف تلقائية */
 function playerCard(x){
   var goals=calcPlayerGoals();
-  var medals=calcPlayerMedals();
-  var posClass=x.pos==="حارس مرمى"?"gk":x.pos==="مدافع"?"df":x.pos==="وسط"?"mf":"fw";
-  var playerGoals=goals[x.id]||0;
-  var playerMedals=medals[x.id]||[];
-  var medalsHTML=playerMedals.length?playerMedals.map(function(m){
-    return '<span class="pc-medal '+m.type+'">'+m.icon+' '+esc(m.label)+'</span>';
-  }).join(""):'<span class="dim" style="font-size:.72rem">لا أوسمة بعد</span>';
-  
+  var pc=x.pos==="حارس مرمى"?"gk":x.pos==="مدافع"?"df":x.pos==="وسط"?"mf":"fw";
+  var myGoals=goals[x.id]||0;
+  var meds=(x.medals||[]);
+  var medalsHTML=meds.length?meds.map(function(m){
+    var ic=m.t==="gold"?"🥇":m.t==="silver"?"🥈":m.t==="bronze"?"🥉":"🏅";
+    return '<span class="pc-medal '+esc(m.t||"gold")+'">'+ic+' '+esc(m.label)+'</span>';
+  }).join(""):'<span class="dim" style="font-size:.7rem">لا أوسمة بعد</span>';
   return '<article class="player-card">'+
-    '<div class="pc-header">'+(x.photo?'<img src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" loading="lazy">':'')+
-    '<div class="pc-num">'+esc(x.num)+'</div>'+
-    '<div class="pc-pos-badge '+posClass+'">'+esc(x.pos)+'</div></div>'+
-    '<div class="pc-body">'+
-    '<div class="pc-name">'+esc(x.name)+'</div>'+
-    '<div class="pc-info">'+(x.age?'<span>🎂 '+esc(x.age)+' سنة</span>':"")+'<span>👕 #'+esc(x.num)+'</span></div>'+
+    '<div class="pc-header">'+(x.photo?'<img src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" loading="lazy">':'<span class="pc-ph">'+esc(x.num)+'</span>')+
+    '<div class="pc-num">'+esc(x.num)+'</div><div class="pc-pos-badge '+pc+'">'+esc(x.pos)+'</div></div>'+
+    '<div class="pc-body"><div class="pc-name">'+esc(x.name)+'</div>'+
+    '<div class="pc-info">'+(x.age?'<span>🎂 '+esc(x.age)+' سنة</span>':"")+'<span>👕 رقم '+esc(x.num)+'</span></div>'+
     '<div class="pc-medals">'+medalsHTML+'</div>'+
-    '<div class="pc-stats">'+
-    '<div class="pc-stat"><b>'+playerGoals+'</b><small>أهداف</small></div>'+
+    '<div class="pc-stats"><div class="pc-stat"><b>'+myGoals+'</b><small>أهداف</small></div>'+
     '<div class="pc-stat"><b>'+(x.apps||0)+'</b><small>مباريات</small></div>'+
-    '<div class="pc-stat"><b>0</b><small>صناعة</small></div>'+
-    '</div></div></article>';
+    '<div class="pc-stat"><b>'+meds.length+'</b><small>أوسمة</small></div></div></div></article>';
 }
-
 function memberCard(b){var ini=(b.name||"؟").trim().charAt(0);
   return '<article class="bcard card"><div class="bph">'+(b.photo?'<img src="'+esc(b.photo)+'" alt="">':esc(ini))+'</div><b>'+esc(b.name)+'</b><span class="role">'+esc(b.role)+'</span>'+(b.phone?'<a class="tel" href="tel:'+esc(b.phone)+'">📞 '+esc(b.phone)+'</a>':"")+'</article>'}
 function phero(t,s){return '<section class="phero"><div class="wrap"><h1>'+t+'</h1><p>'+s+'</p><div class="rule"></div></div></section>'}
@@ -216,7 +195,6 @@ function startCD(){clearInterval(cdT);var tick=function(){var n=nextM(),el=$("#c
   $("#cM").textContent=("0"+Math.floor(s%3600/60)).slice(-2);$("#cS").textContent=("0"+(s%60)).slice(-2)};
   tick();cdT=setInterval(tick,1000)}
 
-/* ===== الصفحات ===== */
 var VIEWS={
   home:function(){
     var m=nextM();
@@ -240,12 +218,11 @@ var VIEWS={
   matches:function(){return phero("المباريات <em>والنتائج</em>","كل مباريات الفريق بتفاصيلها: النتائج، الهدافون، والتشكيلات.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("m","ابحث: خصم، ملعب، بطولة…")+
     '<div class="tabs"><button class="on" data-mt="u">القادمة</button><button data-mt="r">النتائج</button></div><div class="mlist" id="mlist"></div></div></section>'},
-  squad:function(){return phero("قائمة <em>الفريق</em>","اللاعبون والخانات، والتشكيلة الأساسية.")+
+  squad:function(){return phero("قائمة <em>الفريق</em>","بطاقات اللاعبين: الصورة والخانة والرقم والأوسمة والأهداف.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("p","ابحث: اسم لاعب، خانة، رقم…")+
     '<div class="chips" id="pchips"></div><div class="players" id="plist"></div>'+
     '<div class="sec-head" style="margin-top:30px"><div><span class="kick">الخطة</span><h2>التشكيلة الأساسية</h2></div></div>'+
-    '<div class="lu-col">'+pitch3d(defaultXI())+'</div>'+
-    '</div></section>'},
+    '<div class="lu-col">'+pitch3d(defaultXI())+'</div></div></section>'},
   news:function(){return phero("أخبار <em>النادي</em>","أرشيف كامل لكل مستجدات الفريق والإدارة — شاركها بضغطة.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("n","ابحث في الأخبار…")+'<div class="news-g" id="nlist"></div></div></section>'},
   board:function(){return phero("إدارة <em>النادي</em>","الهيئة الإدارية والجهاز الفني المشرف على النادي.")+
@@ -300,7 +277,6 @@ var BIND={
   }
 };
 
-/* ===== المودالات ===== */
 function openModal(html){$("#modalBody").innerHTML=html;$("#modal").classList.add("on");document.body.classList.add("lock")}
 function closeModal(){$("#modal").classList.remove("on");document.body.classList.remove("lock")}
 function newsModal(n){
@@ -316,7 +292,6 @@ function matchModal(m){
     (hasLu?'<div class="lu-grid"><div class="lu-col"><h4>تشكيلتنا</h4>'+pitch3d(playersOf(m.lineup))+'</div><div class="lu-col"><h4>تشكيلة '+esc(m.opponent)+'</h4>'+oppListHTML(m.oppLineup)+'</div></div>':""));
 }
 
-/* ===== SEO ===== */
 function updateMeta(v){
   var d={home:"الموقع الرسمي لنادي وادي التراجمة — المباراة القادمة والنتائج والأخبار",
     matches:"جدول مباريات ونتائج نادي وادي التراجمة مع الهدافين والتشكيلات",
@@ -328,7 +303,7 @@ function updateMeta(v){
 }
 
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("on");io.unobserve(en.target)}})},{threshold:.08});
-function reveal(){$$(".card,.sec-head,.nm-card,.phero .wrap,.hero-in,.p3").forEach(function(el){el.classList.add("rv");io.observe(el)})}
+function reveal(){$$(".card,.sec-head,.nm-card,.phero .wrap,.hero-in,.p3,.player-card").forEach(function(el){el.classList.add("rv");io.observe(el)})}
 function setActive(v){$$("[data-nav]").forEach(function(a){a.classList.toggle("on",a.dataset.nav===v)})}
 function closeDrawer(){$("#drawer").classList.remove("on");$("#scrim").classList.remove("on");$("#burger").classList.remove("on");document.body.classList.remove("lock")}
 
