@@ -4,8 +4,8 @@
 
 var KEY="wadi_data_v2", TK="wadi_theme";
 var POS=["حارس مرمى","مدافع","وسط","مهاجم"];
-var NAV=[["home","🏠","الرئيسية"],["matches","⚽","المباريات"],["squad","👥","الفريق"],["news","📰","الأخبار"],["board","🧑‍","الإدارة"]];
-var TITLES={home:"الرئيسية",matches:"المباريات والنتائج",squad:"الفريق والتشكيلة",news:"أخبار النادي",board:"إدارة النادي"};
+var NAV=[["home","🏠","الرئيسية"],["matches","⚽","المباريات"],["squad","👥","الفريق"],["news","📰","الأخبار"],["honors","🏅","سجل الشرف"],["board","🧑‍","الإدارة"]];
+var TITLES={home:"الرئيسية",matches:"المباريات والنتائج",squad:"الفريق والتشكيلة",news:"أخبار النادي",honors:"سجل الشرف",board:"إدارة النادي"};
 
 var SEED={
   settings:{name:"الوادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",
@@ -42,6 +42,7 @@ var SEED={
     {id:2,name:"الشفيع محمد",role:"نائب الرئيس",phone:""},
     {id:3,name:"محجوب علي",role:"المدرب العام",phone:""},
     {id:4,name:"ياسر إبراهيم",role:"إداري الفريق",phone:""}],
+  honors:[],
   messages:[]
 };
 
@@ -64,7 +65,7 @@ function pD(d){if(d instanceof Date)return d;var s=String(d==null?"":d);
 function load(){
   gCache=null;
   try{var r=localStorage.getItem(KEY);C=r?merge(clone(SEED),JSON.parse(r)):clone(SEED)}catch(e){C=clone(SEED)}
-  ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+  ["players","matches","news","board","honors","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
   C.settings=merge(clone(SEED.settings),C.settings||{});
   C.matches.forEach(function(m){if(!Array.isArray(m.lineup))m.lineup=[];if(!Array.isArray(m.oppLineup))m.oppLineup=[];if(!Array.isArray(m.goals))m.goals=[]});
   C.news.forEach(function(n){if(!Array.isArray(n.imgs))n.imgs=n.img?[n.img]:[]});
@@ -184,6 +185,20 @@ function playerCard(x){
 }
 function memberCard(b){var ini=(b.name||"؟").trim().charAt(0);
   return '<article class="bcard card"><div class="bph">'+(b.photo?'<img src="'+esc(b.photo)+'" alt="">':esc(ini))+'</div><b>'+esc(b.name)+'</b><span class="role">'+esc(b.role)+'</span>'+(b.phone?'<a class="tel" href="tel:'+esc(b.phone)+'">📞 '+esc(b.phone)+'</a>':"")+'</article>'}
+
+/* سجل الشرف: أوسمة الفريق وتكريمات اللاعبين والإدارة */
+function honorName(h){
+  if(h.kind==="player")return playerName(h.who);
+  if(h.kind==="board"){var b=C.board.filter(function(x){return x.id===h.who})[0];return b?b.name:"عضو إدارة"}
+  return C.settings.name;
+}
+function honorCard(h){
+  var ic=h.t==="gold"?"🥇":h.t==="silver"?"🥈":h.t==="bronze"?"🥉":"🏅";
+  return '<article class="bcard card"><div class="bph">'+ic+'</div><b>'+esc(h.title)+'</b><span class="role">'+esc(honorName(h))+'</span>'+
+    (h.season?'<span class="tag">'+esc(h.season)+'</span>':"")+
+    (h.note?'<p class="dim" style="margin-top:6px">'+esc(h.note)+'</p>':"")+'</article>';
+}
+
 function phero(t,s){return '<section class="phero"><div class="wrap"><h1>'+t+'</h1><p>'+s+'</p><div class="rule"></div></div></section>'}
 function emptyState(i,t,d){return '<div class="empty"><i>'+i+'</i><h3>'+t+'</h3><p>'+d+'</p></div>'}
 function searchbar(id,ph){return '<div class="searchbar"><span>🔍</span><input id="sq_'+id+'" placeholder="'+ph+'" autocomplete="off"><span class="s-count" id="sn_'+id+'"></span></div>'}
@@ -240,6 +255,21 @@ var VIEWS={
     '<div class="lu-col">'+pitch3d(defaultXI())+'</div></div></section>'},
   news:function(){return phero("أخبار <em>النادي</em>","أرشيف كامل لكل مستجدات الفريق والإدارة — شاركها بضغطة.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+searchbar("n","ابحث في الأخبار…")+'<div class="news-g" id="nlist"></div></div></section>'},
+  honors:function(){
+    var team=C.honors.filter(function(h){return h.kind==="team"});
+    var pl=C.honors.filter(function(h){return h.kind==="player"});
+    var bd=C.honors.filter(function(h){return h.kind==="board"});
+    var h=phero("سجل <em>الشرف</em>","أوسمة الفريق وتكريمات اللاعبين والإدارة — فخر الديار.");
+    h+='<section class="sec" style="padding-top:20px"><div class="wrap">';
+    if(!C.honors.length){h+=emptyState("🏅","لا أوسمة بعد","ستظهر هنا أوسمة الفريق وتكريماته قريبًا.")}
+    else{
+      if(team.length){h+='<div class="sec-head"><div><span class="kick">فخر الديار</span><h2>أوسمة الفريق</h2></div></div><div class="bgrid">'+team.map(honorCard).join("")+'</div>'}
+      if(pl.length){h+='<div class="sec-head" style="margin-top:26px"><div><span class="kick">نسور التراجمة</span><h2>تكريمات اللاعبين</h2></div></div><div class="bgrid">'+pl.map(honorCard).join("")+'</div>'}
+      if(bd.length){h+='<div class="sec-head" style="margin-top:26px"><div><span class="kick">العطاء</span><h2>تكريمات الإدارة</h2></div></div><div class="bgrid">'+bd.map(honorCard).join("")+'</div>'}
+    }
+    h+='</div></section>';
+    return h;
+  },
   board:function(){return phero("إدارة <em>النادي</em>","الهيئة الإدارية والجهاز الفني المشرف على النادي.")+
     '<section class="sec" style="padding-top:20px"><div class="wrap">'+
     (C.board.length?'<div class="bgrid">'+C.board.map(memberCard).join("")+'</div>':emptyState("🧑‍","إدارة النادي","سيُعلن عن أعضاء الإدارة قريبًا."))+'</div></section>'}
@@ -312,6 +342,7 @@ function updateMeta(v){
     matches:"جدول مباريات ونتائج نادي الوادي التراجمة ريفي رفاعة مع الهدافين والتشكيلات",
     squad:"قائمة لاعبي نادي الوادي التراجمة ريفي رفاعة والتشكيلة الأساسية",
     news:"آخر أخبار نادي الوادي التراجمة ريفي رفاعة",
+    honors:"سجل شرف نادي الوادي التراجمة ريفي رفاعة — أوسمة الفريق وتكريمات اللاعبين والإدارة",
     board:"الهيئة الإدارية لنادي الوادي التراجمة ريفي رفاعة"}[v]||"";
   document.title=TITLES[v]+" | الوادي التراجمة ريفي رفاعة";
   var el=document.querySelector('meta[name="description"]');if(el)el.setAttribute("content",d);
