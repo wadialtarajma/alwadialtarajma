@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>لوحة التحكم | وادي التراجمة</title>
+<meta name="robots" content="noindex,nofollow">
+<title>لوحة التحكم | الوادي التراجمة ريفي رفاعة</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Changa:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -242,7 +243,7 @@ body::before{content:"";position:fixed;inset:0;background:
 <div class="login" id="loginView">
   <div class="login-card">
     <div class="login-logo">و</div>
-    <h1>وادي التراجمة</h1>
+    <h1>الوادي التراجمة</h1>
     <p>لوحة التحكم — إدارة الموقع والمحتوى</p>
     <div class="fld"><label>اسم المستخدم</label><input type="text" id="username" value="admin" autocomplete="username"></div>
     <div class="fld"><label>كلمة المرور</label><input type="password" id="password" autocomplete="current-password"></div>
@@ -255,7 +256,7 @@ body::before{content:"";position:fixed;inset:0;background:
     <div class="sb-head">
       <div class="sb-brand">
         <div class="sb-logo">و</div>
-        <div><b>وادي التراجمة</b><small>لوحة التحكم</small></div>
+        <div><b>الوادي التراجمة</b><small>لوحة التحكم</small></div>
       </div>
     </div>
     <nav class="sb-nav" id="sbNav"></nav>
@@ -300,28 +301,53 @@ function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){retur
 function toast(m,type){var t=$("#toast");t.textContent=m;t.className="toast on "+(type||"ok");setTimeout(function(){t.className="toast"},3000)}
 function localPass(){return localStorage.getItem("wadi_pass")||"wadi2026"}
 
-function DEFAULT(){return{settings:{name:"وادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",about:"",defaultXI:[],f1:{name:"ميدان الوادي",map:"https://maps.app.goo.gl/5omSxgEUMPaeguno7"},f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"},social:{fb:"",wa:"",yt:"",ig:"",tt:""}},players:[],matches:[],news:[],board:[],messages:[]}}
+function DEFAULT(){return{settings:{name:"الوادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",about:"نادي الوادي التراجمة ريفي رفاعة ممثل منطقة التراجمة في منافسات اتحاد رفاعة المحلي لكرة القدم ضمن دوري الدرجة الثانية.",defaultXI:[],f1:{name:"ميدان الوادي",map:"https://maps.app.goo.gl/5omSxgEUMPaeguno7"},f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"},social:{fb:"",wa:"",yt:"",ig:"",tt:""}},players:[],matches:[],news:[],board:[],messages:[]}}
 
-function loadLocal(){
-  try{var r=localStorage.getItem(KEY);C=r?JSON.parse(r):DEFAULT()}catch(e){C=DEFAULT()}
+/* تطبيع موحّد — يُستخدم محليًا وبعد جلب API حتى لا تنهار الإعدادات في الوضع المتصل */
+function normC(){
   ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
   C.settings=C.settings||DEFAULT().settings;
   if(!C.settings.social)C.settings.social={fb:"",wa:"",yt:"",ig:"",tt:""};
   if(!Array.isArray(C.settings.defaultXI))C.settings.defaultXI=[];
+  if(!C.settings.f1)C.settings.f1={name:"ميدان الوادي",map:""};
+  if(!C.settings.f2)C.settings.f2={name:"ميدان الهاشماب",map:""};
   C.matches.forEach(function(m){if(!Array.isArray(m.lineup))m.lineup=[];if(!Array.isArray(m.oppLineup))m.oppLineup=[];if(!Array.isArray(m.goals))m.goals=[]});
   C.news.forEach(function(n){if(!Array.isArray(n.imgs))n.imgs=n.img?[n.img]:[]});
   C.players.forEach(function(p){if(!Array.isArray(p.medals))p.medals=[]});
 }
+function loadLocal(){
+  try{var r=localStorage.getItem(KEY);C=r?JSON.parse(r):DEFAULT()}catch(e){C=DEFAULT()}
+  normC();
+}
+/* حفظ صادق: يلتقط امتلاء المتصفح، ويتحقق من نجاح الخادم فعلًا */
 function save(){
-  localStorage.setItem(KEY,JSON.stringify(C));
+  var lok=true;
+  try{localStorage.setItem(KEY,JSON.stringify(C))}catch(e){lok=false}
   if(MODE==="api"){
     fetch(API+"/admin",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+TOKEN},body:JSON.stringify(C)})
-      .then(function(){toast("✅ تم الحفظ (سحابي + محلي)","ok")})
-      .catch(function(){toast("✅ تم الحفظ محليًا","ok")});
-  }else toast("✅ تم الحفظ","ok");
+      .then(function(r){
+        if(r.status===401){toast("❌ انتهت الجلسة — أعد تسجيل الدخول","err");return}
+        if(r.status===413){toast("❌ المحتوى أكبر من حد الخادم — قلّل الصور","err");return}
+        if(!r.ok)throw 0;
+        toast(lok?"✅ تم الحفظ (سحابي + محلي)":"✅ تم الحفظ سحابيًا (تعذر الحفظ المحلي)","ok");
+      })
+      .catch(function(){toast(lok?"⚠️ حُفظ محليًا فقط — الخادم غير متاح":"❌ تعذر الحفظ — لا محليًا ولا سحابيًا","err")});
+  }else toast(lok?"✅ تم الحفظ":"❌ تعذر الحفظ — مساحة المتصفح ممتلئة",lok?"ok":"err");
 }
 
+/* الصور: في الوضع المتصل تُرفع إلى R2 عبر /api/upload الموجود، وإلا ضغط محلي */
 function compress(file,cb){
+  if(MODE==="api"&&TOKEN){
+    var fd=new FormData();fd.append("file",file);
+    fetch(API+"/upload",{method:"POST",headers:{"Authorization":"Bearer "+TOKEN},body:fd})
+      .then(function(r){if(!r.ok)throw 0;return r.json()})
+      .then(function(d){if(d&&d.url)cb(d.url);else throw 0})
+      .catch(function(){compressLocal(file,cb)});
+    return;
+  }
+  compressLocal(file,cb);
+}
+function compressLocal(file,cb){
   var r=new FileReader();
   r.onload=function(){
     var img=new Image();
@@ -360,6 +386,8 @@ function login(){
   fetch(API+"/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:u,password:p})})
     .then(function(r){
       if(r.status===404||r.status===500||r.status===405||r.status===403)throw{net:true};
+      if(r.status===429)throw{net:false,many:true};
+      if(r.status===503)throw{net:false,cfg:true};
       if(!r.ok)throw{net:false};
       return r.json();
     })
@@ -367,15 +395,17 @@ function login(){
       TOKEN=r.token;localStorage.setItem("wadi_token",TOKEN);localStorage.setItem("wadi_user",r.username||u);
       fetch(API+"/admin",{headers:{"Authorization":"Bearer "+TOKEN}}).then(function(x){return x.json()}).then(function(d){
         C=d.content||DEFAULT();
-        ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+        normC();
         enter("api",r.username||u);
       });
     })
     .catch(function(err){
       if(err&&err.net){
         if(p===localPass()){loadLocal();enter("local",u)}
-        else toast("❌ كلمة المرور خاطئة (الافتراضية: wadi2026)","err");
-      }else toast("❌ بيانات الدخول خاطئة","err");
+        else toast("❌ كلمة المرور خاطئة","err");
+      }else if(err&&err.many)toast("❌ محاولات كثيرة — انتظر قليلًا","err");
+      else if(err&&err.cfg)toast("❌ الخادم غير مهيأ — راجع ADMIN_PASS","err");
+      else toast("❌ بيانات الدخول خاطئة","err");
     });
 }
 $("#loginBtn").onclick=login;
@@ -687,8 +717,23 @@ function messages(){
     (C.messages.length?C.messages.map(function(m,i){
       return '<div class="msg'+(m.read?" read":"")+'"><div class="head"><b>'+esc(m.name)+'</b><time>'+new Date(m.created_at||Date.now()).toLocaleString("ar")+'</time></div><p>'+esc(m.body)+'</p><div class="meta"><span>📱 '+esc(m.phone||"—")+'</span><span>📋 '+esc(m.topic||"أخرى")+'</span></div><div class="acts">'+(m.read?"":'<button class="btn sm" data-r="'+i+'">✓ تعليم كمقروءة</button>')+'<button class="btn sm danger" data-d="'+i+'">🗑️ حذف</button></div></div>';
     }).join(""):'<div class="empty"><i>✉️</i><h3>لا رسائل واردة</h3><p>ستظهر هنا رسائل الزوار</p></div>');
-  $$("#content [data-r]").forEach(function(b){b.onclick=function(){C.messages[+b.dataset.r].read=true;save();messages()}});
-  $$("#content [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف الرسالة؟")){C.messages.splice(+b.dataset.d,1);save();messages()}}});
+  $$("#content [data-r]").forEach(function(b){b.onclick=function(){
+    var i=+b.dataset.r,m=C.messages[i];if(!m)return;
+    if(MODE==="api"&&m.id!=null){
+      fetch(API+"/messages",{method:"PATCH",headers:{"Content-Type":"application/json","Authorization":"Bearer "+TOKEN},body:JSON.stringify({id:m.id,read:true})})
+        .then(function(r){if(!r.ok)throw 0;m.read=true;messages();toast("✅ تم التعليم كمقروءة","ok")})
+        .catch(function(){toast("❌ تعذر الاتصال بالخادم","err")});
+    }else{m.read=true;save();messages()}
+  }});
+  $$("#content [data-d]").forEach(function(b){b.onclick=function(){
+    if(!confirm("حذف الرسالة؟"))return;
+    var i=+b.dataset.d,m=C.messages[i];if(!m)return;
+    if(MODE==="api"&&m.id!=null){
+      fetch(API+"/messages",{method:"DELETE",headers:{"Content-Type":"application/json","Authorization":"Bearer "+TOKEN},body:JSON.stringify({id:m.id})})
+        .then(function(r){if(!r.ok)throw 0;C.messages.splice(i,1);messages();toast("✅ تم الحذف","ok")})
+        .catch(function(){toast("❌ تعذر الاتصال بالخادم","err")});
+    }else{C.messages.splice(i,1);save();messages()}
+  }});
 }
 
 /* ===== الإعدادات ===== */
@@ -716,7 +761,7 @@ function settings(){
     '<div class="fld"><label>TikTok</label><input id="socTt" value="'+esc(s.social.tt)+'"></div></div>'+
     '<div class="set-card"><h4>🔐 كلمة المرور (الوضع المحلي)</h4>'+
     '<div class="fld"><label>كلمة مرور جديدة</label><input id="newPass" type="password" placeholder="اتركها فارغة للإبقاء على الحالية"></div>'+
-    '<p style="color:var(--muted);font-size:.76rem;margin-top:6px">الحالية: <b style="color:var(--gold-ink)">'+esc(localPass())+'</b></p></div></div>'+
+    '<p style="color:var(--muted);font-size:.76rem;margin-top:6px">الحالية: <b style="color:var(--gold-ink)">••••••••</b></p></div></div>'+
     '<div style="margin-top:20px;text-align:end"><button class="btn" id="saveS">💾 حفظ كل الإعدادات</button></div>';
   var XI=(s.defaultXI||[]).slice();
   function jerseySvg(num){return '<svg viewBox="0 0 44 38" class="jsy"><path d="M15 3 7 7 2 14l7 4 2-3v16h22V15l2 3 7-4-5-7-8-4c0 4-3 6-6 6s-6-2-6-6z" fill="#f2b84b" stroke="#123024" stroke-width="1.6"/><text x="22" y="28" text-anchor="middle" font-size="12" font-family="Changa" font-weight="800" fill="#123024">'+esc(num)+'</text></svg>'}
@@ -787,9 +832,9 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()
 if(TOKEN){
   fetch(API+"/admin",{headers:{"Authorization":"Bearer "+TOKEN}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
     C=d.content||DEFAULT();
-    ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
+    normC();
     enter("api",localStorage.getItem("wadi_user")||"admin");
-  }).catch(function(){TOKEN="";/* تظهر شاشة الدخول */});
+  }).catch(function(){TOKEN="";localStorage.removeItem("wadi_token");/* تظهر شاشة الدخول */});
 }
 })();
 </script>
