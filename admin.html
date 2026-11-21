@@ -291,7 +291,7 @@ var C=null,MODE="",POS=["حارس مرمى","مدافع","وسط","مهاجم"];
 var SECTIONS=[
   {g:"الرئيسية",items:[["dash","📊","لوحة القيادة"]]},
   {g:"المحتوى",items:[["players","👥","اللاعبون"],["matches","⚽","المباريات"],["news","📰","الأخبار"]]},
-  {g:"النادي",items:[["honors","🏅","سجل الشرف"],["board","🧑‍","الإدارة"],["messages","✉️","الرسائل"]]},
+  {g:"النادي",items:[["board","🧑‍","الإدارة"],["honors","🏅","سجل الشرف"],["messages","✉️","الرسائل"]]},
   {g:"النظام",items:[["settings","⚙️","الإعدادات"]]}
 ];
 
@@ -425,12 +425,12 @@ function buildSidebar(){
   $("#sbNav").innerHTML=h;
   $$("#sbNav a").forEach(function(a){a.onclick=function(e){e.preventDefault();go(a.dataset.sec)}});
 }
-var PAGE_TITLES={dash:"لوحة القيادة",players:"اللاعبون",matches:"المباريات والنتائج",news:"أخبار النادي",honors:"سجل الشرف",board:"إدارة النادي",messages:"الرسائل الواردة",settings:"الإعدادات"};
+var PAGE_TITLES={dash:"لوحة القيادة",players:"اللاعبون",matches:"المباريات والنتائج",news:"أخبار النادي",board:"إدارة النادي",honors:"سجل الشرف",messages:"الرسائل الواردة",settings:"الإعدادات"};
 function go(sec){
   $$("#sbNav a").forEach(function(a){a.classList.toggle("on",a.dataset.sec===sec)});
   $("#pageTitle").textContent=PAGE_TITLES[sec]||"لوحة التحكم";
   $("#sidebar").classList.remove("on");$("#backdrop").classList.remove("on");
-  ({dash:dash,players:players,matches:matches,news:news,honors:honors,board:board,messages:messages,settings:settings})[sec]();
+  ({dash:dash,players:players,matches:matches,news:news,board:board,honors:honors,messages:messages,settings:settings})[sec]();
 }
 $("#menuBtn").onclick=function(){$("#sidebar").classList.add("on");$("#backdrop").classList.add("on")};
 $("#backdrop").onclick=function(){$("#sidebar").classList.remove("on");$("#backdrop").classList.remove("on")};
@@ -678,86 +678,6 @@ function openNews(i){
   };
 }
 
-/* ===== سجل الشرف ===== */
-function honors(){
-  $("#content").innerHTML='<div class="sec-head"><h3>سجل الشرف <span class="count">'+C.honors.length+'</span></h3><button class="btn" id="addH">➕ إضافة وسم/تكريم</button></div><div class="list" id="list"></div>';
-  $("#addH").onclick=function(){openHonor(-1)};
-  renderHonors();
-}
-function honorWho(x){
-  if(x.kind==="player"){var p=C.players.filter(function(y){return y.id===x.who})[0];return p?p.name:"لاعب غير موجود"}
-  if(x.kind==="board"){var b=C.board.filter(function(y){return y.id===x.who})[0];return b?b.name+(b.role?" — "+b.role:""):"عضو غير موجود"}
-  return C.settings.name+" (الفريق كاملًا)";
-}
-function renderHonors(){
-  var groups=[["team","🏆 أوسمة الفريق"],["player","👥 تكريمات اللاعبين"],["board","🧑‍ تكريمات الإدارة"]],h="";
-  groups.forEach(function(g){
-    var arr=[];C.honors.forEach(function(x,i){if((x.kind||"team")===g[0])arr.push({x:x,i:i})});
-    if(!arr.length)return;
-    h+='<div style="margin-bottom:6px"><h4 style="font-size:.86rem;color:var(--gold-ink);margin:10px 0 8px">'+g[1]+' ('+arr.length+')</h4>';
-    arr.forEach(function(o){
-      var x=o.x,ic=x.t==="gold"?"🥇":x.t==="silver"?"🥈":x.t==="bronze"?"🥉":"🏅";
-      h+='<div class="it"><div class="it-ic"><span>'+ic+'</span></div>'+
-        '<div class="it-bd"><b>'+esc(x.title)+'</b><small>'+esc(honorWho(x))+(x.note?" • "+esc(x.note):"")+'</small>'+
-        '<div class="it-tags"><span class="tag '+(x.kind==="player"?"blue":x.kind==="board"?"green":"gold")+'">'+(x.kind==="player"?"لاعب":x.kind==="board"?"إدارة":"الفريق كاملًا")+'</span>'+(x.season?'<span class="tag amber">🗓 '+esc(x.season)+'</span>':"")+'</div></div>'+
-        '<div class="it-acts"><button class="e" data-e="'+o.i+'">✏️</button><button class="d" data-d="'+o.i+'">🗑️</button></div></div>';
-    });
-    h+='</div>';
-  });
-  $("#list").innerHTML=h||'<div class="empty"><i>🏅</i><h3>لا أوسمة بعد</h3><p>أضف وسمًا للفريق كاملًا أو تكريمًا للاعب أو عضو إدارة</p></div>';
-  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openHonor(+b.dataset.e)}});
-  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف الوسم/التكريم؟")){C.honors.splice(+b.dataset.d,1);save();renderHonors()}}});
-}
-function openHonor(i){
-  var x=i>=0?C.honors[i]:{kind:"team",t:"gold",title:"",who:0,season:"",note:""};
-  var WHO=x.who||0;
-  $("#modalBox").className="modal-box";
-  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' وسم/تكريم</h3>'+
-    '<div class="fld"><label>اسم الوسم أو التكريم (تسمية حرة)</label><input id="hTitle" value="'+esc(x.title)+'" placeholder="مثال: بطل دوري رفاعة / درع التميز الإداري / أفضل لاعب في الموسم"></div>'+
-    '<div class="fld-row"><div class="fld"><label>الجهة المُكرَّمة</label><select id="hKind">'+
-      '<option value="team"'+(x.kind==="team"?" selected":"")+'>🏆 الفريق كاملًا</option>'+
-      '<option value="player"'+(x.kind==="player"?" selected":"")+'>👥 لاعب</option>'+
-      '<option value="board"'+(x.kind==="board"?" selected":"")+'>🧑‍ عضو إدارة</option></select></div>'+
-    '<div class="fld"><label>نوع الوسم</label><select id="hT">'+
-      '<option value="gold"'+(x.t==="gold"?" selected":"")+'>🥇 ذهبية</option>'+
-      '<option value="silver"'+(x.t==="silver"?" selected":"")+'>🥈 فضية</option>'+
-      '<option value="bronze"'+(x.t==="bronze"?" selected":"")+'>🥉 برونزية</option>'+
-      '<option value="honor"'+(x.t!=="gold"&&x.t!=="silver"&&x.t!=="bronze"?" selected":"")+'>🏅 تكريم</option></select></div></div>'+
-    '<div class="fld" id="hWhoWrap"><label>الحاصل على الوسم</label><select id="hWho"></select></div>'+
-    '<div class="fld-row"><div class="fld"><label>الموسم / السنة</label><input id="hSeason" value="'+esc(x.season||"")+'" placeholder="مثال: 2026 أو 2025/2026"></div>'+
-    '<div class="fld"><label>ملاحظة (اختياري)</label><input id="hNote" value="'+esc(x.note||"")+'" placeholder="مثال: بعد الفوز على الشباب رفاعة"></div></div>'+
-    '<div class="modal-acts"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 حفظ</button></div>';
-  $("#modal").classList.add("on");
-  function fillWho(){
-    var k=$("#hKind").value,wrap=$("#hWhoWrap"),sel=$("#hWho");
-    if(k==="team"){wrap.style.display="none";return}
-    wrap.style.display="";
-    var arr=k==="player"?C.players:C.board;
-    if(!arr.length){sel.innerHTML='<option value="">'+(k==="player"?"لا لاعبون — أضفهم أولًا":"لا أعضاء إدارة — أضفهم أولًا")+'</option>';return}
-    sel.innerHTML=arr.map(function(y){
-      return '<option value="'+y.id+'"'+(y.id===WHO?" selected":"")+'>'+esc(y.name)+(k==="player"?" — #"+esc(y.num):(y.role?" — "+esc(y.role):""))+'</option>';
-    }).join("");
-    if(!WHO||!arr.filter(function(y){return y.id===WHO}).length)WHO=arr[0].id;
-    sel.value=String(WHO);
-  }
-  fillWho();
-  $("#hKind").onchange=function(){WHO=0;fillWho()};
-  $("#hWho").onchange=function(){WHO=+this.value||0};
-  $("#mX").onclick=closeModal;
-  $("#mS").onclick=function(){
-    var kind=$("#hKind").value,title=$("#hTitle").value.trim();
-    if(!title){toast("❌ أدخل اسم الوسم أو التكريم","err");return}
-    var who=0;
-    if(kind!=="team"){
-      who=+$("#hWho").value||0;
-      if(!who){toast(kind==="player"?"❌ اختر اللاعب — أضف اللاعبين أولًا":"❌ اختر عضو الإدارة — أضف الأعضاء أولًا","err");return}
-    }
-    var o={id:i>=0?C.honors[i].id:Date.now(),kind:kind,t:$("#hT").value,title:title,who:who,season:$("#hSeason").value.trim(),note:$("#hNote").value.trim()};
-    if(i>=0)C.honors[i]=o;else C.honors.push(o);
-    save();closeModal();renderHonors();
-  };
-}
-
 /* ===== الإدارة ===== */
 function board(){
   $("#content").innerHTML='<div class="sec-head"><h3>إدارة النادي <span class="count">'+C.board.length+'</span></h3><button class="btn" id="addB">➕ إضافة عضو</button></div><div class="list" id="list"></div>';
@@ -788,6 +708,70 @@ function openBoard(i){
     if(!o.name){toast("❌ أدخل الاسم","err");return}
     if(i>=0)C.board[i]=o;else C.board.push(o);
     save();closeModal();renderBoard();
+  };
+}
+
+/* ===== سجل الشرف ===== */
+function honors(){
+  $("#content").innerHTML='<div class="sec-head"><h3>سجل الشرف <span class="count">'+C.honors.length+'</span></h3><button class="btn" id="addH">➕ إضافة وسام</button></div><div class="list" id="list"></div>';
+  $("#addH").onclick=function(){openHonor(-1)};
+  renderHonors();
+}
+function honorWho(h){
+  if(h.kind==="player"){var p=C.players.filter(function(x){return x.id===h.who})[0];return p?p.name:"لاعب محذوف"}
+  if(h.kind==="board"){var b=C.board.filter(function(x){return x.id===h.who})[0];return b?b.name+(b.role?" — "+b.role:""):"عضو محذوف"}
+  return "الفريق كاملًا";
+}
+function renderHonors(){
+  var groups=[["team","🏆 أوسمة الفريق"],["player","👥 تكريمات اللاعبين"],["board","🧑‍ تكريمات الإدارة"]],h="";
+  groups.forEach(function(g){
+    var arr=[];C.honors.forEach(function(x,i){if((x.kind||"team")===g[0])arr.push({h:x,i:i})});
+    if(!arr.length)return;
+    h+='<div style="margin-bottom:6px"><h4 style="font-size:.86rem;color:var(--gold-ink);margin:10px 0 8px">'+g[1]+' ('+arr.length+')</h4>';
+    arr.forEach(function(x){
+      var o=x.h,ic=o.t==="gold"?"🥇":o.t==="silver"?"🥈":o.t==="bronze"?"🥉":"🏅";
+      h+='<div class="it"><div class="it-ic"><span>'+ic+'</span></div>'+
+        '<div class="it-bd"><b>'+esc(o.title)+'</b><small>'+esc(honorWho(o))+(o.season?" • "+esc(o.season):"")+'</small>'+
+        (o.note?'<div class="it-tags"><span class="tag blue">'+esc(o.note)+'</span></div>':"")+'</div>'+
+        '<div class="it-acts"><button class="e" data-e="'+x.i+'">✏️</button><button class="d" data-d="'+x.i+'">🗑️</button></div></div>';
+    });
+    h+='</div>';
+  });
+  $("#list").innerHTML=h||'<div class="empty"><i>🏅</i><h3>لا أوسمة بعد</h3><p>أضف أول وسام للفريق أو تكريمًا للاعب أو إداري</p></div>';
+  $$("#list [data-e]").forEach(function(b){b.onclick=function(){openHonor(+b.dataset.e)}});
+  $$("#list [data-d]").forEach(function(b){b.onclick=function(){if(confirm("حذف الوسام؟")){C.honors.splice(+b.dataset.d,1);save();renderHonors()}}});
+}
+function openHonor(i){
+  var o=i>=0?C.honors[i]:{kind:"team",title:"",who:0,t:"gold",season:"",note:""};
+  $("#modalBox").className="modal-box";
+  $("#modalBox").innerHTML='<h3>'+(i>=0?"تعديل":"إضافة")+' وسام / تكريم</h3>'+
+    '<div class="fld"><label>اسم الوسم أو التكريم</label><input id="hTitle" value="'+esc(o.title)+'" placeholder="مثال: بطل دوري رفاعة / درع التميز الإداري"></div>'+
+    '<div class="fld-row"><div class="fld"><label>الجهة المُكرَّمة</label><select id="hKind"><option value="team"'+(o.kind==="team"?" selected":"")+'>🏆 الفريق كاملًا</option><option value="player"'+(o.kind==="player"?" selected":"")+'>👥 لاعب</option><option value="board"'+(o.kind==="board"?" selected":"")+'>🧑‍ عضو إدارة</option></select></div><div class="fld"><label>نوع الوسام</label><select id="hType"><option value="gold"'+(o.t==="gold"?" selected":"")+'>🥇 ذهبي</option><option value="silver"'+(o.t==="silver"?" selected":"")+'>🥈 فضي</option><option value="bronze"'+(o.t==="bronze"?" selected":"")+'>🥉 برونزي</option><option value="medal"'+(o.t==="medal"?" selected":"")+'>🏅 وسام</option></select></div></div>'+
+    '<div class="fld" id="hWhoFld"><label>اختر الشخص</label><select id="hWho"></select></div>'+
+    '<div class="fld-row"><div class="fld"><label>الموسم / السنة</label><input id="hSeason" value="'+esc(o.season||"")+'" placeholder="مثال: 2026"></div><div class="fld"><label>ملاحظة (اختياري)</label><input id="hNote" value="'+esc(o.note||"")+'" placeholder="مثال: بمناسبة الصعود"></div></div>'+
+    '<div class="modal-acts"><button class="btn ghost" id="mX">إلغاء</button><button class="btn" id="mS">💾 حفظ</button></div>';
+  $("#modal").classList.add("on");
+  function fillWho(){
+    var kind=$("#hKind").value;
+    if(kind==="team"){$("#hWhoFld").style.display="none";return}
+    $("#hWhoFld").style.display="";
+    var list=kind==="player"?C.players:C.board;
+    $("#hWho").innerHTML=list.map(function(x){return '<option value="'+x.id+'"'+(o.who===x.id?" selected":"")+'>'+esc(x.name)+(kind==="player"?" — #"+esc(x.num):"")+'</option>'}).join("");
+  }
+  fillWho();
+  $("#hKind").onchange=fillWho;
+  $("#mX").onclick=closeModal;
+  $("#mS").onclick=function(){
+    var kind=$("#hKind").value,title=$("#hTitle").value.trim();
+    if(!title){toast("❌ أدخل اسم الوسم أو التكريم","err");return}
+    var who=0;
+    if(kind!=="team"){
+      if(!(kind==="player"?C.players:C.board).length){toast(kind==="player"?"❌ أضف لاعبين أولًا":"❌ أضف أعضاء إدارة أولًا","err");return}
+      who=+$("#hWho").value||0;
+    }
+    var obj={id:i>=0?C.honors[i].id:Date.now(),kind:kind,title:title,who:who,t:$("#hType").value,season:$("#hSeason").value.trim(),note:$("#hNote").value.trim()};
+    if(i>=0)C.honors[i]=obj;else C.honors.push(obj);
+    save();closeModal();renderHonors();
   };
 }
 
