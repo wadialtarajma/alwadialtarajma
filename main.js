@@ -8,11 +8,12 @@ var NAV=[["home","🏠","الرئيسية"],["matches","⚽","المباريات
 var TITLES={home:"الرئيسية",matches:"المباريات والنتائج",squad:"الفريق والتشكيلة",news:"أخبار النادي",board:"إدارة النادي"};
 
 var SEED={
-  settings:{name:"وادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",
-    about:"نادي وادي التراجمة ريفي رفاعة ممثل منطقة التراجمة في منافسات اتحاد رفاعة المحلي لكرة القدم ضمن دوري الدرجة الثانية.",
+  settings:{name:"الوادي التراجمة",region:"ريفي رفاعة",motto:"من قلب الوادي.. نلعب باسم الديار",
+    about:"نادي الوادي التراجمة ريفي رفاعة ممثل منطقة التراجمة في منافسات اتحاد رفاعة المحلي لكرة القدم ضمن دوري الدرجة الثانية.",
     defaultXI:[1,2,3,4,5,6,7,8,9,10,11],
     f1:{name:"ميدان الوادي",map:"https://maps.app.goo.gl/5omSxgEUMPaeguno7"},
-    f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"}},
+    f2:{name:"ميدان الهاشماب",map:"https://maps.app.goo.gl/NQ5eu8AeUwTmhckv6?g_st=ac"},
+    social:{fb:"",wa:"",yt:"",ig:"",tt:""}},
   players:[
     {id:1,name:"أحمد الطيب",num:1,age:26,pos:"حارس مرمى",apps:5,photo:"",medals:[]},
     {id:2,name:"محمد عثمان",num:2,age:23,pos:"مدافع",apps:5,photo:"",medals:[]},
@@ -44,7 +45,7 @@ var SEED={
   messages:[]
 };
 
-var C=clone(SEED),cdT=null,cur="home",bound=false,mtab="u",posF="all",Q={m:"",p:"",n:""};
+var C=clone(SEED),cdT=null,cdTarget=null,gCache=null,cur="home",bound=false,mtab="u",posF="all",Q={m:"",p:"",n:""};
 
 function $(s){return document.querySelector(s)}
 function $$(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
@@ -52,7 +53,16 @@ function clone(o){return JSON.parse(JSON.stringify(o))}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function merge(a,b){if(b==null)return a;if(Array.isArray(a)||Array.isArray(b))return b;if(typeof a==="object"&&typeof b==="object"){var o={};for(var k in a)o[k]=a[k];for(var k2 in b)o[k2]=(k2 in a)?merge(a[k2],b[k2]):b[k2];return o}return b}
 
+/* التواريخ: أوقات المباريات بتوقيت السودان (UTC+2) ثابتًا لكل الزوار،
+   والتاريخ المجرد يُعرض بتوقيت الخرطوم حتى لا ينزاح يومًا في مناطق غربية */
+var TZ="Africa/Khartoum";
+function pD(d){if(d instanceof Date)return d;var s=String(d==null?"":d);
+  if(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(s))s+=":00+02:00";
+  else if(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(s))s+="+02:00";
+  return new Date(s)}
+
 function load(){
+  gCache=null;
   try{var r=localStorage.getItem(KEY);C=r?merge(clone(SEED),JSON.parse(r)):clone(SEED)}catch(e){C=clone(SEED)}
   ["players","matches","news","board","messages"].forEach(function(k){if(!Array.isArray(C[k]))C[k]=[]});
   C.settings=merge(clone(SEED.settings),C.settings||{});
@@ -64,18 +74,19 @@ function toast(m){var t=$("#toast");if(!t)return;t.textContent=m;t.classList.add
 
 function crest(w){return '<svg viewBox="0 0 64 74" width="'+w+'" aria-hidden="true"><defs><linearGradient id="g'+w+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123024"/><stop offset="1" stop-color="#050d0a"/></linearGradient></defs><path d="M32 2 60 12v27c0 16-12 27-28 33C16 66 4 55 4 39V12Z" fill="url(#g'+w+')" stroke="#f2b84b" stroke-width="2.6"/><path d="M4 24h56" stroke="#2e5bff" stroke-width="2.2" opacity=".85"/><circle cx="32" cy="17" r="6.4" fill="#f2b84b"/><path d="M9 40c6-5 12 5 23 0s17 5 23 0" stroke="#f4f1e8" stroke-width="2.6" fill="none"/><path d="M9 49c6-5 12 5 23 0s17 5 23 0" stroke="#7c9bff" stroke-width="1.9" fill="none" opacity=".85"/><text x="32" y="63" text-anchor="middle" font-size="7" font-family="Changa" font-weight="700" fill="#f2b84b">التراجمة</text></svg>'}
 
-var fD=function(d){return new Date(d).toLocaleDateString("ar",{weekday:"long",day:"numeric",month:"long"})};
-var fDs=function(d){return new Date(d).toLocaleDateString("ar",{day:"numeric",month:"long",year:"numeric"})};
-var fT=function(d){return new Date(d).toLocaleTimeString("ar",{hour:"2-digit",minute:"2-digit"})};
-var dN=function(d){return new Date(d).getDate()};
-var dM=function(d){return new Date(d).toLocaleDateString("ar",{month:"short"})};
-var nextM=function(){return C.matches.filter(function(m){return m.status==="upcoming"&&new Date(m.date)>new Date()}).sort(function(a,b){return new Date(a.date)-new Date(b.date)})[0]};
+var fD=function(d){return pD(d).toLocaleDateString("ar",{weekday:"long",day:"numeric",month:"long",timeZone:TZ})};
+var fDs=function(d){return pD(d).toLocaleDateString("ar",{day:"numeric",month:"long",year:"numeric",timeZone:TZ})};
+var fT=function(d){return pD(d).toLocaleTimeString("ar",{hour:"2-digit",minute:"2-digit",timeZone:TZ})};
+var dN=function(d){return +new Intl.DateTimeFormat("en",{day:"numeric",timeZone:TZ}).format(pD(d))};
+var dM=function(d){return pD(d).toLocaleDateString("ar",{month:"short",timeZone:TZ})};
+var nextM=function(){return C.matches.filter(function(m){return m.status==="upcoming"&&pD(m.date)>new Date()}).sort(function(a,b){return pD(a.date)-pD(b.date)})[0]};
 function setTheme(t){document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem(TK,t)}catch(e){}
   var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="dark"?"#060d0a":"#ffffff")}
 function playerName(id){var p=C.players.filter(function(x){return x.id===id})[0];return p?p.name:"لاعب"}
 
-/* الأهداف تُحسب تلقائياً من أهداف المباريات المسجلة */
+/* الأهداف تُحسب تلقائياً من أهداف المباريات المسجلة — مرة واحدة لكل عرض */
 function calcPlayerGoals(){
+  if(gCache)return gCache;
   var g={};
   C.players.forEach(function(p){g[p.id]=0});
   C.matches.forEach(function(m){
@@ -83,7 +94,7 @@ function calcPlayerGoals(){
       m.goals.forEach(function(x){if(x.team==="my"&&x.pid&&g[x.pid]!==undefined)g[x.pid]++});
     }
   });
-  return g;
+  gCache=g;return g;
 }
 
 /* الملعب المنظوري */
@@ -180,6 +191,7 @@ function bindSearch(id,set,rr){var inp=$("#sq_"+id);if(inp)inp.oninput=function(
 
 function boardHTML(){
   var m=nextM();
+  cdTarget=m?pD(m.date).getTime():null;
   if(!m)return '<div class="nm-head"><b><i></i> '+esc(C.settings.name)+'</b><span>اتحاد رفاعة</span></div><div style="text-align:center;padding:8px 0">'+crest(70)+'<p style="color:rgba(244,241,232,.75);font-size:.85rem;margin-top:8px">لم تُجدول مباراة قادمة بعد.</p></div>';
   return '<div class="nm-head"><b><i></i> المباراة القادمة</b><span>'+esc(m.comp||"")+'</span></div>'+
     '<div class="vs"><div>'+crest(46)+'<span class="nm-t">'+esc(C.settings.name)+'</span><small>'+(m.home?"مستضيف":"")+'</small></div><strong>VS</strong><div><div class="opc">'+esc((m.opponent||"؟").charAt(0))+'</div><span class="nm-t">'+esc(m.opponent)+'</span><small>'+(m.home?"ضيف":"مستضيف")+'</small></div></div>'+
@@ -189,20 +201,23 @@ function boardHTML(){
     '<div class="lu-panel" id="luMy" hidden><div class="lu-col"><h4 style="color:#ffd98a">تشكيلتنا</h4>'+pitch3d(playersOf(m.lineup))+'</div></div>'+
     '<div class="lu-panel" id="luOp" hidden><div class="lu-col"><h4 style="color:#ffd98a">تشكيلة '+esc(m.opponent)+'</h4>'+oppListHTML(m.oppLineup)+'</div></div>';
 }
-function startCD(){clearInterval(cdT);var tick=function(){var n=nextM(),el=$("#cD");if(!n||!el)return;
-  var s=Math.max(0,Math.floor((new Date(n.date)-Date.now())/1000));
-  el.textContent=Math.floor(s/86400);$("#cH").textContent=("0"+Math.floor(s%86400/3600)).slice(-2);
-  $("#cM").textContent=("0"+Math.floor(s%3600/60)).slice(-2);$("#cS").textContent=("0"+(s%60)).slice(-2)};
+/* العداد مثبّت على المباراة المعروضة — يتوقف عند الصفر ولا يقفز لمباراة أخرى */
+function startCD(){clearInterval(cdT);if(cdTarget==null)return;
+  var tick=function(){var el=$("#cD");if(!el){clearInterval(cdT);return}
+    var s=Math.max(0,Math.floor((cdTarget-Date.now())/1000));
+    el.textContent=Math.floor(s/86400);$("#cH").textContent=("0"+Math.floor(s%86400/3600)).slice(-2);
+    $("#cM").textContent=("0"+Math.floor(s%3600/60)).slice(-2);$("#cS").textContent=("0"+(s%60)).slice(-2);
+    if(s<=0)clearInterval(cdT)};
   tick();cdT=setInterval(tick,1000)}
 
 var VIEWS={
   home:function(){
     var m=nextM();
-    var nw=C.news.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)}).slice(0,2);
+    var nw=C.news.slice().sort(function(a,b){return pD(b.date)-pD(a.date)}).slice(0,2);
     var pl=C.players.slice(0,6);
     var h='<section class="hero"><div class="wrap hero-in"><div class="hero-t">'+
       '<span class="badge"><i></i> اتحاد رفاعة المحلي • الدرجة الثانية</span>'+
-      '<h1>نادي وادي <em>التراجمة</em><span>'+esc(C.settings.region)+'</span></h1>'+
+      '<h1>نادي الوادي <em>التراجمة</em><span>'+esc(C.settings.region)+'</span></h1>'+
       '<p class="lead">«'+esc(C.settings.motto)+'»</p>'+
       '<div class="hero-cta"><a class="btn" href="#/matches" data-nav="matches">⚽ المباريات</a><a class="btn on-dark" href="#/news" data-nav="news">📰 الأخبار</a></div>'+
       '</div></div></section>';
@@ -248,7 +263,7 @@ var BIND={
     var render=function(){
       var list=C.matches.filter(function(m){return mtab==="u"?m.status==="upcoming":m.status==="finished"});
       if(Q.m){var q=Q.m.toLowerCase();list=list.filter(function(m){return ((m.opponent||"")+" "+(m.venue||"")+" "+(m.comp||"")).toLowerCase().indexOf(q)>-1})}
-      list.sort(function(a,b){return mtab==="u"?new Date(a.date)-new Date(b.date):new Date(b.date)-new Date(a.date)});
+      list.sort(function(a,b){return mtab==="u"?pD(a.date)-pD(b.date):pD(b.date)-pD(a.date)});
       $("#sn_m").textContent=list.length;
       $("#mlist").innerHTML=list.length?list.map(matchCard).join(""):emptyState("🔍","لا نتائج مطابقة","جرّب كلمة أخرى أو بدّل التبويب.");
     };
@@ -268,7 +283,7 @@ var BIND={
   },
   news:function(){
     var render=function(){
-      var list=C.news.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});
+      var list=C.news.slice().sort(function(a,b){return pD(b.date)-pD(a.date)});
       if(Q.n){var q=Q.n.toLowerCase();list=list.filter(function(n){return (n.title+" "+n.ex).toLowerCase().indexOf(q)>-1})}
       $("#sn_n").textContent=list.length;
       $("#nlist").innerHTML=list.length?list.map(newsCard).join(""):emptyState("🔍","لا أخبار مطابقة","");
@@ -293,12 +308,12 @@ function matchModal(m){
 }
 
 function updateMeta(v){
-  var d={home:"الموقع الرسمي لنادي وادي التراجمة — المباراة القادمة والنتائج والأخبار",
-    matches:"جدول مباريات ونتائج نادي وادي التراجمة مع الهدافين والتشكيلات",
-    squad:"قائمة لاعبي نادي وادي التراجمة والتشكيلة الأساسية",
-    news:"آخر أخبار نادي وادي التراجمة ريفي رفاعة",
-    board:"الهيئة الإدارية لنادي وادي التراجمة"}[v]||"";
-  document.title=TITLES[v]+" | وادي التراجمة";
+  var d={home:"الموقع الرسمي لنادي الوادي التراجمة ريفي رفاعة — المباراة القادمة والنتائج والأخبار",
+    matches:"جدول مباريات ونتائج نادي الوادي التراجمة ريفي رفاعة مع الهدافين والتشكيلات",
+    squad:"قائمة لاعبي نادي الوادي التراجمة ريفي رفاعة والتشكيلة الأساسية",
+    news:"آخر أخبار نادي الوادي التراجمة ريفي رفاعة",
+    board:"الهيئة الإدارية لنادي الوادي التراجمة ريفي رفاعة"}[v]||"";
+  document.title=TITLES[v]+" | الوادي التراجمة ريفي رفاعة";
   var el=document.querySelector('meta[name="description"]');if(el)el.setAttribute("content",d);
 }
 
@@ -369,7 +384,7 @@ function buildChrome(){
 }
 
 load();buildChrome();route();
-try{fetch("/api/data",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(d){
+try{fetch("/api/data",{cache:"no-store"}).then(function(r){var ct=r.headers.get("content-type")||"";return r.ok&&ct.indexOf("application/json")>-1?r.json():null}).then(function(d){
   if(d){C=merge(clone(SEED),d);try{localStorage.setItem(KEY,JSON.stringify(C))}catch(e){}load();buildChrome();route()}
 }).catch(function(){})}catch(e){}
 })();
