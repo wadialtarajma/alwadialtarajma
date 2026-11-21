@@ -34,7 +34,8 @@ const SEED={settings:{name:"الوادي التراجمة",region:"ريفي رف
   {id:1,name:"عبد الرحمن أحمد",role:"رئيس النادي",phone:""},
   {id:2,name:"الشفيع محمد",role:"نائب الرئيس",phone:""},
   {id:3,name:"محجوب علي",role:"المدرب العام",phone:""},
-  {id:4,name:"ياسر إبراهيم",role:"إداري الفريق",phone:""}]};
+  {id:4,name:"ياسر إبراهيم",role:"إداري الفريق",phone:""}],
+ honors:[]};
 const J=(d,s=200)=>new Response(JSON.stringify(d),{status:s,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store"}});
 const hx=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
 const cl=(v,n=400)=>String(v??"").trim().slice(0,n);
