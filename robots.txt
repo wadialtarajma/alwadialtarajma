@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /api/
 
-Sitemap: https://wadialtarajma.pages.dev/sitemap.xml
+Sitemap: https://alwadialtarajma.pages.dev/sitemap.xml
